@@ -88,7 +88,15 @@ Le décret n° 2019-768 du 24 juillet 2019 précise les obligations légales.
 
 #### Conformité au RGAA
 
-**Tous** les critères du RGAA doivent être remplis.
+Tous les critères du RGAA doivent être remplis... en théorie.
+
+Dans les faits, il n'y a pas d'obligation. Il suffit aux organisations d'être en conformité avec les obligations suivantes :
+
+- publication de la déclaration d'accessibilité
+- mention de la conformité en page d'accueil
+- schéma pluriannuel de mise en accessibilité
+
+Si tous ces points sont remplis, l'organisme ne peut être attaqué.
 
 #### Déclaration d’accessibilité
 
@@ -109,7 +117,7 @@ La **page d’accueil** de chaque service en ligne doit afficher une des mention
 - "Accessibilité : partiellement conforme" si le résultat de l’audit est supérieur à 50%
 - "Accessibilité : totalement conforme" si le taux est égal à 100%
 
-#### Lien vers le schéma pluriannuel de mise en accessibilité numérique
+#### Lien vers le schéma pluriannuel de mise en accessibilité
 
 Le schéma pluriannuel de mise en accessibilité détaille la **mise en œuvre de l’accessibilité au sein de l'organisation**.
 Il doit également être **publié sur le web**.

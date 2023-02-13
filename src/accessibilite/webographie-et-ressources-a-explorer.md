@@ -42,3 +42,12 @@
 #### Sites et blogs
 
 - [Blog de Scott O'Hara (spécialiste de l'accessibilité)](https://www.scottohara.me/)
+
+
+### Guides et outils
+
+- [Accessibility Guidelines: Checklist](https://accessibility.voxmedia.com/)
+- [Accessible Color: Evaluate color palettes](https://accessiblecolor.design/)
+- [Text on background image a11y check](http://www.brandwood.com/a11y/)
+- [Design Accessible](https://design-accessible.fr/)
+- [Checklist Design Accessible](https://design-accessible.fr/checklist)

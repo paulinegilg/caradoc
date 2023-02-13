@@ -5,7 +5,7 @@ Le premier thème que nous allons aborder traitera des couleurs et du contraste.
 
 ::: tip Réfléchissez-y...
 Vous avez sûrement déjà visité des sites web avec des textes placés sur un fond avec un contraste insuffisant.
-Peut-être avez-vous rencontré des difficultés à naviguer site ou à saisir les informations dont vous aviez besoin.
+Peut-être avez-vous rencontré des difficultés à naviguer ou à saisir les informations dont vous aviez besoin.
 Maintenant, mettez-vous à la place de personnes ayant d'importants troubles de la vue...
 ::: 
 

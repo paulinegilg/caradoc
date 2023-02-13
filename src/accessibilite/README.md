@@ -42,4 +42,4 @@ Merci d'avance pour votre aide ! Je ferai mon possible pour vous répondre rapid
 
 ## Remerciements
 
-Merci à Carlo pour sa relecture et son aide précieuse.
+Merci à Carlo et à Justine pour leur relecture et leur aide précieuse.
