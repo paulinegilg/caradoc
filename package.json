@@ -1,13 +1,13 @@
 {
-  "name": "test",
-  "version": "0.0.1",
-  "description": "test",
+  "name": "CaraDoc",
+  "version": "1.0.2",
+  "description": "A website with all the courses I created",
   "main": "index.js",
   "authors": {
     "name": "Pauline Gilg",
     "email": "paulinegilg@protonmail.com"
   },
-  "repository": "/test",
+  "repository": "/caradoc",
   "scripts": {
     "dev": "vuepress dev src",
     "build": "vuepress build src"

@@ -148,7 +148,7 @@ Or, cela correspond aux **caractéristiques natives** de l'élément `<button>`.
 Ici, nous devrions plutôt utiliser (si possible, conformément à la règle 1 d'ARIA) :
 
 ```html
-<button type="submit">Submit</span>
+<button type="submit">Submit</button>
 ```
 
 #### Ne cachez pas les éléments pouvant recevoir du focus
@@ -168,7 +168,7 @@ pour l'utilisateur grâce à `role="presentation"` ou `aria-hidden="true"`.
 
 Souvenez-vous, nous avons déjà évoqué ce point dans le chapitre sur l'accessibilité des contenus textuels.
 
-Des éléments interactifs peuvent correspondre à des **liens*, des **textes alternatifs** et des **labels** de champs de formulaire.
+Des éléments interactifs peuvent correspondre à des **liens**, des **textes alternatifs** et des **labels** de champs de formulaire.
 
 ```html
 <!-- Un lien avec un texte cliquable accessible -->
