@@ -6,6 +6,9 @@ xfeatures:
 - title: Accessibilité (nouveau !)
   details: Découvrez les fondamentaux de l'accessibilité pour rendre votre vie numérique plus respectueuse des droits des personnes en situation de handicap
   link: /accessibilite
+- title: Améliorer la qualité des sites web (nouveau !)
+  details: todo
+  link: /qualite-web
 ---
 
 <div class="features">
