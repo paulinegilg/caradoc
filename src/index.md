@@ -19,7 +19,7 @@ xfeatures:
 </div>
 
 ::: slot footer
-Licence [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) - Site créé par [Pauline Gilg](https://paulinegilg.fr) - [Mentions légales et données personnelles](/legal-gdpr)
+Licence [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) - Site créé par [Pauline Gilg](https://paulinegilg.fr) - [Mentions légales et données personnelles](/legal-gdpr)
 
 Logo de [Icons 8](https://icons8.com/illustrations/author/zD2oqC8lLBBA) par [Ouch!](https://icons8.com/illustrations)
 :::
