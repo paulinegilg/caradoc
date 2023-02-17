@@ -1,6 +1,6 @@
 {
   "name": "CaraDoc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A website with all the courses I created",
   "main": "index.js",
   "authors": {
@@ -14,6 +14,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "vuepress": "^1.5.3"
+    "vuepress": "^1.9.8"
   }
 }
