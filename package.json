@@ -1,6 +1,6 @@
 {
   "name": "CaraDoc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A website with all the courses I created",
   "main": "index.js",
   "authors": {
