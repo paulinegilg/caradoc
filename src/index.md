@@ -7,7 +7,7 @@ xfeatures:
   details: Découvrez les fondamentaux de l'accessibilité pour rendre votre vie numérique plus respectueuse des droits des personnes en situation de handicap.
   link: /accessibilite
 - title: Améliorer la qualité des sites web (nouveau !)
-  details: Apprenez à intégrer des critères de qualité dans vos projets web. 
+  details: Apprenez à intégrer des critères de qualité dans vos projets web.
   link: /qualite-web
 ---
 
