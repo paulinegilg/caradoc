@@ -12,7 +12,7 @@ Le site a été développé avec [VuePress](https://vuepress.vuejs.org/).
 
 ## Droits d’autrice et droit de reproduction
 
-L'ensemble des formations sont sous [licence CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+L'ensemble des formations sont sous [licence CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 Vous êtes autorisé à :
 
@@ -24,7 +24,7 @@ Selon les conditions suivantes :
 - Vous devez créditer mon travail, intégrer un lien vers la licence et indiquer si des modifications ont été effectuées
 - Vous devez indiquer ces informations par tous les moyens raisonnables
 - Dans le cas où vous adaptez, transformez ou créez à partir de mon travail, 
-vous devez diffuser votre contenu dans les mêmes conditions, c'est-à-dire avec la licence CC BY-SA 2.0
+vous devez diffuser votre contenu dans les mêmes conditions, c'est-à-dire avec la licence CC BY-SA 4.0
 
 ## Utilisation de données personnelles collectées
 
