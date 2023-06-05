@@ -83,7 +83,8 @@ export default defineConfig({
                 { text: "✉️ Contact", link: '/fr/contact' },
                 { text: "🐛 Signaler une erreur ou un bug", link: '/fr/bug' },
                 { text: "🐘 Mastodon", link: '' },
-                { text: "👽 À propos", link: '/fr/about' }
+                { text: "👽 À propos", link: '/fr/about' },
+                { text: "🕵️‍♀️ Mentions légales et données personnelles", link: '/fr/legal'}
             ],
 
             outlineTitle: 'Sur cette page',
@@ -99,7 +100,7 @@ export default defineConfig({
             },
 
             footer: {
-                message: '<a href="">Mentions légales et données personnelles</a>',
+                message: '<a href="/fr/legal">Mentions légales et données personnelles</a>',
                 copyright: 'Contenus sous licence CC BY-SA 4.0'
             },
 
@@ -157,11 +158,12 @@ export default defineConfig({
                 { text: "✉️ Contact", link: '/en/contact' },
                 { text: "🐛 Report an error or a bug", link: '/en/bug' },
                 { text: "🐘 Mastodon", link: '' },
-                { text: "👽 About", link: '/en/about' }
+                { text: "👽 About", link: '/en/about' },
+                { text: "🕵️‍♀️ Legal notice and personal data", link: '/en/legal'}
             ],
 
             footer: {
-                message: '<a href="">Legal notice and personal data</a>',
+                message: '<a href="/en/legal">Legal notice and personal data</a>',
                 copyright: 'Contents under licence CC BY-SA 4.0'
             },
 
