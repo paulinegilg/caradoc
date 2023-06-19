@@ -6,6 +6,8 @@ next: false
 
 # 🧰 Ressources
 
+retrouver de l’autonomie, de l’esprit critique et de la liberté dans vos pratiques numériques
+
 ## Logiciel libre
 
 - Framalibre
@@ -77,6 +79,15 @@ next: false
 - MOOC sécurité ANSSI
 - Licences
 - ["L’Email, vaste sujet" - conférence](https://www.octopuce.fr/conference-lemail-vaste-sujet-par-benjamin-sonntag/)
+- https://exodus-privacy.eu.org/fr/
+- https://louisderrac.com/2023/05/5-alternatives-a-google-maps-et-les-autres/
+- https://ohshitgit.com/fr
+- https://github.com/TheFrenchGhosty/TheFrenchGhostys-Ultimate-Firefox-Configuration
+- https://www.arte.tv/fr/videos/RC-017841/dopamine/
+- https://www.meilleure-innovation.com/linux-systeme-exploitation/
+- https://linc.cnil.fr/dossier-cookies
+- https://tube.picasoft.net/w/38AEFZfZQEKhhpkENN2V88
+- https://podcast.picasoft.net/@la_voix_est_libre
 
 ## Extensions de navigateur
 

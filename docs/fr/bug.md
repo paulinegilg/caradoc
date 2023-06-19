@@ -18,14 +18,14 @@ Vous avez détecté un bug sur le site comme un problème d'affichage, de redire
 Vous pouvez [m'envoyer un mail](mailto:paulinegilg@protonmail.com?subject=CaraDoc%20-%20Bug) 
 en précisant la page concernée, le navigateur et l'appareil utilisés, la date et l'heure et en décrivant l'incident.
 
-Merci d'utiliser de préférence **ce template** pour faciliter le débugage.
+Merci d'utiliser de préférence **ce template** pour faciliter le débuggage.
 
 ```txt
 URL de la page : https://caradoc.paulinegilg.fr/...
 Navigateur utilisé : Firefox
 Appareil : Mobile
-Contenu en erreur : ...
-Correction proposée : ...
+Date et heure de l'incident : ...
+Description du bug : ...
 ```
 
 Merci pour votre aide !
