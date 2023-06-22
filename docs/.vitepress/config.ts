@@ -23,7 +23,7 @@ export default defineConfig({
                 { text: "🔒 Protéger les données personnelles en conformité avec le RGPD", items: [
                         { text: "Introduction", link: '/fr/rgpd/'},
                         { text: "Qu'est-ce qu'une donnée personnelle ?", link: '/fr/rgpd/definition-donnee-personnelle'},
-                        { text: "Pourquoi protéger les données ?", link: '/fr/rgpd/pourquoi-proteger-les-donnees'},
+                        { text: "Pourquoi protéger les données&nbsp;?", link: '/fr/rgpd/pourquoi-proteger-les-donnees'},
                         { text: "Historique de la protection des données personnelles", link: '/fr/rgpd/historique-protection-donnees-personnelles'},
                         { text: "Traitement, responsable de traitement et finalité", link: '/fr/rgpd/definition-traitement-responsable-finalite'},
                         { text: "Champ d'application du RGPD", link: '/fr/rgpd/champ-d-application'},

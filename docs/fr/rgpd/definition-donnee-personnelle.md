@@ -11,7 +11,7 @@ un matricule interne, une adresse IP, un identifiant de connexion informatique, 
 
 Certaines données sont dites "sensibles", mais nous y reviendrons.
 
-### Identification des personnes
+## Identification des personnes
 
 Une personne physique peut être identifiée :
 

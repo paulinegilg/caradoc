@@ -49,13 +49,15 @@ retrouver de l’autonomie, de l’esprit critique et de la liberté dans vos pr
 - TechDays
 - Journées du libre
 
-## Associations
+## Associations et collectifs
 
 - April
 - Framasoft
 - Hackstub
 - Emmaüs Connect
 - La Contre-Voie
+- Picasoft
+- Katzele
 
 ## Lieux
 
@@ -88,6 +90,8 @@ retrouver de l’autonomie, de l’esprit critique et de la liberté dans vos pr
 - https://linc.cnil.fr/dossier-cookies
 - https://tube.picasoft.net/w/38AEFZfZQEKhhpkENN2V88
 - https://podcast.picasoft.net/@la_voix_est_libre
+- https://mooc.chatons.org/course/view.php?id=3
+- https://www.youtube.com/watch?v=h2Z7tg6-3ZI
 
 ## Extensions de navigateur
 
