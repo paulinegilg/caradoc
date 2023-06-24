@@ -31,3 +31,5 @@ TODO
 
 Plus d'infos sur les sanctions plus tard dans le cours 
 
+https://www.cnil.fr/fr/publicite-personnalisee-criteo-sanctionne-dune-amende-de-40-millions-deuros
+

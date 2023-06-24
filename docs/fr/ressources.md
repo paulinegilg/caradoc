@@ -92,6 +92,11 @@ retrouver de l’autonomie, de l’esprit critique et de la liberté dans vos pr
 - https://podcast.picasoft.net/@la_voix_est_libre
 - https://mooc.chatons.org/course/view.php?id=3
 - https://www.youtube.com/watch?v=h2Z7tg6-3ZI
+- https://actionnumeriquesolidaire.org/article/informatique-et-obsolescence-programme
+- https://hackblossom.org/cybersecurity/
+- https://affordance.framasoft.org/
+- https://multimedia.ademe.fr/infographies/infographie-terres-rares-ademe/
+- https://longuevieauxobjets.gouv.fr/reduire-son-impact-numerique
 
 ## Extensions de navigateur
 

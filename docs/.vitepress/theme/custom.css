@@ -14,3 +14,9 @@ h1 + p.text {
         font-size: 2.8rem !important;
     }
 }
+
+/* Underline links for accessibility and quality reasons */
+p > a {
+    text-decoration: underline;
+    text-decoration-style: solid !important;
+}
