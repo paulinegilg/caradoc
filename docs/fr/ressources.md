@@ -97,6 +97,7 @@ retrouver de l’autonomie, de l’esprit critique et de la liberté dans vos pr
 - https://affordance.framasoft.org/
 - https://multimedia.ademe.fr/infographies/infographie-terres-rares-ademe/
 - https://longuevieauxobjets.gouv.fr/reduire-son-impact-numerique
+- https://louisderrac.com/2023/06/comprendre-le-numerique-fin-du-cycle-de-conference-debut-du-cycle-de-debat/
 
 ## Extensions de navigateur
 
