@@ -60,3 +60,7 @@ Lorsqu'une personne demande à faire respecter à un de ces droits auprès d'un 
 **demande d'exercice de droit**.
 
 Le responsable de traitement dispose d'un délai d'**un mois** pour répondre à la demande.
+
+::: tip Ça peut toujours servir !
+Pour vos propres demandes d'exercice de droit, la CNIL propose des [modèles de courriers](https://www.cnil.fr/fr/modeles/courrier) (adaptables en mail) personnalisables.
+:::
