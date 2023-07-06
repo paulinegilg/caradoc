@@ -4,7 +4,7 @@ prev: false
 next: false
 ---
 
-# ✉️ Contact
+# Contact
 
 ## Une question ou une suggestion ? 
 

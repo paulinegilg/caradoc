@@ -16,7 +16,11 @@ h1 + p.text {
 }
 
 /* Underline links for accessibility and quality reasons */
-p > a {
+p > a, li > a {
     text-decoration: underline;
     text-decoration-style: solid !important;
+}
+
+.outline-link {
+    text-decoration: none;
 }

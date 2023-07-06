@@ -4,7 +4,7 @@ prev: false
 next: false
 ---
 
-# 🕵️‍♀️ Mentions légales et gestion des données personnelles
+# Mentions légales et gestion des données personnelles
 
 ## Hébergement
 
