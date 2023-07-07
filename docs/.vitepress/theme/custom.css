@@ -24,3 +24,7 @@ p > a, li > a {
 .outline-link {
     text-decoration: none;
 }
+
+.dark .VPSkipLink[data-v-471574a7] {
+    color: var(--vp-c-brand);
+}
