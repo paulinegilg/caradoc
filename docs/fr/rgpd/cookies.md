@@ -91,18 +91,22 @@ Voici les points importants à prendre en compte pour être en conformité :
 
 ### Exemples de conformité
 
-#### Fenêtre de consentement de Radio France
+Fenêtre de consentement de Radio France :
 
 ![](/rgpd/cookies-bon-exemple.jpg)
 
 ### Exemples de non conformité
 
-#### Fenêtre de consentement d'Amazon
+Fenêtre de consentement d'Amazon :
 
 ![](/rgpd/cookies-mauvais-exemple.jpg)
 
 ### Le cas des *paywalls*
 
+TODO
+https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookie-walls/monetisation-des-donnees-personnelles-les-enjeux-juridiques-et-ethiques
+
 ## Gestionnaire de cookies
 
+TODO
 Tarte au citron

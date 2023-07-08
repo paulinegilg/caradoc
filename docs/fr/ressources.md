@@ -39,6 +39,8 @@ Sur cette page, vous trouverez des ressources classées par thématique et par m
 - [MOOC Atelier RGPD (CNIL)](https://atelier-rgpd.cnil.fr/login/index.php)
 - [Gestionnaire de cookies (Tarte au citron)](https://tarteaucitron.io/fr/)
 - [Wiki collaboratif sur les décisions des CNIL européennes (GDPRHub)](https://gdprhub.eu/index.php?title=Welcome_to_GDPRhub)
+- https://cookiedatabase.org/
+- https://dignilog.com/
 
 ## Accessibilité
 
@@ -102,15 +104,14 @@ Sur cette page, vous trouverez des ressources classées par thématique et par m
 ## Newsletters
 
 - [Veille accessibilité (Access42)](https://access42.net/)
-- Louis Derrac
-- Lucie Ronfaut
-- Newsletter RGPDHub
+- [Règle 30 de Lucie Ronfaut](https://www.numerama.com/newsletter-regle30-il-ny-a-pas-de-femmes-sur-internet/)
 
 ## Podcasts
 
-- Libre à vous
+- [Libre à vous](https://www.libreavous.org/)
 - [La voie est libre (Picasoft)](https://podcast.picasoft.net/@la_voix_est_libre)
-- L'Octet vert
+- [L'Octet vert](https://www.standblog.org/blog/category/podcast)
+- [La voie est libre](https://podcast.picasoft.net/@la_voix_est_libre)
 
 ## Vidéos
 
@@ -118,15 +119,14 @@ Sur cette page, vous trouverez des ressources classées par thématique et par m
 
 ## Livres
 
-- Sobriété numérique, Frédéric Bordage
+- [Sobriété numérique : les clés pour agir (Frédéric Bordage)](https://www.greenit.fr/2019/09/10/sobriete-numerique-les-cles-pour-agir/)
+- [Technoféminisme, Comment le numérique aggrave les inégalités (Mathilde Saliou)](https://www.grasset.fr/livre/technofeminisme-9782246828822/)
 
 ## Conférences
 
-- Mixit
-- ParisWeb
-- TechDays
-- Journées du libre
-- DevFest
+- [Mixit](https://mixitconf.org/)
+- [ParisWeb](https://www.paris-web.fr/)
+- [Journées du Logiciel Libre](https://www.jdll.org/)
 
 ## Associations et collectifs
 

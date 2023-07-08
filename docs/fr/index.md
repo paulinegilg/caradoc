@@ -17,38 +17,38 @@ hero:
       link: /fr/ressources
 
 features:
-  - title: Comprendre le web
-    details:
-    icon: 🌐
-  - title: Protéger les données personnelles en conformité avec le RGPD
+  - title: Formation - Protéger les données personnelles en conformité avec le RGPD
     details:
     icon: 🔒
     link: /fr/rgpd/
-  - title: Découvrir l'accessibilité numérique
+  - title: Formation - Découvrir l'accessibilité numérique
     details: Découvrez les fondamentaux de l'accessibilité pour rendre votre vie numérique plus respectueuse des droits des personnes en situation de handicap.
     icon: ♿️
     link: /fr/accessibilite/
-  - title: Améliorer la qualité des sites web
+  - title: Formation - Améliorer la qualité des sites web
     details: Apprenez à intégrer des critères de qualité dans vos projets web.
     icon: ✅
     link: /fr/qualite-web/
-  - title: Quelques gestes pour un numérique plus sobre
+  - title: Fiche - Comprendre le web
+    details:
+    icon: 🌐
+  - title: Fiche - Quelques gestes pour un numérique plus sobre
     details:
     icon: ♻️
-  - title: (Re)prendre le contrôle de sa vie numérique
+  - title: Fiche - (Re)prendre le contrôle de sa vie numérique
     details:
     icon: ✊🏾
-  - title: Installer Linux (Ubuntu) sur son PC
+  - title: Fiche - Installer Linux (Ubuntu) sur son PC
     details: 
     icon: 💻
-  - title: Se lancer dans l'auto-hébergement
+  - title: Fiche - Se lancer dans l'auto-hébergement
     details:
     icon: 🏠
-#  - title: Installer Node.js et npm
-#    details:
-#    icon: 📦
-#  - title: Créer un site statique avec VitePress
-#    details: Plongez dans l'écosystème bouillonnant de JavaScript et des générateurs de sites statiques (SSG) et construisez pas à pas votre site avec VitePress.
-#    icon: ⚡
+  - title: Fiche - Installer Node.js et npm
+    details:
+    icon: 📦
+  - title: Fiche - Créer un site statique avec VitePress
+    details: Plongez dans l'écosystème bouillonnant de JavaScript et des générateurs de sites statiques (SSG) et construisez pas à pas votre site avec VitePress.
+    icon: ⚡
 ---
 

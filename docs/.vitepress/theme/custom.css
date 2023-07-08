@@ -1,3 +1,4 @@
+/*
 h1 + p.text {
     line-height: 1.3 !important;
 }
@@ -14,6 +15,7 @@ h1 + p.text {
         font-size: 2.8rem !important;
     }
 }
+*/
 
 /* Underline links for accessibility and quality reasons */
 p > a, li > a {
@@ -25,20 +27,7 @@ p > a, li > a {
     text-decoration: none;
 }
 
+/* Skip links */
 .dark .VPSkipLink[data-v-471574a7] {
     color: var(--vp-c-brand);
-}
-
-.VPHomeHero {
-    text-align: center;
-}
-
-.name, .text, .tagline, .actions {
-    max-width: 920px !important;
-    width: 100%;
-    margin: auto !important;
-}
-
-.actions {
-    justify-content: center;
 }
