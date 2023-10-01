@@ -19,7 +19,6 @@ export default defineConfig({
                 ],
 
                 sidebar: [
-                    { text: "Comprendre le web", items: [] },
                     { text: "Protéger les données personnelles en conformité avec le RGPD", items: [
                             { text: "Introduction", link: '/fr/rgpd/'},
                             { text: "Qu'est-ce qu'une donnée personnelle ?", link: '/fr/rgpd/definition-donnee-personnelle'},
@@ -79,15 +78,9 @@ export default defineConfig({
                             { text: "Webographie et ressources à explorer", link: '/fr/qualite-web/webographie-et-ressources-a-explorer'}
                         ]
                     },
-                    { text: "Quelques gestes pour un numérique plus sobre", items: [] },
-                    { text: "(Re)prendre le contrôle de sa vie numérique", items: [] },
-                    { text: "Installer Linux (Ubuntu) sur son PC", items: [] },
-                    { text: "Se lancer dans l'auto-hébergement", items: [] },
                     { text: "Ressources", link: '/fr/ressources' },
-                    { text: "Veille numérique", link: '' },
                     { text: "Contact", link: '/fr/contact' },
                     { text: "Signaler une erreur ou un bug", link: '/fr/bug' },
-                    { text: "Mastodon", link: '' },
                     { text: "À propos", link: '/fr/about' },
                     { text: "Mentions légales et données personnelles", link: '/fr/legal'}
                 ],
