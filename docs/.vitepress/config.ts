@@ -19,7 +19,7 @@ export default defineConfig({
                 ],
 
                 sidebar: [
-                    { text: "Protéger les données personnelles en conformité avec le RGPD", items: [
+                    /*{ text: "Protéger les données personnelles en conformité avec le RGPD", items: [
                             { text: "Introduction", link: '/fr/rgpd/'},
                             { text: "Qu'est-ce qu'une donnée personnelle ?", link: '/fr/rgpd/definition-donnee-personnelle'},
                             { text: "Pourquoi protéger les données&nbsp;?", link: '/fr/rgpd/pourquoi-proteger-les-donnees'},
@@ -42,7 +42,7 @@ export default defineConfig({
                             { text: "Le RGPD en gestion de projets web", link: '/fr/rgpd/le-rgpd-en-gestion-de-projets-web'},
                             { text: "Webographie et ressources à explorer", link: '/fr/rgpd/webographie-et-ressources-a-explorer'}
                         ]
-                    },
+                    },*/
                     {
                         text: "Accessibilité",
                         items: [
@@ -146,12 +146,26 @@ export default defineConfig({
 
                 sidebar: [
                     { text: "Protect personal data in compliance with the GDPR", items: [
-                            { text: "Introduction", link: '/en/gdpr/'}
+                            { text: "Introduction", link: '/en/gdpr/'},
+                            { text: "What is personal data?", link: '/en/gdpr/what-is-personal-data'},
+                            { text: "Why protect personal data?", link: '/en/gdpr/why-protect-data'},
+                            { text: "Brief history of personal data protection", link: '/en/gdpr/brief-history-of-personal-data-protection'},
+                            { text: "Definitions around data processing", link: '/en/gdpr/definitions-around-data-processing'},
+                            { text: "The scope of the GDPR", link: '/en/gdpr/the-scope-of-the-gdpr'},
+                            { text: "Lawful basis for data processing", link: '/en/gdpr/lawful-basis-for-processing'},
+                            { text: "Consent", link: '/en/gdpr/consent'},
+                            { text: "Data minimization", link: '/en/gdpr/data-minimization'},
+                            { text: "How long should data be kept?", link: '/en/gdpr/data-retention-period'},
+                            { text: "Information et droits des personnes", link: '/en/gdpr/'},
+                            { text: "Données sensibles", link: '/en/gdpr/'},
+                            { text: "Transfert de données hors UE", link: '/en/gdpr/'},
+                            { text: "Sanctions en cas de manquement au RGPD", link: '/en/gdpr/'},
+                            { text: "Enjeux et opportunités du RGPD", link: '/en/gdpr/'},
+                            { text: "Webographie et ressources à explorer", link: '/en/gdpr/'}
                         ]
                     },
                     { text: "Contact", link: '/en/contact' },
                     { text: "Report an error or a bug", link: '/en/bug' },
-                    { text: "Mastodon", link: '' },
                     { text: "About", link: '/en/about' },
                     { text: "Legal notice and personal data", link: '/en/legal'}
                 ],
