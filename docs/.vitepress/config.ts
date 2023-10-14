@@ -156,12 +156,12 @@ export default defineConfig({
                             { text: "Consent", link: '/en/gdpr/consent'},
                             { text: "Data minimization", link: '/en/gdpr/data-minimization'},
                             { text: "How long should data be kept?", link: '/en/gdpr/data-retention-period'},
-                            { text: "Information et droits des personnes", link: '/en/gdpr/'},
-                            { text: "Données sensibles", link: '/en/gdpr/'},
-                            { text: "Transfert de données hors UE", link: '/en/gdpr/'},
-                            { text: "Sanctions en cas de manquement au RGPD", link: '/en/gdpr/'},
-                            { text: "Enjeux et opportunités du RGPD", link: '/en/gdpr/'},
-                            { text: "Webographie et ressources à explorer", link: '/en/gdpr/'}
+                            { text: "The right to be informed", link: '/en/gdpr/right-to-be-informed'},
+                            { text: "Sensitive data", link: '/en/gdpr/sensitive-data'},
+                            { text: "Data transfers outside the EU", link: '/en/gdpr/transfers-outside-eu'},
+                            { text: "Fines and penalties", link: '/en/gdpr/fines-and-penalties'},
+                            { text: "Challenges and opportunities of the GDPR", link: '/en/gdpr/challenges-and-opportunities'},
+                            { text: "Webography and resources to explore", link: '/en/gdpr/webography-and-resources-to-explore'}
                         ]
                     },
                     { text: "Contact", link: '/en/contact' },

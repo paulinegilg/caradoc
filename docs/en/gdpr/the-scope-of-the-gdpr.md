@@ -2,7 +2,7 @@
 
 ## Establishment criterion
 
-The RGPD applies to the processing of personal data carried out by **organizations established on EU territory**,
+The GDPR applies to the processing of personal data carried out by **organizations established on EU territory**,
 whether the processing takes place in the EU.
 
 ## Targeting criterion
@@ -11,7 +11,7 @@ The GDPR applies to the processing of personal data carried out by **organizatio
 
 ## What about outsourcing?
 
-The data controllers described by the establishment and targeting criteria, as well as their possible subcontractors, are all affected by the RGPD.
+The data controllers described by the establishment and targeting criteria, as well as their possible subcontractors, are all affected by the GDPR.
 
 The latter may be:
 

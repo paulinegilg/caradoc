@@ -6,7 +6,7 @@ which gives an organization the right to process personal data.
 
 It can also be referred to as the "legal foundation" or "legal basis" for processing.
 
-To be **lawful**, a processing operation must be based on **at least one** of the **6 bases** described by the RGPD.
+To be **lawful**, a processing operation must be based on **at least one** of the **6 bases** described by the GDPR.
 :::
 
 ## Legal obligation

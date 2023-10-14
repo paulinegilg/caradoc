@@ -25,8 +25,8 @@ without their consent to carry out targeted influence campaigns.
 
 Facebook is deemed complicit since, at the time of the facts, the social network did not prohibit this type of practice.
 
-## RGPD (2018)
+## GDPR (2018)
 
-The RGPD (General Data Protection Regulation ) is the European regulation on data protection.
+The GDPR (General Data Protection Regulation ) is the European regulation on data protection.
 
-The RGPD came into operation on May 25, 2018.
+The GDPR came into operation on May 25, 2018.
