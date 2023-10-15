@@ -9,7 +9,7 @@ Everyone is concerned, because **everyone has a private life**.
 
 Even if on the surface "we have nothing to hide"...
 
-We all have desires, wishes, secrets, convictions, a sex life, tastes, projects, credit,
+We all have desires, wishes, secrets, convictions, a sexual life, tastes, projects, credit,
 housing or social benefits, medical records, political opinions, religious beliefs... and we must be able to decide whether to share them, and with whom.
 :::
 

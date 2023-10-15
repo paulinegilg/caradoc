@@ -11,7 +11,6 @@ next: false
 Don't hesitate to contact me!
 
 - By [mail](mailto:paulinegilg@protonmail.com?subject=CaraDoc%20-%20Contact)
-- On Mastodon
 
 ## An error or bug?
 

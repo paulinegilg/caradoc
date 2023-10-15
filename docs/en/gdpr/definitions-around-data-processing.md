@@ -18,11 +18,19 @@ in alphabetical or chronological order are also considered as personal data proc
 ## The data controller
 
 ::: tip To remember
-The **data controller** is the legal entity (company, municipality, etc.) or natural person who determines the purposes and means of data processing,
+The **data controller** is the legal entity (company, administration, etc.) or natural person who determines the purposes and means of data processing,
 i.e. the purpose and the way in which it is carried out.
 :::
 
 In practice, this is generally the legal entity (company, local authority, etc.) embodied by its legal representative (chairman, mayor, etc.).
+
+## The data processor
+
+::: tip To remember
+The **data processor**  is the legal entity or a natural person, public authority, agency, or any other organization who processes personal data on behalf of a data controller.
+:::
+
+For example, in the case of outsourcing or a contract with a third party.
 
 ## The purpose of processing
 
@@ -32,6 +40,6 @@ In practice, this is generally the legal entity (company, local authority, etc.)
 
 Data is collected for a **well-defined** and **legitimate** purpose, and is not further processed in a way incompatible with this initial purpose.
 
-Examples: recruitment management, payroll management, customer management, satisfaction surveys, premises monitoring, communication campaigns, etc.
+Examples: recruitment management, payroll management, customer management, satisfaction surveys, communication campaigns, etc.
 
 Processing that differs from the initial objective cannot be carried out.

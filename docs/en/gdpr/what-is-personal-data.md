@@ -16,7 +16,7 @@ Some data is considered "sensitive", but we'll come back to this later.
 A natural person can be identified:
 
 - **directly** (e.g. name)
-- **indirectly** (e.g. telephone or license plate number, social security number, postal or e-mail address, voice, photo, video, etc.).
+- **indirectly** (e.g. telephone or license number, social security number, postal or e-mail address, voice, photo, video, etc.).
 
 A natural person can be identified:
 

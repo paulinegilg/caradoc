@@ -1,3 +1,9 @@
+---
+layout: doc
+prev: false
+next: false
+---
+
 # About
 
 My name is Pauline Gilg, and I'm a software developer based in Strasbourg.

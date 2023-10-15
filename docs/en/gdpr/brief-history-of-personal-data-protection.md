@@ -1,6 +1,6 @@
 # Brief history of personal data protection
 
-## European Directive (1995)
+## European Data Protection Directive (1995)
 
 Creation of a common base for all EU countries in terms of personal data protection.
 
@@ -27,6 +27,6 @@ Facebook is deemed complicit since, at the time of the facts, the social network
 
 ## GDPR (2018)
 
-The GDPR (General Data Protection Regulation ) is the European regulation on data protection.
+The GDPR (General Data Protection Regulation) is the European regulation on data protection.
 
-The GDPR came into operation on May 25, 2018.
+The GDPR came into operation on May 25, 2018 and is since in effect.
