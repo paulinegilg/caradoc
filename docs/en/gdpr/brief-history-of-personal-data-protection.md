@@ -30,3 +30,8 @@ Facebook is deemed complicit since, at the time of the facts, the social network
 The GDPR (General Data Protection Regulation) is the European regulation on data protection.
 
 The GDPR came into operation on May 25, 2018 and is since in effect.
+
+## Digital Services Act (2022)
+
+The aim of the DSA is to update the EU's legal framework, in particular by modernizing the e-commerce laws.
+It regulates AI, money and digital platforms to enable players to innovate and develop, and to provide better security for the users.

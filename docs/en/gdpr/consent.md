@@ -9,7 +9,7 @@ legal obligation, performance of a contract, public task, legitimate interest or
 
 ## How to obtain consent
 
-Consent must be :
+Consent must be:
 
 - **free**: neither coerced nor influenced
 - **specific**: consent must correspond to a single processing operation, for a given purpose

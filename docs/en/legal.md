@@ -4,7 +4,7 @@ prev: false
 next: false
 ---
 
-# 🕵️‍♀️ Legal notice and personal data management
+# Legal notice and personal data management
 
 ## Hosting
 
@@ -13,8 +13,6 @@ This site is hosted by [OVH](https://ovh.com/), 2 rue Kellermann, 59100 Roubaix,
 ## Creation and publishing
 
 This platform and the training courses featured on it were created by [Pauline Gilg](https://paulinegilg.fr).
-
-The site was developed with [VuePress](https://vuepress.vuejs.org/).
 
 ## Copyrights and reproduction rights
 

@@ -4,7 +4,7 @@ prev: false
 next: false
 ---
 
-# 🐛 Report an error or bug
+# Report an error or bug
 
 ## Report an error
 

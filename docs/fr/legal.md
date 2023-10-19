@@ -14,8 +14,6 @@ Ce site est hébergé chez [OVH](https://ovh.com/), 2 rue Kellermann, 59100 Roub
 
 Cette plateforme et les formations qui y figurent ont été créés par [Pauline Gilg](https://paulinegilg.fr).
 
-Le site a été développé avec [VitePress](https://vitepress.dev/).
-
 ## Droits d’autrice et droit de reproduction
 
 L'ensemble des formations sont sous [licence CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).

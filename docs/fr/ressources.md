@@ -39,8 +39,8 @@ Sur cette page, vous trouverez des ressources classées par thématique et par m
 - [MOOC Atelier RGPD (CNIL)](https://atelier-rgpd.cnil.fr/login/index.php)
 - [Gestionnaire de cookies (Tarte au citron)](https://tarteaucitron.io/fr/)
 - [Wiki collaboratif sur les décisions des CNIL européennes (GDPRHub)](https://gdprhub.eu/index.php?title=Welcome_to_GDPRhub)
-- https://cookiedatabase.org/
-- https://dignilog.com/
+- [Cookie database](https://cookiedatabase.org/)
+- [Dignilog](https://dignilog.com/)
 
 ## Accessibilité
 
