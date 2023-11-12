@@ -5,12 +5,12 @@ prev: false
 
 # Introduction
 
-La collecte de données est le fondement de l’économie numérique grâce à la publicité qu’elle peut générer.
+La collecte de données personnelles est le fondement de l’économie numérique grâce à la publicité qu’elle peut générer.
 Pour les organismes privés, c'est l'un des principaux leviers pour générer des bénéfices, parfois, en échange de services.
 C'est le fameux adage "si c'est gratuit, c'est toi le produit" !
 
 En tant que professionnel du web, il est indispensable de bien connaître les enjeux de la protection des données personnelles
-et les lois qui l'encadrent. Il faut s'assurer durant toute la vie du projet que les données de vos
+et les lois qui l'encadrent. Il faut s'assurer durant toute la vie d'un projet que les données des
 utilisateurs ainsi que toutes les opérations effectuées sur celles-ci soient protégées en permanence.
 
 C'est justement ce que nous allons étudier dans ce cours.

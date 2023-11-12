@@ -23,7 +23,7 @@ Pour de nombreuses entreprises, le RGPD est une contrainte qui les empêcherait 
 
 En réalité, le RGPD est une opportunité !
 
-Sur le Web, un site conforme est vecteur de confiance.
+Sur le web, un site conforme est vecteur de confiance.
 
 ### Les valeurs ajoutées de l’intégration du RGPD dans une entreprise ou une administration
 

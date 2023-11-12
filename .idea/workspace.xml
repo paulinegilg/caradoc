@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/en/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/en/about.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/accessibilite/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/accessibilite/index.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/index.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/qualite-web/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/qualite-web/index.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/enjeux-opportunites-rgpd.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/enjeux-opportunites-rgpd.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/historique-protection-donnees-personnelles.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/historique-protection-donnees-personnelles.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/duree-conservation.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/duree-conservation.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/index.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/pourquoi-proteger-les-donnees.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/pourquoi-proteger-les-donnees.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/sanctions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/sanctions.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/transfert-hors-ue.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/transfert-hors-ue.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/public/_redirects" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/securite.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/securite.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +70,8 @@
       <workItem from="1685978567323" duration="328000" />
       <workItem from="1697964667700" duration="7000" />
       <workItem from="1699787521681" duration="2772000" />
-      <workItem from="1699796147820" duration="3871000" />
+      <workItem from="1699796147820" duration="4404000" />
+      <workItem from="1699811384603" duration="1038000" />
     </task>
     <servers />
   </component>

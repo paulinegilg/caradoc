@@ -2,14 +2,17 @@
 
 ## Combien de temps conserver les données ?
 
-les données doivent être conservées le temps nécessaire à la **satisfaction des
+Les données doivent être conservées le temps nécessaire à la **satisfaction des
 objectifs poursuivis** par leur collecte, ainsi qu’au respect d’éventuelles **obligations légales** ou
 d’**impératifs particuliers**.
 
 Le responsable de traitement doit déterminer une **durée fixe** de conservation ou un **critère objectif**
-pour déterminer cette durée. Par exemple, le temps de la relation contractuelle avec un client.
+pour déterminer cette durée. 
 
-Par exemple, lors d’un achat sur internet, données bancaires du client ne doivent être conservées que le temps de l’opération de paiement.
+Par exemple :
+
+- le temps de la relation contractuelle avec un client
+- pour les données bancaires, le temps de l'opération de paiement dans le cadre d’un achat en ligne
 
 Au-delà de cette durée, les données devront être **effacées**, **anonymisées** ou **archivées**.
 
