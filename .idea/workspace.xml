@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/duree-conservation.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/duree-conservation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/index.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/securite.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/securite.md" afterDir="false" />
-    </list>
+    <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +66,7 @@
       <workItem from="1697964667700" duration="7000" />
       <workItem from="1699787521681" duration="2772000" />
       <workItem from="1699796147820" duration="4404000" />
-      <workItem from="1699811384603" duration="1038000" />
+      <workItem from="1699811384603" duration="1382000" />
     </task>
     <servers />
   </component>

@@ -10,6 +10,6 @@ philosophiques ou religieuses, l’appartenance syndicale, la santé, l’orient
 données génétiques et biométriques.
 - Le n° de sécurité sociale.
 - Les données relatives aux condamnations pénales, aux infractions et aux mesures de sûreté.
-- 
+
 Pour traiter des données sensibles, un responsable de traitement devra justifier de la base légale
 du traitement et de l’exception la plus pertinente pour le traitement.
