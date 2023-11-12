@@ -53,6 +53,16 @@ Chacun peut décider et contrôler les usages qui sont faits de ses données :
 - La possibilité d’organiser le sort de ses données personnelles après la mort
 - La possibilité d’exercer ses droits par voie électronique
 
+## *Privacy Shield* (2016)
+
+Le *Privacy Shield* était un mécanisme d'auto-certification pour les entreprises établies aux États-Unis.
+
+Il avait été reconnu par la Commission européenne comme offrant un niveau de protection adéquat pour les données personnelles transférées 
+d'une entité européenne vers des entreprises établies aux États-Unis.
+
+La décision validant le *Privacy Shield* a été annulée par la Cour de justice de l'Union européenne en 2020. 
+Elle ne constitue plus une garantie juridique suffisante pour transmettre des données personnelles de l'Union européenne vers les États-Unis.
+
 ## Cambridge Analytica (2018)
 
 **Christopher Wylie**, ancien employé Cambridge Analytica révèle que son entreprise a joué un rôle dans l'élection du président Donald Trump.
@@ -70,5 +80,12 @@ des données.
 La France conserve sa propre législation "Informatique et Libertés" en complément, c’est-à-dire que la loi informatique et libertés reste pleinement en vigueur.
 
 Le RGPD est entré en service le 25 mai 2018.
+
+## *Digital Services Act* (2022)
+
+L'objectif du DSA est de mettre à jour le cadre juridique de l'UE, 
+notamment en modernisant les lois sur le commerce électronique. 
+Elle réglemente l'IA et les plateformes numériques afin de permettre aux acteurs d'innover et de se développer, 
+tout en offrant une meilleure sécurité aux utilisateurs.
 
 [Vidéo "La CNIL, 40 ans au service des libertés !"](https://www.youtube.com/watch?v=Th-rzrc3488)

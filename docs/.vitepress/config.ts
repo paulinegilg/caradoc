@@ -20,7 +20,7 @@ export default defineConfig({
                 ],
 
                 sidebar: [
-                    /*{ text: "Protéger les données personnelles en conformité avec le RGPD", items: [
+                    { text: "Protéger les données personnelles en conformité avec le RGPD", items: [
                             { text: "Introduction", link: '/fr/rgpd/'},
                             { text: "Qu'est-ce qu'une donnée personnelle ?", link: '/fr/rgpd/definition-donnee-personnelle'},
                             { text: "Pourquoi protéger les données&nbsp;?", link: '/fr/rgpd/pourquoi-proteger-les-donnees'},
@@ -32,18 +32,19 @@ export default defineConfig({
                             { text: "Minimisation des données", link: '/fr/rgpd/minimisation-donnees'},
                             { text: "Durée de conservation des données", link: '/fr/rgpd/duree-conservation'},
                             { text: "Information et droits des personnes", link: '/fr/rgpd/information-droits-des-personnes'},
-                            { text: "Dark patterns", link: '/fr/rgpd/dark-patterns'},
-                            { text: "Cookies", link: '/fr/rgpd/cookies'},
-                            { text: "Mesure de fréquentation d'un site ou d'une application", link: '/fr/rgpd/frequentation'},
                             { text: "Sécurité des données", link: '/fr/rgpd/securite'},
                             { text: "Données sensibles", link: '/fr/rgpd/donnees-sensibles'},
                             { text: "Transfert de données hors UE", link: '/fr/rgpd/transfert-hors-ue'},
                             { text: "Sanctions en cas de manquement au RGPD", link: '/fr/rgpd/sanctions'},
                             { text: "Enjeux et opportunités du RGPD", link: '/fr/rgpd/enjeux-opportunites-rgpd'},
-                            { text: "Le RGPD en gestion de projets web", link: '/fr/rgpd/le-rgpd-en-gestion-de-projets-web'},
-                            { text: "Webographie et ressources à explorer", link: '/fr/rgpd/webographie-et-ressources-a-explorer'}
+                            // TODO
+                            // { text: "Dark patterns", link: '/fr/rgpd/dark-patterns'},
+                            // { text: "Cookies", link: '/fr/rgpd/cookies'},
+                            // { text: "Mesure de fréquentation d'un site ou d'une application", link: '/fr/rgpd/frequentation'},
+                            // { text: "Le RGPD en gestion de projets web", link: '/fr/rgpd/le-rgpd-en-gestion-de-projets-web'},
+                            // { text: "Webographie et ressources à explorer", link: '/fr/rgpd/webographie-et-ressources-a-explorer'}
                         ]
-                    },*/
+                    },
                     {
                         text: "Accessibilité",
                         items: [

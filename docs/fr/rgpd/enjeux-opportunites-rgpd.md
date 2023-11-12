@@ -1,3 +1,8 @@
+---
+layout: doc
+next: false
+---
+
 # Enjeux et opportunités du RGPD
 
 ## Les 3 axes majeurs du RGPD

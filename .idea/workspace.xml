@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vitepress/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/en/about.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/accessibilite/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/accessibilite/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/qualite-web/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/qualite-web/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/enjeux-opportunites-rgpd.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/enjeux-opportunites-rgpd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/historique-protection-donnees-personnelles.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/historique-protection-donnees-personnelles.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/pourquoi-proteger-les-donnees.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/pourquoi-proteger-les-donnees.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/sanctions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/sanctions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/transfert-hors-ue.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/transfert-hors-ue.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/public/_redirects" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +31,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2QSYCJdKoeU8imbAGCWa5DWqACW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,14 +44,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "develop",
     "last_opened_file_path": "/home/pauline/Dev/caradoc-vitepress",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/snap/webstorm/318/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/snap/webstorm/341/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -62,6 +78,9 @@
       <workItem from="1685638877659" duration="1100000" />
       <workItem from="1685804415746" duration="11195000" />
       <workItem from="1685978567323" duration="328000" />
+      <workItem from="1697964667700" duration="7000" />
+      <workItem from="1699787521681" duration="2772000" />
+      <workItem from="1699796147820" duration="3871000" />
     </task>
     <servers />
   </component>

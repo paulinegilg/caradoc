@@ -5,21 +5,34 @@ prev: false
 
 # Introduction
 
-## À quoi servent les données personnelles sur internet ?
+La collecte de données est le fondement de l’économie numérique grâce à la publicité qu’elle peut générer.
+Pour les organismes privés, c'est l'un des principaux leviers pour générer des bénéfices, parfois, en échange de services.
+C'est le fameux adage "si c'est gratuit, c'est toi le produit" !
 
-La collecte de données est à la base du développement de l’économie numérique grâce à la publicité qu’elle peut générer.
+En tant que professionnel du web, il est indispensable de bien connaître les enjeux de la protection des données personnelles
+et les lois qui l'encadrent. Il faut s'assurer durant toute la vie du projet que les données de vos
+utilisateurs ainsi que toutes les opérations effectuées sur celles-ci soient protégées en permanence.
 
-C’est aujourd’hui l’un des fondements du système des organismes privés.
+C'est justement ce que nous allons étudier dans ce cours.
 
-Dans ce système de société, les données personnelles des utilisateurs servent à générer des bénéfices.
+Il vous faudra environ **6 heures** pour le parcourir.
+Il s'adresse aux **étudiants** et aux **professionnels du web**.
 
-*Source : Médiapart, Annakim Delfendahl*
+## Les objectifs de cette formation
 
-## "Si c’est gratuit, c’est toi le produit"
+À l'issue de cette introduction, vous devriez être capables de :
 
-## Le RGPD concerne tout le monde !
+- **Comprendre** les enjeux de la protection des données à caractère personnel
+- **Maîtriser** la terminologie juridique de base autour de la protection des données à caractère personnel
+- **Connaître** les principaux concepts du RGPD
+- **Intégrer** la protection des données à caractère personnel dans un projet web
 
-“Que vous travailliez seul⋅e ou en équipe au développement d’un projet, que vous soyez amené⋅e à
-gérer une équipe de développement, ou que vous soyez un prestataire réalisant des développements
-pour des tiers, il est indispensable de s’assurer durant toute la vie du projet que les données de vos
-utilisateurs ainsi que toutes les opérations effectuées sur celles-ci soient protégées en permanence.”
+## Vous souhaitez contribuer ou poser une question ?
+
+Eh bien, n'hésitez pas !
+
+Envoyez-moi un [mail](mailto:paulinegilg@protonmail.com) en précisant le cours et le chapitre concerné.
+
+Si vous constatez un bug, rendez-vous sur [cette page](/fr/bug).
+
+Merci d'avance pour votre aide ! Je ferai mon possible pour vous répondre rapidement.

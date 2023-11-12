@@ -37,4 +37,9 @@ Pensez-y pour vos futurs travaux collaboratifs, sondages ou formulaires !
 
 ## Les conséquences d'une utilisation malveillante de données
 
-TODO
+On pense souvent aux vols de données bancaires comme les RIB ou les numéros de cartes bancaires,
+qui peuvent causer de sérieux préjudices financiers.
+
+Mais d'autres vols de données peuvent également causer du tort aux personnes :
+les données liées à l'orientation sexuelle, à l'origine éthnique ou à la religion peuvent donner lieu à de la discrimination sociale, tandis que 
+les données liées à la santé ou l'appartenance à un syndicat peuvent engendrer de la discrimination lors du recrutement par exemple.

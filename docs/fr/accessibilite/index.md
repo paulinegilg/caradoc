@@ -37,11 +37,11 @@ En revanche, à l'issue de cette introduction, vous devriez être capables de :
 
 ## Vous souhaitez contribuer ou poser une question ?
 
-Eh bien, n'hésitez pas ! 
-Deux solutions s'offrent à vous.
+Eh bien, n'hésitez pas !
 
-1. Sur [GitHub](https://github.com/paulinegilg/caradoc/issues) : rendez-vous sur le dépôt GitHub de la plateforme. Ouvrez une issue en précisant le cours concerné.
-2. Par [mail](mailto:paulinegilg@protonmail.com)
+Envoyez-moi un [mail](mailto:paulinegilg@protonmail.com) en précisant le cours et le chapitre concerné.
+
+Si vous constatez un bug, rendez-vous sur [cette page](/fr/bug).
 
 Merci d'avance pour votre aide ! Je ferai mon possible pour vous répondre rapidement.
 

@@ -1,12 +1,19 @@
 # Sanctions en cas de manquement au RGPD
 
-## TODO
+## Que risque-t-on en cas de manquement au RGPD ?
 
-Que risque-t-on en cas de manquement au RGPD ?
-Jusqu'à 20 millions d'euros ou jusqu'à 4 % du chiffre d'affaires annuel mondial dans le cas d’une
-entreprise. Ces sanctions peuvent être rendues publiques.
-Cookies : la CNIL sanctionne Google à hauteur 100 millions d’euros
-https://www.cnil.fr/fr/cookies-sanction-de-60-millions-deuros-lencontre-de-google-llc-et-de-40-millions-deuros-lencontre
+Jusqu'à **20 millions d'euros** ou jusqu'à **4 % du chiffre d'affaires annuel mondial** dans le cas d’une
+entreprise. Ces sanctions peuvent être **rendues publiques**.
+
+### L'amende la plus importante à ce jour : 1,2 milliard d'euros contre Meta
+
+Imposée par la CNIL irlandaise en mai 2022, il s'agit de l'amende la plus importante à ce jour dans le cadre du RGPD.
+
+Cette amende record sanctionne le transfert de données personnelles d'utilisateurs européens vers les États-Unis sans mécanismes de protection adéquats
+et constitue une étape importante dans la réglementation sur la protection des données.
+
+Elle constitue un avertissement clair à l'attention des entreprises que les exigences du RGPD doivent être prises au sérieux,
+et que le non-respect de ces exigences peut avoir de graves conséquences financières.
 
 ## Qui veille au respect du RGPD ?
 

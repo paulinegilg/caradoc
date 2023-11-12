@@ -5,7 +5,7 @@ prev: false
 
 # Introduction
 
-Si vous avez déjà travaillé sur un projet web, il y a fort à parier que vous avez déjà constaté qu'il est souvent **difficile
+Si vous avez déjà travaillé sur un projet web, il y a fort à parier que vous avez déjà constaté qu'il est **difficile
 de maintenir un bon niveau de qualité**. Bien souvent, c'est parce que **nous manquons de temps**, que **nous anticipons mal les choses**,
 ou parce que nous avons **du mal à comprendre les besoins de nos clients**.
 
@@ -31,9 +31,9 @@ Il s'adresse aux **étudiants** et aux **professionnels du web**.
 ## Vous souhaitez contribuer ou poser une question ?
 
 Eh bien, n'hésitez pas !
-Deux solutions s'offrent à vous.
 
-1. Sur [GitHub](https://github.com/paulinegilg/caradoc/issues) : rendez-vous sur le dépôt GitHub de la plateforme. Ouvrez une issue en précisant le cours concerné.
-2. Par [mail](mailto:paulinegilg@protonmail.com)
+Envoyez-moi un [mail](mailto:paulinegilg@protonmail.com) en précisant le cours et le chapitre concerné.
+
+Si vous constatez un bug, rendez-vous sur [cette page](/fr/bug).
 
 Merci d'avance pour votre aide ! Je ferai mon possible pour vous répondre rapidement.
