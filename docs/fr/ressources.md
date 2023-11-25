@@ -111,7 +111,6 @@ Sur cette page, vous trouverez des ressources classées par thématique et par m
 - [Libre à vous](https://www.libreavous.org/)
 - [La voie est libre (Picasoft)](https://podcast.picasoft.net/@la_voix_est_libre)
 - [L'Octet vert](https://www.standblog.org/blog/category/podcast)
-- [La voie est libre](https://podcast.picasoft.net/@la_voix_est_libre)
 
 ## Vidéos
 
@@ -137,6 +136,7 @@ Sur cette page, vous trouverez des ressources classées par thématique et par m
 - [Picasoft](https://picasoft.net/)
 - [Hackstub (hackerspace strasbourgeois)](https://hackstub.eu/home/fr)
 - [Emmaüs Connect](https://emmaus-connect.org/)
+- [Katzele](http://katzele.netlib.re/)
 
 ## Lieux
 

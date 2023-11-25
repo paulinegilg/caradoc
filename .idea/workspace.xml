@@ -6,6 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/cache/deps/_metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vue.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vue.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vitepress/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/ressources.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/ressources.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/dark-patterns.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/dark-patterns.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +77,7 @@
       <workItem from="1699796147820" duration="4404000" />
       <workItem from="1699811384603" duration="3055000" />
       <workItem from="1699867743036" duration="658000" />
-      <workItem from="1700929614192" duration="627000" />
+      <workItem from="1700929614192" duration="4622000" />
     </task>
     <servers />
   </component>
