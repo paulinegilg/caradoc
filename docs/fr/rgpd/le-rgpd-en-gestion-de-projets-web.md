@@ -1,5 +1,6 @@
 ---
 layout: doc
+next: false
 ---
 
 # Le RGPD en gestion de projets web

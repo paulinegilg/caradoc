@@ -5,26 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/fr/rgpd/rediger-mentions-d-information.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/public/rgpd/cookie-wall.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/public/rgpd/cookies-bon-exemple-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/public/rgpd/mentions-information-formulaire.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/chunk-CSMLHSNT.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/chunk-CSMLHSNT.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___@vue_devtools-api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___@vue_devtools-api.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___@vueuse_integrations_useFocusTrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___@vueuse_integrations_useFocusTrap.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___mark__js_src_vanilla__js.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___mark__js_src_vanilla__js.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___minisearch.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vitepress___minisearch.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vue.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vitepress/cache/deps/vue.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/.vitepress/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/cookies.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/cookies.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/legal.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/legal.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/frequentation.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/mesure-de-frequentation.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/historique-protection-donnees-personnelles.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/historique-protection-donnees-personnelles.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/information-droits-des-personnes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/information-droits-des-personnes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/le-rgpd-en-gestion-de-projets-web.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/le-rgpd-en-gestion-de-projets-web.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/rgpd/rediger-mentions-d-information.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/rgpd/rediger-mentions-d-information.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +40,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "develop",
-    "last_opened_file_path": "/home/pauline/Dev/tp-installation-gestionnaire-cookies",
+    "last_opened_file_path": "/home/pauline/Dev/caradoc-vitepress/docs/public/rgpd",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -91,7 +80,8 @@
       <workItem from="1699811384603" duration="3055000" />
       <workItem from="1699867743036" duration="658000" />
       <workItem from="1700929614192" duration="5338000" />
-      <workItem from="1700988092692" duration="3163000" />
+      <workItem from="1700988092692" duration="4879000" />
+      <workItem from="1700999266014" duration="9372000" />
     </task>
     <servers />
   </component>

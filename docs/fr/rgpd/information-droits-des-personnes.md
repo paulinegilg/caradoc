@@ -28,10 +28,14 @@ Pour être licite, la collecte de données personnelles doit s’accompagner d�
 
 - l’identité du **responsable de traitement**
 - la **finalité** du traitement
+- la **base légale** du traitement
 - le **caractère obligatoire ou facultatif** des données à fournir et les conséquences d’un défaut de réponse
 - les **destinataires des données**
+- la **durée de conservation des données**
 - leurs **droits** (droit d’accès, de rectification, et d’opposition)
 - les éventuels **transferts** de données vers des pays hors UE
+- les **coordonnées du délégué à la protection des données de l’organisme**, s’il a été désigné, ou d’un point de contact sur les questions de protection des données personnelles
+- le **droit d’introduire une réclamation auprès de la CNIL**
 
 L’information doit être donnée **avant** la collecte des données.
 :::

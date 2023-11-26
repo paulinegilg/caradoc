@@ -16,7 +16,7 @@ Cette plateforme et les formations qui y figurent ont été créés par [Pauline
 
 ## Droits d’autrice et droit de reproduction
 
-L'ensemble des formations sont sous [licence CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+L'ensemble des formations sont sous [licence CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), à l'exception des références sourcées qui sont soumises à leur propre licence.
 
 Vous êtes autorisé à :
 

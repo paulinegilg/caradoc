@@ -61,7 +61,13 @@ Il avait été reconnu par la Commission européenne comme offrant un niveau de 
 d'une entité européenne vers des entreprises établies aux États-Unis.
 
 La décision validant le *Privacy Shield* a été annulée par la Cour de justice de l'Union européenne en 2020. 
-Elle ne constitue plus une garantie juridique suffisante pour transmettre des données personnelles de l'Union européenne vers les États-Unis.
+Elle ne constituait plus une garantie juridique suffisante pour transmettre des données personnelles de l'Union européenne vers les États-Unis.
+
+Suite à cette décision, en 2023, la Commission européenne est revenue sur cette décision suite à une évolution 
+dans la législation des États-Unis qui permet d'assurer un niveau de protection des données personnelles équivalent à celui de l’UE. 
+En vertu de ce nouveau *Data privacy Framework*, les transferts de données personnelles depuis l'UE vers certains organismes peuvent désormais s’effectuer librement, sans encadrement spécifique.
+
+Plus d'information sur le [site de la CNIL](https://www.cnil.fr/fr/transferts-de-donnees-vers-les-etats-unis-la-commission-europeenne-adopte-une-nouvelle-decision).
 
 ## Cambridge Analytica (2018)
 
