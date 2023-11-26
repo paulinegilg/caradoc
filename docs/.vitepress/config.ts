@@ -40,6 +40,7 @@ export default defineConfig({
                             { text: "Dark patterns", link: '/fr/rgpd/dark-patterns'},
                             { text: "Cookies", link: '/fr/rgpd/cookies'},
                             { text: "Mesure de fréquentation d'un site ou d'une application", link: '/fr/rgpd/frequentation'},
+                            { text: "Rédiger des mentions d'information", link: '/fr/rgpd/rediger-mentions-d-information'},
                             { text: "Le RGPD en gestion de projets web", link: '/fr/rgpd/le-rgpd-en-gestion-de-projets-web'},
                             //{ text: "Webographie et ressources à explorer", link: '/fr/rgpd/webographie-et-ressources-a-explorer'}
                         ]

@@ -95,18 +95,55 @@ Fenêtre de consentement de Radio France :
 
 ![](/rgpd/cookies-bon-exemple.jpg)
 
+Fenêtre de consentement du Musée du Louvres :
+
+![](/rgpd/cookies-bon-exemple-2.png)
+
 ### Exemples de non conformité
 
 Fenêtre de consentement d'Amazon :
 
 ![](/rgpd/cookies-mauvais-exemple.jpg)
 
-### Le cas des *paywalls*
+### Le cas des *cookie walls*
 
-TODO
-https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookie-walls/monetisation-des-donnees-personnelles-les-enjeux-juridiques-et-ethiques
+Fenêtre de consentement d'Allociné, avec *cookie wall* :
+
+![](/rgpd/cookie-wall.png)
+
+Les *cookie walls* consistent à bloquer l'accès à un site web ou à une application mobile pour les utilisateurs
+qui ne donneraient pas leur consentement au dépôt de cookies.
+
+Dans certains cas (*pay walls*), l'accès sans cookies est possible avec une contrepartie financière, comme un abonnement à un service.
+
+Au regard de la législation actuelle, cette pratique ne peut pas être interdite par la CNIL.
+
+Elle pose cependant un certain nombre de questions étiques comme le fait que :
+
+- les personnes les plus vulnérables doivent fournir leurs données pour accéder gratuitement à des services, tandis que d’autres, plus aisées, pourraient payer un abonnement leur permettant d’accéder à un service sans fournir de données personnelles
+- la possibilité de préserver son anonymat vis-à-vis de certains tiers soit réservée à quelques-uns et exclue pour d’autres
+
+Pour en savoir plus, consultez les 
+[recommendations de la CNIL sur les enjeux juridiques et éthiques des *cookie walls*](https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookie-walls/monetisation-des-donnees-personnelles-les-enjeux-juridiques-et-ethiques).
 
 ## Gestionnaire de cookies
 
-TODO
-Tarte au citron
+Je vous conseille d'utiliser le gestionnaire de cookies [Tarte au citron](https://tarteaucitron.io), et ce, pour plusieurs raisons : 
+
+- il est conforme aux recommendations de la CNIL citées plus haut dans ce chapitre
+- il est facile à installer et à personnaliser
+- il est open source et libre
+
+![](https://tarteaucitron.io/img/panel.png)
+
+*Source : [tarteaucitron.io](https://tarteaucitron.io)*
+
+### Installation de *Tarte au citron*
+
+2 modes d'installation sont proposés. Un mode manuel (gratuit), et un mode pro (nécessitant un abonnement, gratuit en-dessous d'un seuil de services).
+
+::: tip Exercice : installation manuelle
+Rendez-vous sur [ce dépôt Git](https://git.chezluma.fr/lumadil/tp-installation-cookie-panel) et suivez les consignes.
+:::
+
+Il existe également un [plugin WordPress](https://wordpress.com/fr/plugins/tarteaucitronjs) (nécessite un abonnement).
