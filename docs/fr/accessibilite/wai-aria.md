@@ -1,4 +1,4 @@
-## WAI-ARIA
+# WAI-ARIA
 
 Avant de poursuivre ce cours, nous devons nous pencher sur une notion très importante pour l'accessibilité : **ARIA**.
 
@@ -29,17 +29,17 @@ ARIA est une partie complexe d'HTML et de l'accessibilité.
 Si c'est la première fois que vous en entendez parler, il est fort probable que vous vous demandiez à quoi cela sert,
 concrètement, et surtout, **quand l'utiliser**.
 
-### Les 5 règles d'ARIA
+## Les 5 règles d'ARIA
 
 La WAI a théorisé **5 règles pour une bonne utilisation d'ARIA**. Passons-les en revue ensemble :
 
-#### N'utilisez ARIA qu'en dernier recours
+### N'utilisez ARIA qu'en dernier recours
 
 Autrement dit, utilisez ARIA **uniquement** s'il n'existe pas d'élément HTML sémantique correspondant à vos besoins,
 si vous souhaitez utiliser une fonctionnalité dont l'accessibilité n'est pas encore supportée,
 ou si vous avez besoin de plus de liberté pour styliser un élément.
 
-#### Ne modifiez pas la sémantique des éléments
+### Ne modifiez pas la sémantique des éléments
 
 ```html
 <!-- N'écrivez pas -->
@@ -53,7 +53,7 @@ L'élément `<h2>` n'est pas interactif par nature.
 Sémantiquement, il sert uniquement à définir un titre.
 L'entourer d'une `<div>` tabulable peut être utile, par exemple, pour naviguer à travers différents onglets.
 
-#### Permettez toujours la navigation au clavier
+### Permettez toujours la navigation au clavier
 
 Vous pouvez utiliser l'attribut `tabindex="0"` pour permettre à des éléments ne recevant pas de focus nativement d'être
 navigables au clavier.
@@ -74,7 +74,7 @@ Ici, nous devrions plutôt utiliser (si possible, conformément à la règle 1 d
 <button type="submit">Submit</button>
 ```
 
-#### Ne cachez pas les éléments pouvant recevoir du focus
+### Ne cachez pas les éléments pouvant recevoir du focus
 
 Vous pouvez indiquer aux lecteurs d'écran d'ignorer certains éléments si ceux-ci ne sont pas porteurs d'informations utiles
 pour l'utilisateur grâce à `role="presentation"` ou `aria-hidden="true"`.
@@ -87,7 +87,7 @@ pour l'utilisateur grâce à `role="presentation"` ou `aria-hidden="true"`.
 <div><button>Submit</button></div>
 ```
 
-#### Utilisez des libellés accessibles pour vos éléments interactifs
+### Utilisez des libellés accessibles pour vos éléments interactifs
 
 Des éléments interactifs peuvent correspondre à des **liens**, des **textes alternatifs** et des **labels** de champs de formulaire.
 

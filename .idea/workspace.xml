@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/accessibilite/images.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/accessibilite/images.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/accessibilite/multimedia.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/accessibilite/multimedia.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/accessibilite/structuration-de-l-information.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/accessibilite/structuration-de-l-information.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/fr/accessibilite/wai-aria.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/accessibilite/wai-aria.md" afterDir="false" />
-    </list>
+    <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
