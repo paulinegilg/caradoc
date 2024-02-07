@@ -36,7 +36,7 @@ Cette fois `alt` est bien rempli, les lecteurs d'écran pourront accéder à la 
 
 La réponse est : **cela dépend**.
 
-De manière générale, partez du principe qu'il faut renseigner l'attribut `alt`.
+Si l'image est porteuse d'information, alors il faut renseigner l'attribut `alt`.
 
 Mais si l'image est purement décorative, il vaut mieux ne pas le remplir, car trop d'informations inutiles risquent d'alourdir le contenu.
 Dans ce cas, privilégiez les solutions suivantes :

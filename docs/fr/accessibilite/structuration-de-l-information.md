@@ -28,7 +28,7 @@ l'**activation à la touche `Entrée`** et la possibilité de **tabuler** dessus
 
 ## Structurer ses contenus
 
-Comme nous l'avons évoqué dans le chapitre précédent, il est essentiel de bien structurer son contenu avec des
+Il est essentiel de bien structurer son contenu avec des
 **titres**, des **paragraphes** et des **listes**.
 
 Ainsi, les lecteurs d'écran peuvent **naviguer facilement dans le contenu** et le lire au fur et à mesure, en indiquant ce qui est un titre, un paragraphe etc.

@@ -89,8 +89,6 @@ pour l'utilisateur grâce à `role="presentation"` ou `aria-hidden="true"`.
 
 #### Utilisez des libellés accessibles pour vos éléments interactifs
 
-Souvenez-vous, nous avons déjà évoqué ce point dans le chapitre sur l'accessibilité des contenus textuels.
-
 Des éléments interactifs peuvent correspondre à des **liens**, des **textes alternatifs** et des **labels** de champs de formulaire.
 
 ```html
