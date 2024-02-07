@@ -29,6 +29,6 @@ ils peuvent créer des **obstacles** qui empêchent les personnes de l’utilise
 ::: tip À retenir
 Pour les entreprises et les administrations, l'accessibilité est essentielle et inhérente à la création de sites web de qualité, 
 qui n'excluront pas les personnes handicapées de l'utilisation de leurs produits et services.
-En tant que citoyen, nous avons aussi un rôle à jouer ! Par exemple, lorsque vous publiez un contenu non textuel sur le web, 
+En tant que citoyen, nous avons aussi un rôle à jouer ! Par exemple, lorsque vous publiez un contenu non textuel **porteur d'information** sur le web, 
 pensez toujours à fournir une alternative. C'est un geste simple qui a un impact.
 :::

@@ -2,7 +2,20 @@
 layout: doc
 ---
 
-# Animations
+# Scripts et animations
+
+## Scripts
+
+Les scripts entrainent des **changements d'état** des composants d'une interface.
+Par exemple, un script va ouvrir ou fermer une fenêtre modale, déployer un accordéon, etc.
+
+Pour que les scripts soient accessibles, il convient de :
+
+- Les rendre contrôlables au **clavier** et par tout **dispositif de pointage**
+- **Avertir** l'utilisateur en cas de changement de contexte ou lui en donner le contrôle
+- Correctement restituer les éventuels **messages de statut** (une action qui génère une erreur ou un succès, un état de progression, etc.)
+
+## Animations
 
 Les animations peuvent rendre les sites plus vivants et engageants, 
 mais ils peuvent aussi causer de sérieux troubles à des personnes atteintes de **problèmes vestibulaires**, 

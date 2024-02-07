@@ -26,18 +26,3 @@ les utilisateurs disposant d'une **connexion avec peu de réseau** pour qui tél
 ou ceux se trouvant dans un **environnement bruyant** ou au contraire dans un **environnement calme** et ne pouvant en conséquence pas accéder au son.
 :::
 
-## Accessibilité des contrôles vidéo et audio
-
-Si vous devez intégrer des vidéos ou des sons directement sur un site,
-il est probable que vous utilisiez les éléments HTML `<audio>` et `<video>`.
-
-Grâce à HTML5 et l'attribut `controls`, vous disposez de commandes natives pour contrôler vos contenus à partir de ces éléments : 
-des boutons lecture et pause, des sliders pour avancer dans le média ou pour contrôler le son, etc.
-
-Le hic, c'est que ces commandes ne sont pas accessibles uniquement au clavier, sauf sur le navigateur Opera.
-Or, nous avons vu que pour certains utilisateurs, c'était essentiel.
-
-Dans l'idéal, il vous faudra créer des **contrôles personnalisés** grâce à HTML5 et JavaScript.
-Nous n'allons pas rentrer dans ces détails techniques dans ce cours, mais si cela vous intéresse, 
-je vous conseille de jeter un coup d'œil à la 
-[documentation de Mozilla sur l'accessibilité](https://developer.mozilla.org/fr/docs/Learn/Accessibility/Multimedia#cr%C3%A9ation_de_contr%C3%B4les_audio_et_vid%C3%A9o_personnalis%C3%A9s).

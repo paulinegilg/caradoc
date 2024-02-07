@@ -60,63 +60,6 @@ Un contenu organisé de manière claire aura beaucoup plus de chance d'être lis
 Si possible, évitez de jargonner et faites des **phrases simples et courtes**, dans un registre qui puisse être compris du plus grand nombre.
 Si vous utilisez des abréviations ou des **acronymes**, pensez à les **expliciter**.
 
-### Structurez votre contenu avec des titres
 
-Utilisez des **titres** pour **structurer** votre contenu et ainsi **délimiter** des **zones de texte logiques**.
-Cela clarifiera votre contenu et les lecteurs d'écran pourront se baser sur vos titres pour générer des **tables des matières**.
 
-Bien entendu, les titres doivent **s'enchainer de manière logique** : un `<h1>`, puis un `<h2>`, un `<h3>` et ainsi de suite.
-
-```html
-<!-- Mauvais enchainement de titres -->
-<h1>Titre de premier niveau</h1>
-    ...
-<h3>Titre de troisième niveau</h3>
-
-<!-- Bon enchainement de titres -->
-<h1>Titre de premier niveau</h1>
-    ...
-<h2>Titre de deuxième niveau</h2>
-```
-
-### Utilisez des listes pour simplifier votre contenu
-
-Utilisez les éléments HTML correspondant au contenu que vous souhaitez afficher.
-Par exemple, si vous listez des éléments, faites appel à `<ul>` ou à `<ol>`.
-
-```html
-<!-- Évitez -->
-<h3>Ingrédients :</h3>
-<div>
-    <p>- Lait</p>
-    <p>- Farine</p>
-    <p>- Oeufs</p>
-    <p>- Sucre</p>
-</div>
-
-<!-- Privilégiez -->
-<h3>Ingrédients :</h3>
-<ul>
-    <li>Lait</li>
-    <li>Farine</li>
-    <li>Oeufs</li>
-    <li>Sucre</li>
-</ul>
-```
-
-### Explicitez vos liens et vos boutons
-
-Pour vos liens et vos boutons, **évitez les libellés comme "cliquez ici" ou "lien"**.
-
-::: tip À retenir
-Les libellés de liens ou de boutons doivent pouvoir être compris **séparément** et **en-dehors du contexte**.
-:::
-
-```html
-<!-- Évitez -->
-<p>Pour consulter notre documentation sur l'accessibilité, cliquez <a href="/doc.html">ici</a></p>
-
-<!-- Privilégiez -->
-<p>Consultez <a href="/doc.html">notre documentation sur l'accessibilité</a></p>
-```
 

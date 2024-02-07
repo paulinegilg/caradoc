@@ -1,93 +1,12 @@
----
-layout: doc
----
-
-# Bien utiliser HTML
-
-HTML joue un grand rôle dans l'accessibilité. Bien utilisé, il permet aux lecteurs d'écran de lire et d'interagir avec le contenu d'une page web.
-
-Bien utiliser le HTML, c'est avoir recours au **HTML sémantique**.
-
-## HTML sémantique
-
-> Le HTML sémantique est l'utilisation du balisage HTML visant à renforcer le sémantisme **(la signification)** des informations contenues dans les pages web, 
-c'est-à-dire leur **sens**, plutôt que de se borner à définir leurs présentations (ou apparence).
-
-Source : [HTML sémantique sur Wikipédia](https://fr.wikipedia.org/wiki/HTML_s%C3%A9mantique)
-
-Voyons quelques exemples pour vous aider à conceptualiser cette notion.
-
-Si vous souhaitez mettre un texte en valeur, vous pouvez utiliser la balise `<i>` qui indique un style italique,
-mais il est préférable d'utiliser `<em>` qui signifie une emphase. C'est dans un second temps, avec CSS, que vous pourrez 
-définir le style de votre élément, et si besoin, le mettre en italique.
-
-Autre exemple : vous pouvez créer un bouton cliquable à l'aide d'une `<div>`, mais il est plus logique d'en créer un
-à l'aide de l'élément `<button>`. En effet, les `<div>` n'ont pas de valeur sémantique alors que les éléments `<button>`, eux,
-sont justement faits pour les boutons. Ils possèdent des styles par défaut et des **fonctionnalités spécifiques**, telles que
-l'**activation à la touche `Entrée`** et la possibilité de **tabuler** dessus.
-
-## Structurer ses contenus
-
-Comme nous l'avons évoqué dans le chapitre précédent, il est essentiel de bien structurer son contenu avec des
-**titres**, des **paragraphes** et des **listes**.
-
-Ainsi, les lecteurs d'écran peuvent **naviguer facilement dans le contenu** et le lire au fur et à mesure, en indiquant ce qui est un titre, un paragraphe etc.
-
-### Exemple de page web bien structurée
-
-```html
-<header>
-    <h1>Titre de la page</h1>
-</header>
-
-<nav>
-    <!--  navigation principale  -->
-</nav>
-
-<!--  contenu principal de la page  -->
-<main>
-    
-    <article>
-        <h2>Article</h2>
-        <!--  contenu d'un article  -->
-    </article>
-
-    <aside>
-        <h2>Contenu en relation</h2>
-        <!--  contenu en relation  -->
-    </aside>
-    
-    <section>
-        <!-- section de contenu -->
-    </section>
-
-</main>
-
-<!--  pied de page  -->
-<footer>
-    <nav>
-        <!-- navigation secondaire si nécessaire -->
-    </nav>
-</footer>
-```
-
-Dans cet exemple, nous exploitons tout le potentiel des **éléments sémantiques de HTML5**.
-
-Les lecteurs d'écran comprendront aisément l'organisation de nos contenus.
-Par exemple, pour lire l'article présent sur cette page, il faudra aller au contenu principal, puis sur l'article.
-C'est bien **plus facile de s'y retrouver** qu'avec des `<div>` imbriquées !
-
-::: tip À noter
-Vous pouvez transformer la disposition en CSS, mais **l'ordre du contenu doit toujours être logique dans le code source**.
-:::
-
 ## WAI-ARIA
+
+Avant de poursuivre ce cours, nous devons nous pencher sur une notion très importante pour l'accessibilité : **ARIA**.
 
 ARIA (pour **Accessible Rich Internet Applications**), ou WAI-ARIA, est une spécification technique du W3C.
 
 Il s'agit d'une technologie qui nous aide à résoudre des problèmes en ajoutant de la sémantique
 que les technologies d'assistance et les navigateurs peuvent reconnaitre.
-C'est utile pour des contenus complexes qui ne peuvent pas utiliser la sémantique native de HTML 
+C'est utile pour des contenus complexes qui ne peuvent pas utiliser la sémantique native de HTML
 ou qui sont modifiés dynamiquement avec du JavaScript.
 
 Les **3 fonctionnalités principales** d'ARIA sont les rôles, les propriétés et les états :
@@ -116,7 +35,7 @@ La WAI a théorisé **5 règles pour une bonne utilisation d'ARIA**. Passons-les
 
 #### N'utilisez ARIA qu'en dernier recours
 
-Autrement dit, utilisez ARIA **uniquement** s'il n'existe pas d'élément HTML sémantique correspondant à vos besoins, 
+Autrement dit, utilisez ARIA **uniquement** s'il n'existe pas d'élément HTML sémantique correspondant à vos besoins,
 si vous souhaitez utiliser une fonctionnalité dont l'accessibilité n'est pas encore supportée,
 ou si vous avez besoin de plus de liberté pour styliser un élément.
 
@@ -136,7 +55,7 @@ L'entourer d'une `<div>` tabulable peut être utile, par exemple, pour naviguer 
 
 #### Permettez toujours la navigation au clavier
 
-Vous pouvez utiliser l'attribut `tabindex="0"` pour permettre à des éléments ne recevant pas de focus nativement d'être 
+Vous pouvez utiliser l'attribut `tabindex="0"` pour permettre à des éléments ne recevant pas de focus nativement d'être
 navigables au clavier.
 
 ```html
@@ -186,5 +105,5 @@ Des éléments interactifs peuvent correspondre à des **liens**, des **textes a
 <label for="lapin">Lapin mignon</label>
 ```
 
-Pour en savoir plus, consultez la [documentation MDN sur ARIA](https://developer.mozilla.org/fr/docs/Web/Accessibility/ARIA) 
+Pour en savoir plus, consultez la [documentation MDN sur ARIA](https://developer.mozilla.org/fr/docs/Web/Accessibility/ARIA)
 et la [documentation officielle WAI-ARIA](https://www.w3.org/TR/wai-aria/).

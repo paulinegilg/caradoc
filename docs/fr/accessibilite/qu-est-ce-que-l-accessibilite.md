@@ -4,6 +4,10 @@ layout: doc
 
 # Qu’est-ce que l’accessibilité ?
 
+![Une femme en fauteuil roulant devant un ordinateur](/accessibilite/video-sady.png)
+
+[Vidéo : Apple – Accessibility – Sady (sur YouTube)](https://www.youtube.com/watch?v=XB4cjbYywqg)
+
 Pour bien comprendre de quoi on parle, commençons par définir le terme "accessibilité" au sens large.
 
 > L’accessibilité est un terme initialement relatif au **monde du handicap**, 

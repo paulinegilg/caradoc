@@ -52,13 +52,20 @@ export default defineConfig({
                             { text: "Pourquoi l'accessibilité est importante ?", link: '/fr/accessibilite/pourquoi-l-accessibilite-est-importante' },
                             { text: "Les différentes formes de handicap", link: '/fr/accessibilite/les-differents-handicaps'},
                             { text: "Les technologies d'assistance", link: '/fr/accessibilite/les-technologies-d-assistance' },
-                            { text: "Couleurs et contraste", link: '/fr/accessibilite/couleurs-et-contraste' },
                             { text: "Images", link: '/fr/accessibilite/images' },
-                            { text: "Vidéo et audio", link: '/fr/accessibilite/video-et-audio' },
-                            { text: "Animations", link: '/fr/accessibilite/animations' },
-                            { text: "Contenus textuels", link: '/fr/accessibilite/contenus-textuels' },
-                            { text: "HTML et ARIA", link: '/fr/accessibilite/html-et-aria' },
+                            // TODO cadres
+                            { text: "Couleurs et contraste", link: '/fr/accessibilite/couleurs-et-contraste' },
+                            { text: "Multimédia", link: '/fr/accessibilite/multimedia' },
+                            { text: "WAI-ARIA", link: '/fr/accessibilite/wai-aria' },
+                            // TODO tableaux
+                            { text: "Liens", link: '/fr/accessibilite/liens' },
+                            { text: "Scripts et animations", link: '/fr/accessibilite/scripts-et-animations' },
+                            { text: "Éléments obligatoires", link: '/fr/accessibilite/elements-obligatoires' },
+                            { text: "Structuration de l'information", link: '/fr/accessibilite/structuration-de-l-information' },
+                            // TODO présentation de l'information
                             { text: "Formulaires", link: '/fr/accessibilite/formulaires' },
+                            { text: "Navigation", link: '/fr/accessibilite/navigation' },
+                            // TODO consultation
                             { text: "Référentiels et lois", link: '/fr/accessibilite/referentiels-et-lois' },
                             { text: "Tester l'accessibilité", link: '/fr/accessibilite/tester-l-accessibilite' },
                             { text: "L'accessibilité en projet web", link: '/fr/accessibilite/accessibilite-en-projet-web' },
