@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="" />
+    <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/fr/fiches/docker.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vitepress/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vitepress/config.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,13 +34,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "develop",
-    "last_opened_file_path": "/home/pauline/Dev/caradoc-vitepress/docs/public/rgpd",
+    "last_opened_file_path": "/home/pgilg/Dev/caradoc2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/snap/webstorm/354/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/home/pgilg/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -73,6 +77,7 @@
       <workItem from="1700988092692" duration="4879000" />
       <workItem from="1700999266014" duration="10897000" />
       <workItem from="1707325385472" duration="3846000" />
+      <workItem from="1708350064133" duration="7962000" />
     </task>
     <servers />
   </component>

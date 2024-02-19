@@ -86,6 +86,10 @@ export default defineConfig({
                             { text: "Webographie et ressources à explorer", link: '/fr/qualite-web/webographie-et-ressources-a-explorer'}
                         ]
                     },
+                    { text: "Fiches", items: [
+                            { text: "Docker", link: '/fr/fiches/docker'},
+                        ]
+                    },
                     { text: "Ressources", link: '/fr/ressources' },
                     { text: "Contact", link: '/fr/contact' },
                     { text: "Signaler une erreur ou un bug", link: '/fr/bug' },
