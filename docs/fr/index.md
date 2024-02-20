@@ -25,5 +25,9 @@ features:
     details: Apprenez à intégrer des critères de qualité dans vos projets web.
     icon: ✅
     link: /fr/qualite-web/
+  - title: Fiches pratiques
+    details: 
+    icon: ✅
+    link: /fr/fiches/
 ---
 

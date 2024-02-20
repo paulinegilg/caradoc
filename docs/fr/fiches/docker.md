@@ -7,6 +7,8 @@ next: false
 # Fiche : Docker
 
 Doc de Jonathan : https://documentation5852808.gitlab.io/docker/start/installation.html
+Doc référence de Docker : https://docs.docker.com/reference/
+Handbook FCC : https://www.freecodecamp.org/news/the-docker-handbook/
 
 ## Théorie
 
@@ -489,3 +491,144 @@ docker run -d --name www --publish 80:80 --network stagenet -v ./site:/usr/share
 ```
 
 On lance d'abord le conteneur php sinon le conteneur nginx plante au démarrage, il a besoin de php.
+
+Question
+Que se passe-t-il à la suite de la commande suivante ?
+`docker run --detach --network stagenet -v datadb:/var/lib/mysql --name db mariadb:10.8`
+On lance un conteneur mariadb (téléchargé) en arrière-plan sur un réseau stagenet et on persiste les données dans un volume datadb
+Le conteneur s'arrête... on peut investiguer avec `docker logs db`
+Le conteneur a besoin de créer un utilisateur root pour mariadb -> manque les infos pour la création du mdp admin mariadb
+On peut lui passer ces infos avec des variables d'environnement
+
+Variables d'environnement
+Ce sont des variables peuplant l'environnement d'un conteneur, destinées à être utilisées par ce dernier, la plupart du temps lors de l'initialisation.
+
+Méthode 1
+```shell
+docker run -it --rm --name busy -e VAR_1=valeur1 -e VAR_2=valeur2 busybox
+/ # env
+HOSTNAME=5b2264682a97
+SHLVL=1
+HOME=/root
+TERM=xterm
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PWD=/
+VAR_1=valeur1
+VAR_2=valeur2
+/ #
+```
+
+Méthode 2
+Création d'un fichier de variables : busy.env
+VAR_3=valeur3
+VAR_4=valeur4
+
+`docker run -it --rm --name busy -e VAR_1=valeur1 -e VAR_2=valeur2 --env-file busy.env busybox`
+
+Adaptation de la commande de lancement du conteneur MariaDB
+```shell
+docker run --detach \
+--network stagenet \
+-v datadb:/var/lib/mysql \
+-v ./sql.d:/docker-entrypoint-initdb.d/ \
+-e MARIADB_DATABASE=stage \
+-e MARIADB_ROOT_PASSWORD=azerty \
+--name db \
+mariadb:10.8
+```
+
+Fichier stage.sql du répertoire sql.d
+```sql
+CREATE TABLE t1(id int);
+INSERT INTO t1 VALUES (1),(2),(3);
+```
+
+### Gestion des images
+
+#### Construction d'une image
+
+S'effectue par la commande `docker build` utilisant un fichier d'instruction.
+Il faut un contexte.
+
+Noms par défaut :
+
+- Dockerfile
+- dockerfile
+
+Exemple initial:
+Fichier Dockerfile
+```yaml
+FROM php:8.2-fpm
+RUN  docker-php-ext-install pdo_mysql
+```
+
+Qu'est-ce qu'un Dockerfile ?
+Docker can build images automatically by reading the instructions from a Dockerfile. 
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image.
+
+Construction de l'image
+`docker build ./ -t php-mariadb:8.2-fpm`
+t : option tag
+
+Etape supplémentaire possible :
+envoi `--push` vers une registry
+
+#### Instructions possibles d'un Dockerfile
+
+- FROM : Image de départ, amenée à subir les instructions suivantes.
+- COPY : Copie de fichiers du contexte vers l'image
+- ADD : Copie d'un fichier du contexte vers l'image et traitement possible s'il s'agit :
+  - d'une archive tar/tar.gz
+  - d'une URL
+- RUN : Exécution de commandes à l'intérieur "de l'image"
+  Remarque : Chaque instruction RUN donne lieu à un layer supplémentaire !
+- ENV : Peuple l'environnement des futurs conteneurs
+- ARG : Permet le passage d'argument au sein du Dockerfile -- lors du build. Les valeurs sont passées par l'option --build-arg NOM=valeur.
+- USER : Définit le compte d'exécution du futur conteneur. Définit le compte utilisé par les instructions figurant à la suite de celle-ci, lors du build.
+- ENTRYPOINT : Point d'entrée dans le conteneur -> processus initial. allows you to configure a container that will run as an executable.
+- CMD : instruction sets the command to be executed when running a container from an image. You can specify CMD instructions using shell or exec forms:
+  - CMD ["executable","param1","param2"] (exec form)
+  - CMD ["param1","param2"] (exec form, as default parameters to ENTRYPOINT)
+    Deux cas possibles :
+    Si ENTRYPOINT est défini, alors CMD sera un argument du processus ENTRYPOINT 
+    Dockerfile illustratif
+    ```yaml
+    FROM    debian:12
+    COPY    init.sh /
+    ENTRYPOINT ["/init.sh"]
+    ```
+    Fichier init.sh
+    ```shell
+    #!/bin/bash
+    date
+    exec "$@"
+    ```
+    Si ENTRYPOINT n'est pas défini, alors CMD sera réellement le processus initial.
+- EXPOSE : 
+
+Remarque : Navigation au sein d'une image et ses layers
+`docker run -it -v /run/docker.sock:/run/docker.sock wagoodman/dive test:0.1`
+https://github.com/wagoodman/dive
+
+Exemple de dockerfile
+```yaml
+FROM    debian:12
+COPY    sql.d/stage.sql /usr/src
+ADD     site.tar.gz /opt
+ARG     LOGIN=bob
+LABEL   auteur Bob
+RUN     groupadd admin && useradd -m -G admin -s /bin/bash ${LOGIN}
+ENV     USER ${LOGIN}
+USER    ${LOGIN}
+ENTRYPOINT  ["date"]
+```
+
+Construction de l'image
+`docker build . -t test:0.1`
+
+Résumé J2 :
+- Création d'une image perso avec Dockerfile, commande : `docker image build .`
+- Si tout s'est bien passé, on peut récupérer l'id de l'image (ex : 3199372aa3fc) -> on peut aussi taguer les images pour faire plus simple que les id
+`--tag <image repository>:<image tag>`
+- On lance on conteneur avec l'image créée `docker container run --rm --detach --name custom-nginx-packaged --publish 8080:80 3199372aa3fc`
+ou plus simplement avec un tag : `docker image build --tag custom-nginx:packaged .`
