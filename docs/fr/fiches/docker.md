@@ -72,9 +72,21 @@ docker container ls
 docker ps
 ```
 
-Liste de tous les conteneurs
+Liste de tous les conteneurs, même inactifs
 
 `docker ps -a`
+
+Liste de tous les identifiants des conteneurs
+
+`docker ps -aq`
+
+Suppression de tous les conteneurs
+
+`docker rm -f $(docker ps -aq)`
+
+Suppression des conteneurs arrêtés
+
+`docker container prune`
 
 Lancement d'un premier conteneur
 
@@ -91,7 +103,8 @@ Lancement d'un premier conteneur
 
 Conteneur en mode interactif
 
-De nombreuses images initient des conteneurs avec un processus shell (Debian, Ubuntu, Buxybox, Alpine). Pour obtenir un conteneur viable, il faut fournir les options -it :
+De nombreuses images initient des conteneurs avec un processus shell (Debian, Ubuntu, Buxybox, Alpine).
+Pour obtenir un conteneur viable, il faut fournir les options -it :
 
 `docker run -it --name busy busybox`
 
@@ -216,7 +229,8 @@ Commande : NON. Il n'y a pas de résolution de noms sur le réseau bridge.
 À l'issue de l'installation, Docker dispose des trois réseaux suivants :
 
 - bridge : réseau par défaut
-- host : permet à un conteneur d'être rattaché à l'interface physique de l'hôte (peut être utile afin d'être directement sur le réseau ou pour manipuler la configuration réseau de l'hôte -> keepalived, routeur dynamique).
+- host : permet à un conteneur d'être rattaché à l'interface physique de l'hôte 
+(peut être utile afin d'être directement sur le réseau ou pour manipuler la configuration réseau de l'hôte -> keepalived, routeur dynamique).
 - none : plutôt un non-réseau
 
 Remarques :
@@ -234,7 +248,7 @@ Création d'un réseau :
 ```sh
 docker network create stagenet
 docker network create stagenet --subnet 172.20.0.0/16
-docker network create stagenet \ --subnet 172.18.0.0/16 \ -o com.docker.network.bridge.name=stagenet0
+docker network create stagenet --subnet 172.18.0.0/16 -o com.docker.network.bridge.name=stagenet0
 ```
 
 Affectation d'un conteneur à un réseau
@@ -328,7 +342,7 @@ server {
 }
 ```
 
-Commande : `docker run --name web -v /host/path/nginx.conf:/etc/nginx/nginx.conf:ro -d nginx`
+Commande : 
 `docker cp www:/etc/nginx/conf.d/default.conf .`
 
 Vérifier qu'il est possible d'accéder au fichier index.html créé, ainsi qu'au fichier index.php suivant
@@ -356,14 +370,122 @@ vim index.php
 docker cp index.php php:/var/www/html/
 ```
 
+Remarque : on ne peut pas supprimer un réseau sur lequel des conteneurs sont actifs = endpoints (?)
+
 Pour redémarrer un service :
 
 ```shell
 docker restart www
 ```
 
+Dans une session à part, on peut lancer `docker events` pour obtenir des logs à propos des conteneurs docker en cours.
+
 L'inconvénient, c'est que ce n'est pas automatisé !
 ça fonctionne bien, mais comment faire persister les données.
 Une fois le container arrêté, on perd toutes les données.
 On pense modifier les images, mais en réalité non, puisqu'on ne peut jamais modifier les images.
 C'est possible avec le volume et le montage bind (mécanisme propre à Linux).
+
+### Quiz
+
+- Pourquoi un conteneur s'arrêtant par erreur n'est-il pas automatiquement supprimé ? 
+Tant qu'un conteneur n'est pas supprimé, on peut accéder aux logs. Donc, pour pouvoir consulter les logs.
+On peut le redémarrer.
+- Comment configurer sa suppression automatique lors d'un arrêt ?
+En utilisant l'option `--rm` lors de `docker run`
+Mais attention, on perd potentiellement la possibilité de consulter les logs.
+- Pourquoi la commande n'aboutit-elle pas : `docker run busybox:latest`
+Busybox se lance et s'arrête immédiatement. Car c'est un shell. Or, celui-ci doit fonctionner en mode interactif.
+Il faudrait plutôt utiliser `docker run -it busybox:latest`.
+Si on souhaite lancer le conteneur en mode `--detach`, il faut alors surcharger la commande sh par une autre commande, sans fin -> un exemple peut être `sleep infinity`.
+- Quel est le nom du réseau auquel les conteneurs seront rattachés par défaut ?
+bridge
+- Comment connaitre l'espace d'adressage ?
+`docker network inspect bridge` (https://fr.wikipedia.org/wiki/Adressage_m%C3%A9moire)
+- Que ne peut-on faire avec ce réseau ?
+Il n'y a pas de résolution de nom possible. Et on ne peut pas attribuer d'IP fixe à un conteneur.
+- Quelle commande permet la création d'un réseau en vue d'attribution d'IP fixe à des conteneurs ?
+`docker network create nom_du_réseau --subnet 172.20.0.0/16`
+`docker run --network stagenet --publish 80:80 --ip 172.20.0.100 --name www --hostname web --detach nginx:1.24`
+
+## Persistance des données - Volumes docker et montages bind
+
+On rappelle qu'une fois le conteneur arrêté et supprimé, l'ensemble de ses données est perdu.
+S'il souhaite conserver des données, il faut alors les externaliser de plusieurs manières :
+
+- Copie des données à l'aide de `docker cp` 
+- Utilisation des montages bind (fonctionnalité du noyau Linux)
+- Recours aux volumes docker (objets docker)
+
+### Volumes docker
+
+https://docs.docker.com/storage/volumes/
+
+Def : un volume est un objet associé à un répertoire lors de sa création.
+
+`docker volume ls` pour lister des volumes
+
+`docker create data` pour créer un nouveau volume
+
+`docker volume inspect data` inspection d'un volume
+
+`docker run -it -v data:/partage --rm busybox`
+Création d'un répertoire `partage` dans le conteneur
+Utilisation d'un volume
+Lier un volume à un répertoire
+
+Pour supprimer un volume, il faut le demander explicitement
+suppression d'un volume (à condition qu'il ne soit pas utilisé par un conteneur)
+`docker volume rm data`
+`docker volume prune` suppression des volumes anonymes (créés par une image par exemple) et non rattachés à un conteneur
+
+Problème : le point de montage est accessible uniquement en root
+En règle générale, les volumes sont utilisés pour le stockage de données produites par le conteneur (SGBD, LDAP, Redis, logs...).
+Pour ce qui est des autres données (fichiers de sites, html, php, conf...) on a recours au montage bind.
+
+### Montage bind
+
+Au niveau linux, un montage bind est tout simplement l'association d'un répertoire à un autre.
+https://www.baeldung.com/linux/bind-mounts
+
+Procédure classique
+
+Création d'un répertoire
+`mkdir data`
+Utilisation d'un montage bind avec un conteneur
+`docker run -it --rm -v ./data:/partage busybox`
+
+Procédure moins classique
+
+`docker run -it --rm -v ./nom_inexistant:/partage busybox`
+Dans ce cas le répertoire est automatiquement créé !!!
+Pour ne pas courir le risque de création inopinée de répertoire, il est conseillé d'utiliser la notation suivante :
+`docker run -it --rm --mount type=bind,src=./date,target=/partage --user 1000 busybox`
+
+Consignes
+
+En une ligne de commande(s), supprimer l'ensemble des conteneurs
+`docker rm -f $(docker ps -aq)`
+
+Recréer les deux conteneurs www et php avec l'ensemble des fichiers suivants
+
+- default.conf
+- index.html
+- index.php
+
+de façon à ce qu'ils soient disponibles dès le lancement des conteneurs.
+
+```shell
+mkdir conf
+mkdir site
+
+mv default.conf conf/default.conf
+mv index.html site/index.html
+mv index.php site/index.php
+
+docker network create stagenet --subnet 172.20.0.0/16
+docker run -d --name php --network stagenet -v ./site:/var/www/html/ php:8.2-fpm
+docker run -d --name www --publish 80:80 --network stagenet -v ./site:/usr/share/nginx/html/ -v ./conf:/etc/nginx/conf.d/ nginx:1.24
+```
+
+On lance d'abord le conteneur php sinon le conteneur nginx plante au démarrage, il a besoin de php.
