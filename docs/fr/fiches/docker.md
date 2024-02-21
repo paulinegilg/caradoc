@@ -632,3 +632,553 @@ Résumé J2 :
 `--tag <image repository>:<image tag>`
 - On lance on conteneur avec l'image créée `docker container run --rm --detach --name custom-nginx-packaged --publish 8080:80 3199372aa3fc`
 ou plus simplement avec un tag : `docker image build --tag custom-nginx:packaged .`
+
+Quiz
+
+Quelle différence fondamentale peut-on voir entre les volumes et les montages bind ?
+- **Les volumes sont des objets docker, les montages bind, une fonctionnalité du noyau Linux utilisée par docker**
+- Il est plus facile de lister les volumes -> docker volume ls
+Pour les montages bind c'est autrement plus difficile
+- Les volumes sont adaptés pour les fichiers gérés par les applications
+Les montages bind pour les fichiers que l'on souhaite transférer aux conteneurs
+
+Que fait cette commande ?
+- `docker volume prune` : Ne supprime que les volumes anonymes non utilisés par un conteneur
+- `docker container prune` : Supprime les conteneurs arrêtés
+- `docker image prune` : Supprime les images sans nom (none:none)
+- `docker network prune` : Supprime les réseaux non utilisés
+
+## Docker compose : IaC
+
+Jusqu'à présent ont été vu des commandes CLI, unitaires, peu lisibles, peu maintenables.
+Docker compose permet d'améliorer la situation en décrivant une infrastructure à l'aide d'un fichier texte au format YAML.
+
+### "Langage" YAML
+
+YAML : Yet Another Markup Language
+YAML : YAML Ain't Markup Language
+
+Format de description de structures de données scalaire, c'est-à-dire sous la forme variable -> 1 valeur.
+On peut également écrire des listes, mais attention, l'indentation doit être réalisée avec des espaces et en aucun cas par des tabulations,
+et des tableaux associatifs / hachage / dictionnaires (Python) sous la forme variable -> ensemble de clé/valeur
+2 syntaxes possibles pour les dictionnaires et les listes
+
+Exemples : 
+
+```yaml
+stage: Formation Docker
+nb: 10
+stagiaires:
+  - bob
+  - curt
+  - pat
+fruits: ['Apple', 'Orange', 'Strawberry', 'Mango']
+bob:
+  - login: bob
+  - uid: 1000
+  - hell: /bin/bash
+  - password: azerty
+martin: {name: Martin D'vloper, job: Developer, skill: Elite}
+```
+
+La cohérence syntaxe peut être vérifiée par l'outil yamllint.
+
+Le plugin compose de docker utilise le format YAML pour décrire une infrastructure composée d'un ensemble de services, chaque service étant un conteneur.
+
+Dans le temps, il fallait installer un utilitaire (docker-compose) pour utiliser docker compose.
+Aujourd'hui la fonctionnalité est comprise en temps que dépendance.
+
+Exemple : Traduction compose de la commande suivante
+
+```shell
+docker run -d \
+           --name busy \
+           --publish 9000:9000 \
+           --publish 80:80 \
+           -v data:/partage \
+           -v ./config:/opt/config \
+           -e USER=bob \
+           --network stagenet
+           busybox sleep infinity
+```
+
+exemple de fichier compose.yml
+
+```yaml
+---
+services:
+  busytest:
+    image: busybox:latest
+    container_name: busy
+    ports:
+      - 9000:9000
+      - 80:80
+    volumes:
+      - data:/partage
+      - ./config:/opt/config
+    environment:
+      - USER=bob
+    command:
+      - sleep
+      - infinity
+    networks:
+      stagenet:
+    restart: always
+
+volumes:
+  data:
+    external: true
+
+networks:
+  stagenet:
+    external: true
+```
+
+La conformité est vérifiée par :
+
+`docker compose config`
+
+La stack est démarrée par : 
+
+`docker compose up -d` (-d pour détaché)
+
+Liste des stacks
+
+`docker compose ls`
+
+Liste des conteneurs d'une stack
+
+`docker compose ps`
+
+NB: Si le fichier n'est pas présent dans le répertoire courant ou à un autre nom que le nom par défaut, il faut "forcer" l'utilisation d'un autre fichier
+
+`docker compose -f fichier_compose ps`
+
+Arrêt d'une stack
+
+`docker compose down`
+normalement la commande est sans option, s'il y a des options, il faut faire attention
+par exemple, -v ne signifie pas verbose mais suppression d'un volume
+
+Micro-TP
+Consigne : Création d'une stack avec le seul conteneur www en reprenant les caractéristiques du précédent conteneur www :
+- nom: www
+- port : 80:80
+- volumes : ./site et ./conf-nginx
+- réseau: stagenet dédié
+
+L'idée est de regrouper tout ce qui concerne la stack dans un répertoire dédié, www-php par exemple. Ce qui donne l'arborescence suivante :
+
+```
+www-php/
+├── conf-nginx
+│   └── default.conf
+└── site
+├── index.html
+├── index.php
+└── testdb.php
+```
+
+En adaptant, momentanément, le fichier default.conf, on a le compose.yml suivant :
+
+```yaml
+---
+services:
+  web:
+  image: nginx:1.24
+  container_name: www
+  ports:
+  - 80:80
+  volumes:
+  - ./site:/usr/share/nginx/html
+  - ./conf-nginx:/etc/nginx/conf.d
+  networks:
+    stagenet:
+  restart: always
+
+networks:
+  stagenet:
+```
+
+Ajout du service php :
+- nom: php
+- image: php:8.2-fpm
+- volume : ./site:/var/www/html
+- réseau: stagenet dédié
+- restart: always
+
+Le fichier compose.yml devient :
+
+```yaml
+---
+services:
+  web:
+    image: nginx:1.24
+    container_name: www
+    ports:
+    - 80:80
+    volumes:
+    - ./site:/usr/share/nginx/html
+    - ./conf-nginx:/etc/nginx/conf.d
+    networks:
+      stagenet:
+    restart: always
+  
+  php:
+    image: php:8.2-fpm
+    container_name: php
+    volumes:
+    - ./site:/var/www/html
+    networks:
+      stagenet:
+    restart: always
+
+networks:
+  stagenet:
+```
+
+Consigne : Mise en œuvre d'une stack séparée avec le seul conteneur mariadb.
+
+-> Répertoire séparé :
+- nom de service : db
+- nom du conteneur : db
+- image : mariadb:10.8
+- volume : datadb : external
+- réseau : réflexion...
+- restart : always
+
+Deux options :
+
+Fichier compose.yml
+
+```yaml
+---
+services:
+  db:
+    image: mariadb:10.8
+    container_name: db
+    volumes:
+      - datadb:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=azerty
+      - MARIADB_DATABASE=stage
+    networks:
+      - phpdb
+    restart: always
+
+networks:
+  phpdb:
+    external: true
+
+volumes:
+  datadb:
+```
+
+Avant le lancement de la stack mariadb, il convient de créer le réseau phpdb :
+`docker network create phpdb`
+
+La stack est alors lancée par :
+`docker compose up -d`
+
+Une fois la stack démarrée, on peut relancer la stack www-php après avoir ajouté le conteneur php dans le réseau phpdb :
+
+```yaml
+---
+services:
+  web:
+    image: nginx:1.24
+    container_name: www
+    ports:
+      - 80:80
+    volumes:
+      - ./site:/usr/share/nginx/html
+      - ./conf-nginx:/etc/nginx/conf.d
+    networks:
+      stagenet:
+    restart: always
+
+  php:
+    image: php:8.2-fpm
+    container_name: php
+    volumes:
+      - ./site:/var/www/html
+    networks:
+      stagenet:
+        phpdb:
+    restart: always
+
+networks:
+  stagenet:
+  phpdb:
+    external: true
+
+# Fichier compose avec un build intégré
+  php:
+    image: php-mariadb:8.2-fpm
+    build:
+    context: .
+    dockerfile: Dockerfile-php-mariadb
+    container_name: php
+    volumes:
+      - ./site:/var/www/html
+    networks:
+      stagenet:
+      db_phpdb:
+    restart: always
+```
+
+Variabilisation d'un compose
+
+L'idée est double :
+- éviter la présence de données sensibles dans un fichier compose
+- éviter au maximum de devoir le modifier
+
+Valeur des variables
+- Nom de l'image
+- Tag de l'image
+
+Partout où cela est souhaité, on fait appel à des variables, par exemple :
+
+```yaml
+---
+services:
+  db:
+    image: ${MARIADB_IMAGE_NAME}:${MARIADB_IMAGE_TAG}
+    container_name: db
+    volumes:
+      - datadb:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=stage
+    networks:
+      - phpdb:
+    restart: always
+
+networks:
+  phpdb:
+
+volumes:
+  datadb:
+```
+
+Les variables restent à définir dans le fichier `.env` :
+
+```
+MARIADB_IMAGE_NAME=mariadb
+MARIADB_IMAGE_TAG=10.8
+MARIADB_ROOT_PASSWORD=azerty
+```
+
+Surveillance d'un conteneur : état de santé -> healthcheck
+
+Si d'aventure les processus d'un conteneur ne répondent plus, par défaut aucune information n'est donnée à ce sujet.
+Exemple de processus stoppés par (en tant que root) :
+`kill -STOP $(ps -C nginx -o pid --no-headings)`
+
+On ajoute la surveillance de l'état de santé d'un conteneur par la section healthcheck :
+
+```yaml
+---
+services:
+  web:
+    image: nginx:1.24
+    container_name: www
+    hostname: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./site:/usr/share/nginx/html
+      - ./conf-nginx:/etc/nginx/conf.d
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost/ready"]
+      interval: 5s
+      timeout: 1s
+      retries: 3
+    # start_period: 60s
+    networks:
+      stagenet:
+    restart: always
+```
+
+Principe des ancres YAML
+
+Dans le cas de portions de configuration identiques pour plusieurs conteneurs, 
+les ancres permettent de définir la configuration à mutualiser à un seul endroit et de la propager partout où cela sera nécessaire :
+
+```yaml
+---
+x-etiquetteA: &etiquetteB
+logging:
+driver: json-file
+options:
+max-size: 10m
+max-file: 5
+
+services:
+  web:
+    image: nginx:1.24
+    container_name: www
+    hostname: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./site:/usr/share/nginx/html
+      - ./conf-nginx:/etc/nginx/conf.d
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost/ready"]
+      interval: 5s
+      timeout: 1s
+      retries: 3
+    # start_period: 60s
+    networks:
+      stagenet:
+    restart: always
+    <<: *etiquetteB
+  
+  php:
+    image: php-mariadb:8.2-fpm
+    build:
+    context: .
+    dockerfile: Dockerfile-php-mariadb
+    container_name: php
+    volumes:
+      - ./site:/var/www/html
+    networks:
+      stagenet:
+      db_phpdb:
+    restart: always
+    <<: *etiquetteB
+
+networks:
+  stagenet:
+
+db_phpdb:
+  external: true
+```
+
+On vérifie que la propagation s'effectue par :
+`docker compose config`
+
+Il faut ensuite réactualiser la stack
+`docker compose up  -d`
+
+Mise en œuvre d'une registry
+
+Qu'est-ce qu'une registry ?
+Il s'agit d'un dépôt alternatif d'images.
+
+Pourquoi faire appel à une registry ?
+- Stocker ses propres images
+- Permettre l'accès à des images sans imposer l'accès à internet
+
+Plusieurs déclinaisons
+
+- Registry Insecure -> HTTP
+- Registry Secure -> HTTPS
+- Registry Secure Authentifiante
+
+Déploiement d'une registry insecure sous forme de conteneur
+
+Fichier compose de départ
+
+```yaml
+---
+services:
+  registry:
+  image: registry:2.8
+  container_name: registry
+  restart: always
+  ports:
+  - 5000:5000
+  volumes:
+  - registrydb:/var/lib/registry
+
+volumes:
+  registrydb:
+```
+
+Première interrogation
+
+curl -s localhost:5000/v2/_catalog|jq
+
+Envoi d'une image vers la registry
+
+- Tag de l'image afin d'incorporer la référence à la registry
+- docker image tag php-mariadb:8.2-fpm localhost:5000/php-mariadb:8.2-fpm
+- Push de l'image vers la registry
+- docker push localhost:5000/php-mariadb:8.2-fpm
+
+Nouvelle interrogation
+
+```shell
+curl -s localhost:5000/v2/_catalog|jq
+{
+"repositories": [
+"php-mariadb"
+]
+}
+```
+
+Liste des tags d'un "repository"
+
+```shell
+curl -s localhost:5000/v2/php-mariadb/tags/list|jq
+{
+"name": "php-mariadb",
+"tags": [
+"8.2-fpm",
+"latest"
+]
+}
+```
+
+Référence à une image de la registry dans un compose
+php:
+image: localhost:5000/php-mariadb:8.2-fpm
+build:
+context: .
+dockerfile: Dockerfile-php-mariadb
+container_name: php
+volumes:
+- ./site:/var/www/html
+networks:
+stagenet:
+db_phpdb:
+restart: always
+<<: *logging
+
+La registry ici mise en œuvre n'est pas "sescure". Le dialogue passe par HTTP !
+
+Remarque
+Par défaut, Docker n'accepte le dialogue en HTTP que pour les registry localhost -> docker info
+Aussi toute tentative d'accès distant échoue car la registry ne supporte que le HTTP et les clients distants ne la contacte qu'en HTTPS.
+
+Première solution
+Configurer docker pour contacter la registry distante en HTTP.
+Pour cela on ajoute la ligne suivante dans le fichier de conf, à créer si besoin, /etc/docker/daemon.json :
+{
+"insecure-registries": ["192.168.56.200:5000"]
+}
+
+Redémarrage du service docker
+systemctl restart docker
+
+Vérification
+docker info
+
+Remarque
+Même si cela fonctionne, ce n'est pas conseillé -> on déconfigure.
+
+Mise en place du mode HTTPS
+
+
+Mise en place de l'authentification
+
+Alpine
+
+distribution Linux très légère que l'on peut privilégier sur les images debian ou ubuntu standard
+c'est aussi plus sécurisé parce que plus léger = surface d'attaque plus petite
+
+Analyse des vulnérabilités d'une image
+Les images trivy (aquasec, bitnami...) permettent une analyse des vulnérabilités d'une image
+`docker run -it -v /run/docker.sock:/var/run/docker.sock aquasec/trivy image debian:12`
