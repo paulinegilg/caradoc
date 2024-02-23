@@ -26,8 +26,8 @@ features:
     icon: ✅
     link: /fr/qualite-web/
   - title: Fiches pratiques
-    details: 
-    icon: ✅
+    details: Des fiches pratiques synthétisant des concepts ou des technologies du web.
+    icon: 📑
     link: /fr/fiches/
 ---
 
