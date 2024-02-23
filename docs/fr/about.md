@@ -6,9 +6,9 @@ next: false
 
 # À propos
 
-Je m'appelle Pauline Gilg et je suis développeuse à Strasbourg.
+Je m'appelle [Pauline Gilg](https://paulinegilg.fr) et je suis développeuse à Strasbourg.
 
-Je travaille au sein de la Direction du numérique de l'Université de Strasbourg. Je développe actuellement des applications avec Vue.
+Je travaille à la Direction du numérique de l'Université de Strasbourg. Je développe actuellement des applications web avec Vue.
 J'enseigne également en Master CAWEB (Communication Web Multilingue), toujours à l'Université de Strasbourg.
 
 Éternelle curieuse, j'aime explorer et m'auto-former à de nouveaux langages et technologies.

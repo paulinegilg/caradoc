@@ -6,123 +6,129 @@ next: false
 
 # Fiche : Docker
 
-Doc de Jonathan : https://documentation5852808.gitlab.io/docker/start/installation.html
-Doc référence de Docker : https://docs.docker.com/reference/
-Handbook FCC : https://www.freecodecamp.org/news/the-docker-handbook/
+## Qu'est-ce que Docker ?
 
-## Théorie
+Docker est un outil permettant de lancer des applications et leurs dépendances dans des **conteneurs logiciels isolés**.
+Ces conteneurs pourront ensuite être **executé sur n'importe quel serveur**.
 
-Objectif : création de bulles logicielles
+Cette approche permet d'accroître la flexibilité et la portabilité d’exécution d'une application, 
+laquelle va pouvoir tourner de façon fiable et prévisible sur une grande variété de machines hôtes, 
+que ce soit sur la machine locale, un cloud privé ou public, etc.
 
-La conteneurisation mise en œuvre par Docker/Podman/Kubernetes s'appuie sur un ensemble de fonctionnalités avancées du noyau Linux :
+Ce concept est appelé **conteneurisation**. On l'oppose à la **virtualisation**.
+Tandis que la virtualisation nécessite un hyperviseur pour gérer des machines virtuelles,
+les conteneurs partagent le même noyau que la machine hôte, ce qui les rend plus légers et plus rapides à démarrer. 
 
-- chroot
-- Espaces de noms
-- User
-- Net
-- UTS (Hostname)
-- IPC
-- Mnt
-- PID
-- Cgroup
-- Time
-- Montages Bind
-- Iptables
-- OverlayFS
-- Cgroups
+La conteneurisation s'appuie sur un ensemble de fonctionnalités avancées du **noyau Linux**.
 
-1 conteneur = 4 briques :
+*Source : [Docker (Wikipédia)](https://fr.wikipedia.org/wiki/Docker_(logiciel))*
 
-- Image : Arborescence de départ et des informations
-- Conteneur : Instanciation de l'image
-- Réseau
-- Volume
+![](/fiches/containers-vs-virtualization.png)
 
-Structure d'un dialogue élémentaire avec Docker :
+*Source : [Containers vs. virtual machines (Atlassian)](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)*
 
-`docker <type d'objet> action`
+## Premiers pas
 
-Pour chaque objet, un certain nombre d'actions sont possibles, parmi lesquelles il y a des actions standard :
+### L'environnement Docker
 
-- ls
-- inspect
-- rm
-- prune
+Un conteneur docker est constitué de 4 objets de base :
 
-### Gestion des images
+- **une image** : arborescence de départ et des informations
+- **un conteneur** : instanciation de l'image
+- **un ou plusieurs réseaux** : pour connecter les conteneurs entre eux
+- **un ou plusieurs volumes** : pour persister les données
 
-Un conteneur ne peut être créé qu'à partir d'une image présente localement.
+### Commandes de base
+
+Voici la structure d'un dialogue élémentaire avec Docker :
+
+```shell
+docker <objet> <action> <options>
+```
+
+Pour chaque objet, un certain nombre d'actions sont possibles, parmi lesquelles des actions standard :
+
+- `ls` : lister des objets
+- `inspect` : inspecter la configuration d'un objet
+- `rm` : supprimer des objets
+- `prune` : TODO
+
+## Images
+
+Pour créer un conteneur, Docker a besoin d'une image.
+
+Une image est un modèle contenant des instructions pour créer un conteneur Docker. 
+
+On peut utiliser des images publiées dans un registre ou créer ses propres images.
+
 Une image se récupère par la commande :
 
-```sh
+```shell
 docker image pull nginx:1.24
 docker image pull busybox
 ```
 
-Sans indication précise, les images sont récupérées à partir de la registry communautaire docker hub.
+Ici, on récupère l'image de Nginx (logiciel de serveur web) avec le tag `1.24` qui correspond à une version spécifique,
+puis l'image de Busybox (boîte à outil pour la ligne de commande Shell) en version "latest".
 
-Sans précision du tag -> tag latest
+Sans indication précise, les images sont récupérées à partir du registre communautaire [Docker hub](https://hub.docker.com/).
 
-Attention, une image ne se modifie jamais
+On peut inspecter une image avec la commande : 
 
-### Gestion des conteneurs
-
-Liste des conteneurs actifs
-
-```sh
-docker container ls
-docker ps
+```shell
+docker image inspect busybox:latest
 ```
 
-Liste de tous les conteneurs, même inactifs
+### Layers d'image
 
-`docker ps -a`
+TODO
 
-Liste de tous les identifiants des conteneurs
+Chaque instruction d'un fichier Docker crée une couche dans l'image.
+Lorsque vous modifiez le Dockerfile et reconstruisez l'image, seules les couches qui ont été modifiées sont reconstruites.
 
-`docker ps -aq`
+Attention, une image ne se modifie jamais.
 
-Suppression de tous les conteneurs
+## Conteneurs
 
-`docker rm -f $(docker ps -aq)`
+### Lancement d'un conteneur : `docker run`
 
-Suppression des conteneurs arrêtés
+```shell
+docker run nginx:1.24
+```
 
-`docker container prune`
+Un conteneur est créé à partir de l'image de Nginx récupérée sur le Docker hub.
 
-Lancement d'un premier conteneur
+Dans ce cas, le lancement se fait en **avant-plan** et le choix du nom du conteneur est laissé à Docker.
 
-`docker run nginx:1.24`
+Voici des exemples de **surcharges** possibles à l'aide d'options dans la commande :
 
--> Lancement en avant-plan
--> choix du nom du conteneur laissé à Docker
+```shell
+# Nommage du conteneur en "www" avec --name
+docker run --name www nginx:1.24
 
-`docker run --detach --name www --rm nginx:1.24`
+# Lancement en mode "détaché", 
+# c'est-à-dire en arrière plan avec --detach ou -d
+docker run --detach --name www nginx:1.24
+docker run -d --name www nginx:1.24
 
---detach -> lancement en arrière-plan
---name -> affectation d'un nom précis
---rm -> suppression automatique du conteneur une fois arrêté (attention car perte des logs une fois supprimé)
+# Suppression automatique du conteneur une fois arrêté avec --rm
+docker run --detach --name www --rm nginx:1.24
+```
 
-Conteneur en mode interactif
+### Lancement d'un conteneur en mode interactif : `docker run -it`
 
-De nombreuses images initient des conteneurs avec un processus shell (Debian, Ubuntu, Buxybox, Alpine).
-Pour obtenir un conteneur viable, il faut fournir les options -it :
+De nombreuses images initient des conteneurs avec un **processus shell** (Debian, Ubuntu, Busybox, Alpine, etc.).
+Pour obtenir un conteneur interactif, il faut fournir l'option `-it` :
 
-`docker run -it --name busy busybox`
+```shell
+docker run -it --name busy busybox
+```
 
 Remarque :
 
 Une fois la session terminée, le conteneur passe en statut "exited". Il est possible de le relancer par
 
 `docker start -i busy`
-
-Inspecter une image :
-
-`docker image inspect busybox:latest`
-
-Surcharge à proprement parler :
-
-`docker run --rm busybox date`
 
 Surcharge pour un conteneur en arrière-plan et en attente :
 
@@ -138,6 +144,31 @@ docker exec busy date
 Exemple d'interrogation d'un conteneur nginx depuis un conteneur busy :
 
 `docker exec busy wget -O - -q 172.17.0.2`
+
+### Autres commandes
+
+```shell
+# Lister les conteneurs actifs (les 2 commandes sont équivalentes)
+docker container ls
+docker ps
+
+# Lister tous les conteneurs, même inactifs
+docker ps -a
+
+# Lister tous les identifiants des conteneurs
+docker ps -aq
+
+# Supprimer les conteneurs arrêtés
+docker container prune
+
+# Supprimer tous les conteneurs
+docker rm -f $(docker ps -aq)
+```
+
+
+
+/////// TODO FROM HERE
+
 
 Transfert de fichiers depuis ou vers un conteneur :
 
@@ -419,7 +450,7 @@ S'il souhaite conserver des données, il faut alors les externaliser de plusieur
 - Utilisation des montages bind (fonctionnalité du noyau Linux)
 - Recours aux volumes docker (objets docker)
 
-### Volumes docker
+## Volumes docker
 
 https://docs.docker.com/storage/volumes/
 
@@ -543,7 +574,7 @@ CREATE TABLE t1(id int);
 INSERT INTO t1 VALUES (1),(2),(3);
 ```
 
-### Gestion des images
+## Gestion des images : Dockerfile
 
 #### Construction d'une image
 
@@ -1182,3 +1213,9 @@ c'est aussi plus sécurisé parce que plus léger = surface d'attaque plus petit
 Analyse des vulnérabilités d'une image
 Les images trivy (aquasec, bitnami...) permettent une analyse des vulnérabilités d'une image
 `docker run -it -v /run/docker.sock:/var/run/docker.sock aquasec/trivy image debian:12`
+
+## Documentations
+
+Doc de Jonathan : https://documentation5852808.gitlab.io/docker/start/installation.html
+Doc référence de Docker : https://docs.docker.com/reference/
+Handbook FCC : https://www.freecodecamp.org/news/the-docker-handbook/
