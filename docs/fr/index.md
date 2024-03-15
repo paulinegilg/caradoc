@@ -10,6 +10,9 @@ hero:
       text: Ressources
       link: /fr/ressources
     - theme: alt
+      text: Fiches pratiques
+      link: /fr/fiches/
+    - theme: alt
       text: Contact
       link: /fr/contact
 features:
@@ -25,9 +28,9 @@ features:
     details: Apprenez à intégrer des critères de qualité dans vos projets web.
     icon: ✅
     link: /fr/qualite-web/
-  - title: Fiches pratiques
-    details: Des fiches pratiques synthétisant des concepts ou des technologies du web.
-    icon: 📑
-    link: /fr/fiches/
+  - title: Docker - fiche pratique
+    details: Une fiche pratique synthétisant les concepts de la conteneurisation avec Docker.
+    icon: 🐋
+    link: /fr/fiches/docker
 ---
 
