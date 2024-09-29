@@ -42,7 +42,7 @@ Un conteneur docker est constitué de 4 objets de base :
 
 Voici la structure d'un dialogue élémentaire avec Docker :
 
-```shell
+```bash
 docker <objet> <action> <options>
 ```
 
@@ -63,7 +63,7 @@ On peut utiliser des images publiées dans un registre ou créer ses propres ima
 
 Une image se récupère par la commande :
 
-```shell
+```bash
 docker image pull nginx:1.24
 docker image pull busybox
 ```
@@ -75,7 +75,7 @@ Sans indication précise, les images sont récupérées à partir du registre co
 
 On peut inspecter une image avec la commande : 
 
-```shell
+```bash
 docker image inspect busybox:latest
 ```
 
@@ -90,9 +90,20 @@ Attention, une image ne se modifie jamais.
 
 ## Conteneurs
 
+### Lister les conteneurs
+
+```bash
+# Lister les conteneurs actifs
+docker container ls 
+# Ou bien
+docker ps
+# Lister tous les conteneurs
+docker container ls -a
+```
+
 ### Lancement d'un conteneur : `docker run`
 
-```shell
+```bash
 docker run nginx:1.24
 ```
 
@@ -102,7 +113,7 @@ Dans ce cas, le lancement se fait en **avant-plan** et le choix du nom du conten
 
 Voici des exemples de **surcharges** possibles à l'aide d'options dans la commande :
 
-```shell
+```bash
 # Nommage du conteneur en "www" avec --name
 docker run --name www nginx:1.24
 
@@ -115,39 +126,53 @@ docker run -d --name www nginx:1.24
 docker run --detach --name www --rm nginx:1.24
 ```
 
+### Lancement en tant qu'un autre utilisateur
+
+```bash
+docker run --user <user> <image>
+```
+
+::: info
+`<user>` peut être un nom d'utilisateur ou un UID. Pour connaître l'UID d'un utilisateur, on peut utiliser la commande `id -u <user>`.
+:::
+
 ### Lancement d'un conteneur en mode interactif : `docker run -it`
 
 De nombreuses images initient des conteneurs avec un **processus shell** (Debian, Ubuntu, Busybox, Alpine, etc.).
 Pour obtenir un conteneur interactif, il faut fournir l'option `-it` :
 
-```shell
+```bash
 docker run -it --name busy busybox
 ```
 
-Remarque :
+Une fois la session terminée, le conteneur passe en statut "exited". Il est possible de le relancer par : 
 
-Une fois la session terminée, le conteneur passe en statut "exited". Il est possible de le relancer par
+```bash
+docker start -i busy
+```
 
-`docker start -i busy`
+Surcharge pour un conteneur en arrière-plan et en attente : 
 
-Surcharge pour un conteneur en arrière-plan et en attente :
+```bash
+docker run --detach --rm --name busy busybox sleep infinity
+````
 
-`docker run --detach --rm --name busy busybox sleep infinity`
+Lancement d'une commande au sein d'un conteneur en exécution :
 
-Lancement d'une commande au sein d'un conteneur en exécution
-
-```shell
+```bash
 docker exec -it busy sh
 docker exec busy date
 ```
 
-Exemple d'interrogation d'un conteneur nginx depuis un conteneur busy :
+Exemple d'interrogation d'un conteneur nginx depuis un conteneur busybox :
 
-`docker exec busy wget -O - -q 172.17.0.2`
+```bash
+docker exec busy wget -O - -q 172.17.0.2
+```
 
 ### Autres commandes
 
-```shell
+```bash
 # Lister les conteneurs actifs (les 2 commandes sont équivalentes)
 docker container ls
 docker ps
@@ -165,323 +190,121 @@ docker container prune
 docker rm -f $(docker ps -aq)
 ```
 
+## Réseaux
 
+Docker dispose des **3 réseaux** suivants :
 
-/////// TODO FROM HERE
+- **bridge** : réseau par défaut
+- **host** : pour les conteneurs qui ont besoin d'accéder directement à la pile réseau de la machine hôte
+- **none** : pour les conteneurs qui n'ont pas besoin d'accès réseau
 
+::: info
+- Il n'y a pas de résolution de noms sur le réseau `bridge`
+- Il n'est pas possible d'attribuer des IP fixes sur le réseau `bridge` et sur tout réseau dont on n'a pas défini le subnet (sous-réseau)
+:::
 
-Transfert de fichiers depuis ou vers un conteneur :
+### Lister les réseaux
 
-Exemple du fichier index.html suivant :
-
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-         <meta charset="utf-8">
-    </head>
-    <body>
-      <h4>Formation Docker</h4>
-    </body>
-</html>
+```bash
+docker network ls
 ```
 
-Envoi du fichier index.html dans le conteneur www :
+### Création d'un réseau
 
-`docker cp index.html www:/usr/share/nginx/html/`
-
-On vérifie en requêtant le conteneur www depuis le conteneur busy par :
-
-`docker exec busy wget -O - -q 172.17.0.2`
-
-Récupération, dans le conteneur www, du fichier /etc/nginx/conf.d/default.conf :
-
-`docker cp www:/etc/nginx/conf.d/default.conf .`
-
-Récupération des containers dans un réseau
-`docker network inspect bridge | jq '.[].Containers[]|.Name + " : " + .IPv4Address'`
-
-Publication de port
-Par l'association d'un port de la machine avec un port d'un conteneur, permet d'atteindre ce conteneur depuis l'extérieur en adressant l'IP et le port de la machine hôte :
-`docker run --detach --name www --rm --publish 80:80 nginx:1.24`
-
-Dès lors, il est possible d'accéder au conteneur www depuis un navigateur web en utilisant l'IP/port de la machine hôte.
-
-Les layers
-Une machine virtuelle est composée d'une couche ou de plusieurs ????
-une image nginx est composée de plusieurs couches en épaisseur qui enrichissent les autres
-tous les layouts d'une image sont en readonly,
-seule une couche est dispo en rw au moment du lancement, qui permet de modifier/supprimer une couche inférieure
-à la suppression d'un container, les layers sont vraiment supprimés
-
-Une image n'est JAMAIS modifiée
-
-Remarque importante
-En recréant un nouveau conteneur www, on s'est aperçu que le fichier index.html précédemment copié n'était plus là !!!
-Une image docker ne pourra jamais être modifiée. À chaque nouvelle création d'un conteneur on repart de l'état initial de l'image.
-
-Il est cependant possible de créer une nouvelle image à partir de l'état actuel d'un conteneur par
-`docker commit www nginx-tmp:1.24`
-
-On peut visualiser les différences entre l'état du conteneur et le contenu, figé, de l'image par
-`docker diff www`
-
-### Micro-TP
-
-Consignes :
-
-Création des deux conteneurs suivants :
-
-Conteneur web
-Nom : web
-Image : nginx:1.24
-Mode détaché : oui
-Publication du port 80
-Commande : `docker run -d --name web -p 80:80 nginx:1.24`
-
-Conteneur busy
-Nom : busy
-Image: busybox
-Mode détaché : oui
-Commande : `docker run -d --name busy --rm busybox sleep infinity`
-
-Récupération de l'IP du conteneur web
-Commande : `docker network inspect web | jq`
-
-Se connecter au conteneur busy en y lançant un shell
-Commande : `docker exec -it busy sh`
-
-Est-il possible de pinguer le conteneur web à partir de son IP ?
-Commande : `docker exec busy ping -c 4 172.17.0.2` ou `ping 172.17.0.2`
-
-Est-il possible de pinguer le conteneur web à partir de son nom ?
-Commande : NON. Il n'y a pas de résolution de noms sur le réseau bridge.
-
-### Les réseaux sous Docker
-
-À l'issue de l'installation, Docker dispose des trois réseaux suivants :
-
-- bridge : réseau par défaut
-- host : permet à un conteneur d'être rattaché à l'interface physique de l'hôte 
-(peut être utile afin d'être directement sur le réseau ou pour manipuler la configuration réseau de l'hôte -> keepalived, routeur dynamique).
-- none : plutôt un non-réseau
-
-Remarques :
-
-- Il n'y a pas de résolution de noms sur le réseau bridge
-- Il n'est pas possible d'attribuer des IP fixes sur le réseau bridge
-- Il n'est pas possible d'attribuer des IP fixes sur tout réseau dont on n'a pas défini le subnet (sous-réseau)
-
-Pilotes réseau
-
-La commande `docker info` affiche, entre autres, les différents pilotes réseau disponibles.
-
-Création d'un réseau :
-
-```sh
-docker network create stagenet
-docker network create stagenet --subnet 172.20.0.0/16
-docker network create stagenet --subnet 172.18.0.0/16 -o com.docker.network.bridge.name=stagenet0
+```bash
+docker network create newnet
+# Affecter une IP statique
+docker network create newnet --subnet 172.20.0.0/16
 ```
 
-Affectation d'un conteneur à un réseau
+### Conteneurs et réseaux
 
-Lors de la création
+Lister les conteneurs dans un réseau :
 
-`docker run --network stagenet ...`
+```bash
+# Lister les conteneurs dans un réseau
+docker network inspect <network>
+# Lister les IDs des conteneurs
+docker network inspect bridge | jq '.[].Containers|keys'
+```
 
-Sur un conteneur en fonctionnement
+Publier le port d'un conteneur sur le réseau, par exemple si on stocke un site internet dans un conteneur nginx, 
+afin de le rendre accessible depuis l'extérieur :
 
-`docker network connect stagenet www`
+```bash
+docker run --publish <host_port>:<container_port> <image>
+```
 
-Détachement d'un conteneur d'un réseau
+### Supprimer des réseaux
 
-`docker network disconnect bridge www`
+```bash
+docker network rm <network>
+# Supprime tous les réseaux non utilisés, c'est-à-dire sans conteneurs.
+docker network prune
+```
 
-Remarque importante
+### Affecter un conteneur à un réseau
 
-Docker n'offre aucun routage entre ses différents réseaux. Si deux conteneurs doivent communiquer l'un avec l'autre, trois solutions :
+```bash
+# Affecter
+docker network connect <network> <container>
+# Détacher
+docker network disconnect <network> <container>
+```
+
+::: info
+Docker n'offre aucun routage entre ses différents réseaux. Si deux conteneurs doivent communiquer l'un avec l'autre, plusieurs solutions :
 
 - connecter les deux conteneurs au même réseau
-- exposer les ports comme il se doit
-- utiliser un mécanisme de reverse-proxy (traefik)
-- faire en sorte que les deux conteneurs partagent le même espace de noms réseau (ils pourront alors communiquer par l'adresse 127.0.0.1 -> notion de pod des environnements podman et kubernetes).
+- exposer les ports des conteneurs sur l'hôte
+- faire en sorte que les deux conteneurs partagent le même espace de nom réseau
+:::
 
-Réflexion
-
-Comment faire communiquer deux conteneurs étant sur deux hôtes différents
-
-- exposer les ports comme il se doit
-- utiliser un mécanisme de reverse-proxy (traefik)
-
-Limite de la publication de ports
-
-Par exemple, il n'est pas possible de créer deux conteneurs www publiant chacun le même port 80 ! Il faudra que l'un des deux soit accessible par un port non standard !!!
-La solution est double :
-- ne pas publier les ports
-- utiliser un reverse-proxy
-
-Micro-TP
-Consignes
-
-Création des deux conteneurs suivants
-Conteneur web
-Nom : web
-Image : nginx:1.24
-Mode détaché : oui
-Publication du port 80
-Commande : `docker run --name web -d -p 80:80 nginx:1.24`
-
-Conteneur php
-Nom : php
-Image: php:8.2-fpm
-Mode détaché : oui
-Commande : `docker run --name php -d php:8.2-fpm`
-
-Reconfiguration de nginx pour s'interfacer avec php
-
-Il faut fournir à Nginx le fichier default.conf suivant
-
-```
-server {
-    listen       80;
-    listen  [::]:80;
-    server_name  localhost;
-    
-    location / {
-        root   /usr/share/nginx/html;
-        index  index.html index.htm;
-    }
-    
-    # redirect server error pages to the static page /50x.html
-    #
-
-    error_page   500 502 503 504  /50x.html;
-    
-    location = /50x.html {
-        root   /usr/share/nginx/html;
-    }
-    
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
-
-    location ~ \.php$ {
-        root           html;
-        fastcgi_pass   php:9000;
-        fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /var/www/html$fastcgi_script_name;
-        include        fastcgi_params;
-    }
-}
-```
-
-Commande : 
-`docker cp www:/etc/nginx/conf.d/default.conf .`
-
-Vérifier qu'il est possible d'accéder au fichier index.html créé, ainsi qu'au fichier index.php suivant
-
-```php
-<?php
-    phpinfo();
-?> 
-```
-
-Réponse globale :
-
-```shell
-docker network create stagenet
-docker network connect stagenet web
-docker network connect stagenet php
-
-# conf nginx
-vim default.conf
-docker cp default.conf web:/etc/nginx/conf/default.conf
-docker exec -it web nginx -s reload
-
-# conf php
-vim index.php 
-docker cp index.php php:/var/www/html/
-```
-
-Remarque : on ne peut pas supprimer un réseau sur lequel des conteneurs sont actifs = endpoints (?)
-
-Pour redémarrer un service :
-
-```shell
-docker restart www
-```
-
-Dans une session à part, on peut lancer `docker events` pour obtenir des logs à propos des conteneurs docker en cours.
-
-L'inconvénient, c'est que ce n'est pas automatisé !
-ça fonctionne bien, mais comment faire persister les données.
-Une fois le container arrêté, on perd toutes les données.
-On pense modifier les images, mais en réalité non, puisqu'on ne peut jamais modifier les images.
-C'est possible avec le volume et le montage bind (mécanisme propre à Linux).
-
-### Quiz
-
-- Pourquoi un conteneur s'arrêtant par erreur n'est-il pas automatiquement supprimé ? 
-Tant qu'un conteneur n'est pas supprimé, on peut accéder aux logs. Donc, pour pouvoir consulter les logs.
-On peut le redémarrer.
-- Comment configurer sa suppression automatique lors d'un arrêt ?
-En utilisant l'option `--rm` lors de `docker run`
-Mais attention, on perd potentiellement la possibilité de consulter les logs.
-- Pourquoi la commande n'aboutit-elle pas : `docker run busybox:latest`
-Busybox se lance et s'arrête immédiatement. Car c'est un shell. Or, celui-ci doit fonctionner en mode interactif.
-Il faudrait plutôt utiliser `docker run -it busybox:latest`.
-Si on souhaite lancer le conteneur en mode `--detach`, il faut alors surcharger la commande sh par une autre commande, sans fin -> un exemple peut être `sleep infinity`.
-- Quel est le nom du réseau auquel les conteneurs seront rattachés par défaut ?
-bridge
-- Comment connaitre l'espace d'adressage ?
-`docker network inspect bridge` (https://fr.wikipedia.org/wiki/Adressage_m%C3%A9moire)
-- Que ne peut-on faire avec ce réseau ?
-Il n'y a pas de résolution de nom possible. Et on ne peut pas attribuer d'IP fixe à un conteneur.
-- Quelle commande permet la création d'un réseau en vue d'attribution d'IP fixe à des conteneurs ?
-`docker network create nom_du_réseau --subnet 172.20.0.0/16`
-`docker run --network stagenet --publish 80:80 --ip 172.20.0.100 --name www --hostname web --detach nginx:1.24`
-
-## Persistance des données - Volumes docker et montages bind
+## Persistance des données
 
 On rappelle qu'une fois le conteneur arrêté et supprimé, l'ensemble de ses données est perdu.
-S'il souhaite conserver des données, il faut alors les externaliser de plusieurs manières :
+Si l'on souhaite conserver des données, il faut les externaliser de plusieurs manières :
 
 - Copie des données à l'aide de `docker cp` 
-- Utilisation des montages bind (fonctionnalité du noyau Linux)
 - Recours aux volumes docker (objets docker)
+- Utilisation des montages bind (fonctionnalité du noyau Linux)
 
-## Volumes docker
+::: tip Quand utiliser un volume ? Quand utiliser un montage bind ?
+Les volumes souvent utilisés pour stocker les **données produites par le conteneur** (SGBD, LDAP, Redis, etc.). 
+Pour ce qui est des autres données (**fichiers de configuration**, site web, etc.), on peut utiliser les montages bind.
+:::
 
-https://docs.docker.com/storage/volumes/
+### Volumes docker
 
-Def : un volume est un objet associé à un répertoire lors de sa création.
+Un volume docker est un objet associé à un répertoire lors de sa création.
 
-`docker volume ls` pour lister des volumes
+```bash
+# Lister les volumes
+docker volume ls
 
-`docker create data` pour créer un nouveau volume
+# Créer un nouveau volume
+docker create data
 
-`docker volume inspect data` inspection d'un volume
+# Inspection d'un volume
+docker volume inspect data
 
-`docker run -it -v data:/partage --rm busybox`
-Création d'un répertoire `partage` dans le conteneur
-Utilisation d'un volume
-Lier un volume à un répertoire
+# Rattacher un volume au répertoire d'un conteneur
+docker run -v data:/usr/share/nginx/html/ nginx
 
-Pour supprimer un volume, il faut le demander explicitement
-suppression d'un volume (à condition qu'il ne soit pas utilisé par un conteneur)
-`docker volume rm data`
-`docker volume prune` suppression des volumes anonymes (créés par une image par exemple) et non rattachés à un conteneur
+# Supprimer un volume
+docker volume rm data
 
-Problème : le point de montage est accessible uniquement en root
-En règle générale, les volumes sont utilisés pour le stockage de données produites par le conteneur (SGBD, LDAP, Redis, logs...).
-Pour ce qui est des autres données (fichiers de sites, html, php, conf...) on a recours au montage bind.
+# Supprimer tous les volumes anonymes (sans nom et non rattachés à un conteneur)
+docker volume prune
+```
 
 ### Montage bind
 
-Au niveau linux, un montage bind est tout simplement l'association d'un répertoire à un autre.
-https://www.baeldung.com/linux/bind-mounts
+2 méthodes existent :
 
-Procédure classique
+#### Montage classique
+
+
 
 Création d'un répertoire
 `mkdir data`
@@ -508,7 +331,7 @@ Recréer les deux conteneurs www et php avec l'ensemble des fichiers suivants
 
 de façon à ce qu'ils soient disponibles dès le lancement des conteneurs.
 
-```shell
+```bash
 mkdir conf
 mkdir site
 
@@ -535,7 +358,7 @@ Variables d'environnement
 Ce sont des variables peuplant l'environnement d'un conteneur, destinées à être utilisées par ce dernier, la plupart du temps lors de l'initialisation.
 
 Méthode 1
-```shell
+```bash
 docker run -it --rm --name busy -e VAR_1=valeur1 -e VAR_2=valeur2 busybox
 / # env
 HOSTNAME=5b2264682a97
@@ -557,7 +380,7 @@ VAR_4=valeur4
 `docker run -it --rm --name busy -e VAR_1=valeur1 -e VAR_2=valeur2 --env-file busy.env busybox`
 
 Adaptation de la commande de lancement du conteneur MariaDB
-```shell
+```bash
 docker run --detach \
 --network stagenet \
 -v datadb:/var/lib/mysql \
@@ -629,7 +452,7 @@ envoi `--push` vers une registry
     ENTRYPOINT ["/init.sh"]
     ```
     Fichier init.sh
-    ```shell
+    ```bash
     #!/bin/bash
     date
     exec "$@"
@@ -721,7 +544,7 @@ Aujourd'hui la fonctionnalité est comprise en temps que dépendance.
 
 Exemple : Traduction compose de la commande suivante
 
-```shell
+```bash
 docker run -d \
            --name busy \
            --publish 9000:9000 \
@@ -1141,7 +964,7 @@ Envoi d'une image vers la registry
 
 Nouvelle interrogation
 
-```shell
+```bash
 curl -s localhost:5000/v2/_catalog|jq
 {
 "repositories": [
@@ -1152,7 +975,7 @@ curl -s localhost:5000/v2/_catalog|jq
 
 Liste des tags d'un "repository"
 
-```shell
+```bash
 curl -s localhost:5000/v2/php-mariadb/tags/list|jq
 {
 "name": "php-mariadb",
@@ -1439,7 +1262,7 @@ On stockera les infos d'authentification dans le fichier users.password qu'il fa
 
 Création du fichier users.password à l'aide d'un conteneur httpd
 
-```shell
+```bash
 docker run -ti -v .:/tmp --rm httpd htdigest -c /tmp/users.password who curt
 ```
 
@@ -1785,7 +1608,7 @@ Pour savoir si AppArmor est activé :
 Par défaut, Docker charge un profil AppArmor minimaliste
 En toute logique, on devrait définir un profil dédié pour chaque image un peu sensible
 
-```shell
+```bash
 # Désactivation de AppArmor
 
 docker run -it --rm --security-opt apparmor=unconfined --name busy busybox
@@ -1851,7 +1674,7 @@ Autres solutions d'orchestrateur :
 
 **Initialisation du *cluster* :**
 
-```shell
+```bash
 docker swarm init [ --advertise-addr 192.168.56.200 ]
 ```
 
@@ -1869,7 +1692,7 @@ Overlay : peu importe le point d'entrée, on est toujours amené vers le contene
 
 **Ajout d'un node worker au cluster :**
 
-```shell
+```bash
 # Récupération de la commande d'ajout
 docker swarm join-token worker
 
@@ -1883,7 +1706,7 @@ Remarque : pour lancer Swarm sur une machine, on peut lancer les commandes `dock
 
 Toutes ces commandes ne peuvent se lancer **que depuis un manager**.
 
-```shell
+```bash
 # Liste des nodes
 docker node ls
 
@@ -1919,7 +1742,7 @@ Les services ne se déploient qu'à l'aide de commandes CLI.
 
 [Documentation Docker - services (en anglais)](https://docs.docker.com/engine/swarm/services/)
 
-```shell
+```bash
 # Création d'un service
 docker service create --name www nginx:1.23
 
@@ -1969,7 +1792,7 @@ networks:
 
 Remarque : les directives `container_name` et `restart` sont soit obsolètes, soit non supportées.
 
-```shell
+```bash
 # Déploiement d'une stack
 docker stack deploy hello -c hello-http.yml
 
@@ -1994,7 +1817,7 @@ Ici, swarm-1 sera configuré en serveur NFS.
 
 ##### Sur swarm-1 (serveur NFS)
 
-```shell
+```bash
 # Installation du paquet nfs-kernel-server
 apt install nfs-kernel-server
 ```
@@ -2003,14 +1826,14 @@ Définition d'un partage NFS :
 
 Ajout de la ligne suivante dans /etc/exports : `/home/stagiaire/docker-app-s1124/partage *(rw,no_root_squash,no_subtree_check,fsid=0)`
 
-```shell
+```bash
 # Actualisation du service NFS (en tant que root)
 exportfs -a
 ```
 
 ##### Sur les clients NFS
 
-```shell
+```bash
 # Installation du paquet nfs-common
 apt install nfs-common
 ```
@@ -2151,7 +1974,7 @@ Les secrets sont des objets Docker Swarm permettant le stockage de données sens
 
 #### Création d'un secret
 
-```shell
+```bash
 echo $password | docker secret create mariadb-password -
 ```
 
