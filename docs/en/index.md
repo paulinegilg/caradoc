@@ -5,6 +5,9 @@ hero:
   name: CaraDoc
   text: Online courses about computer science and the web
   tagline: To understand, make your own and (re)take control of your digital life
+  image:
+    src: /logo.png
+    alt:
   actions:
     - theme: brand
       text: Contact

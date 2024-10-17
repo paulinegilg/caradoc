@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46fc96c2-879d-4e3d-a2a5-5532679b9253" name="Changes" comment="" />
+    <list default="true" id="46fc96c2-879d-4e3d-a2a5-5532679b9253" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,7 +28,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "develop",
-    "last_opened_file_path": "/home/pgilg/Dev/caradoc2/docs/public",
+    "last_opened_file_path": "/home/pgilg/Dev/cortex_front",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,7 +61,8 @@
       <option name="presentableId" value="Default" />
       <updated>1727632241182</updated>
       <workItem from="1727632243829" duration="1615000" />
-      <workItem from="1729150011245" duration="2898000" />
+      <workItem from="1729150011245" duration="3795000" />
+      <workItem from="1729154393297" duration="496000" />
     </task>
     <servers />
   </component>
