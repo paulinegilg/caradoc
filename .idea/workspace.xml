@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="" />
+    <list default="true" id="46fc96c2-879d-4e3d-a2a5-5532679b9253" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/public/_redirects" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/public/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/fr/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/fr/index.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,66 +18,53 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="2QSYCJdKoeU8imbAGCWa5DWqACW" />
+  <component name="ProjectId" id="2mkt8CGHtxcMqK5fJi2vfD7gWmj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
+    "com.codeium.enabled": "true",
     "git-widget-placeholder": "develop",
-    "last_opened_file_path": "/home/pauline/Dev/caradoc-vitepress/docs/public/rgpd",
+    "last_opened_file_path": "/home/pgilg/Dev/caradoc2/docs/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/snap/webstorm/354/plugins/javascript-impl/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/docs/public/rgpd" />
-      <recent name="$PROJECT_DIR$/docs/en" />
-      <recent name="$PROJECT_DIR$/docs/rgpd" />
-      <recent name="$PROJECT_DIR$/docs" />
+      <recent name="$PROJECT_DIR$/docs/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/docs/fr" />
+      <recent name="$PROJECT_DIR$/docs/public" />
     </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.149" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="84187fda-fc08-4a35-a2ab-72f36672e1a4" name="Changes" comment="" />
-      <created>1685348320678</created>
+      <changelist id="46fc96c2-879d-4e3d-a2a5-5532679b9253" name="Changes" comment="" />
+      <created>1727632241182</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1685348320678</updated>
-      <workItem from="1685348322277" duration="745000" />
-      <workItem from="1685458846026" duration="8526000" />
-      <workItem from="1685638877659" duration="1100000" />
-      <workItem from="1685804415746" duration="11195000" />
-      <workItem from="1685978567323" duration="328000" />
-      <workItem from="1697964667700" duration="7000" />
-      <workItem from="1699787521681" duration="2772000" />
-      <workItem from="1699796147820" duration="4404000" />
-      <workItem from="1699811384603" duration="3055000" />
-      <workItem from="1699867743036" duration="658000" />
-      <workItem from="1700929614192" duration="5338000" />
-      <workItem from="1700988092692" duration="4879000" />
-      <workItem from="1700999266014" duration="10897000" />
-      <workItem from="1707325385472" duration="3846000" />
+      <updated>1727632241182</updated>
+      <workItem from="1727632243829" duration="1615000" />
+      <workItem from="1729150011245" duration="2184000" />
     </task>
     <servers />
   </component>

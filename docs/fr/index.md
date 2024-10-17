@@ -5,6 +5,9 @@ hero:
   name: CaraDoc
   text: Formations et ressources sur le web et l'informatique
   tagline: Pour comprendre, s'approprier et (re)prendre le contrôle de sa vie numérique
+  image:
+    src: /logo.png
+    alt:   
   actions:
     - theme: brand
       text: Ressources
