@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
     ignoreDeadLinks: true,
     title: "CaraDoc",
-    description: "Formations et documentations sur le web",
+    description: "Formations et fiches pratiques sur le web",
     locales: {
         fr: {
             label: 'Français',
@@ -19,6 +19,21 @@ export default defineConfig({
                 ],
 
                 sidebar: [
+                    { text: "Devenir développeur-euse web en autodidacte", items: [
+                            { text: "Introduction", link: '/fr/devenir-developpeur-web/'},
+                            { text: "Pourquoi se former au développement web ?", link: '/fr/devenir-developpeur-web/pourquoi-devenir-developpeur'},
+                            { text: "Etablir un plan d'apprentissage", link: '/fr/devenir-developpeur-web/etablir-un-plan'},
+                            { text: "Valoriser les compétences existentes", link: '/fr/devenir-developpeur-web/valoriser-competences'},
+                            { text: "Choisir une spécialisation", link: '/fr/devenir-developpeur-web/choisir-une-specialisation'},
+                            { text: "Ressources d'apprentissage", link: '/fr/devenir-developpeur-web/ressources'},
+                            { text: "Pratiquer avec des projets concrets", link: '/fr/devenir-developpeur-web/pratiquer'},
+                            { text: "Trouver des mentors et des communautés", link: '/fr/devenir-developpeur-web/mentors-et-communautes'},
+                            { text: "Gérer la motivation et la charge de travail", link: '/fr/devenir-developpeur-web/motivation-et-charge-de-travail'},
+                            { text: "Préparer son entrée sur le marché du travail", link: '/fr/devenir-developpeur-web/marche-du-travail'},
+                            { text: "Continuer à apprendre", link: '/fr/devenir-developpeur-web/continuer-a-apprendre'},
+                            { text: "Conclusion", link: '/fr/devenir-developpeur-web/conclusion'},
+                        ]
+                    },
                     { text: "Protéger les données personnelles en conformité avec le RGPD", items: [
                             { text: "Introduction", link: '/fr/rgpd/'},
                             { text: "Qu'est-ce qu'une donnée personnelle ?", link: '/fr/rgpd/definition-donnee-personnelle'},

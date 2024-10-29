@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: CaraDoc
-  text: Formations et ressources sur le web et l'informatique
-  tagline: Pour comprendre, s'approprier et (re)prendre le contrôle de sa vie numérique
+  text: Documentations sur le développement et la qualité web
+  tagline: Pour un web plus juste, accessible et inclusif 
   image:
     src: /logo.png
     alt:   
@@ -16,6 +16,10 @@ hero:
       text: Contact
       link: /fr/contact
 features:
+  - title: Devenir développeur-euse web en autodidacte
+    details: Perdu-es dans la jungle du développement web ? Cette documentation vous aidera à tracer votre propre chemin en tant que développeur-euse.
+    icon: 🦄
+    link: /fr/devenir-developpeur-web/
   - title: Protéger les données personnelles en conformité avec le RGPD
     details: Apprivoisez les grands principes de la protection des données personnelles et du RGPD pour être en conformité dans vos projets web. 
     icon: 🔒

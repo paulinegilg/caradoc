@@ -6,7 +6,7 @@ next: false
 
 # Ressources
 
-Sur cette page, vous trouverez des ressources classées par thématique et par médium pour construire une veille critique sur le web et le logiciel libre.
+Sur cette page, vous trouverez des ressources classées par thématique et par médium pour construire une veille critique sur le web.
 
 ## Logiciel libre
 
