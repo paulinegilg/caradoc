@@ -28,9 +28,9 @@ features:
     details: Apprenez à intégrer des critères de qualité dans vos projets web.
     icon: ✅
     link: /fr/qualite-web/
-  - title: Docker - fiche pratique
-    details: Une fiche pratique synthétisant les concepts de la conteneurisation avec Docker.
+  - title: Les bases de Docker
+    details: Partez à la conquête des concepts de base de la conteneurisation avec Docker.
     icon: 🐋
-    link: /fr/fiches/docker
+    link: /fr/docker/
 ---
 

@@ -86,8 +86,17 @@ export default defineConfig({
                             { text: "Webographie et ressources à explorer", link: '/fr/qualite-web/webographie-et-ressources-a-explorer'}
                         ]
                     },
-                    { text: "Fiches", items: [
-                            { text: "Docker", link: '/fr/fiches/docker'},
+                    { text: "Les bases de Docker", items: [
+                            { text: "Introduction", link: '/fr/docker/'}, // TODO
+                            { text: "Installation", link: '/fr/docker/installation'}, // TODO
+                            { text: "Docker, c'est quoi ?", link: '/fr/docker/docker-c-est-quoi'}, // OK
+                            { text: "Premiers pas", link: '/fr/docker/premiers-pas'}, // OK
+                            { text: "Images", link: '/fr/docker/images'}, // OK
+                            { text: "Conteneurs", link: '/fr/docker/conteneurs'}, // OK
+                            { text: "Réseaux", link: '/fr/docker/reseaux'}, // OK
+                            { text: "Persistance des données", link: '/fr/docker/persistance-des-donnees'}, // OK
+                            { text: "Variables d'environnement", link: '/fr/docker/variables-d-environnement'}, // OK
+                            { text: "Gestion des images", link: '/fr/docker/gestion-des-images'},
                         ]
                     },
                     { text: "Ressources", link: '/fr/ressources' },
