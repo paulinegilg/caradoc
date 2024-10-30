@@ -38,6 +38,12 @@ Une nouvelle couche est générée à chaque modification de l'image ou lors de 
 Docker réutilise ensuite ces couches pour créer de nouveaux conteneurs, ce qui accélère le processus de construction. 
 Les couches intermédiaires sont partagées entre les images, optimisant ainsi la vitesse, la taille et l'efficacité.
 
+::: tip Dive
+[Dive](https://github.com/wagoodman/dive) est un outil créé par Alex Goodman qui analyse les images docker pour optimiser leur taille. 
+Il permet de visualiser les couches de l’image, d’identifier les fichiers inutiles et d’améliorer l’efficacité du cache, 
+aidant ainsi les développeurs à réduire la taille et améliorer la performance de leurs images Docker.
+:::
+
 ## Supprimer une image
 
 Pour supprimer une image, on peut utiliser la commande :

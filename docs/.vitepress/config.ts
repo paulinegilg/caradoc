@@ -96,7 +96,8 @@ export default defineConfig({
                             { text: "Réseaux", link: '/fr/docker/reseaux'}, // OK
                             { text: "Persistance des données", link: '/fr/docker/persistance-des-donnees'}, // OK
                             { text: "Variables d'environnement", link: '/fr/docker/variables-d-environnement'}, // OK
-                            { text: "Gestion des images", link: '/fr/docker/gestion-des-images'},
+                            { text: "Gestion des images", link: '/fr/docker/gestion-des-images'}, // OK
+                            { text: "Docker compose", link: '/fr/docker/docker-compose'},
                         ]
                     },
                     { text: "Ressources", link: '/fr/ressources' },

@@ -70,7 +70,7 @@ ADD https://example.com/files.tar.xz .
 
 Exécute des commandes à l'intérieur de l'image.
 
-A l'exécution de la commande, un nouveau conteneur provisoire est créé et le résultat est enregistré dans une nouvelle image.
+À l'exécution de la commande, un nouveau conteneur provisoire est créé et le résultat est enregistré dans une nouvelle image.
 
 ::: warning Attention
 Chaque instruction `RUN` va générer [une nouvelle couche ou *layer*](/fr/docker/images.html#le-systeme-de-couches-dans-docker).
@@ -123,9 +123,22 @@ USER bob
 
 ### `ENTRYPOINT`
 
-// TODO
+Définit le processus principal que le conteneur exécutera au démarrage. 
 
-- ENTRYPOINT : Point d'entrée dans le conteneur -> processus initial. allows you to configure a container that will run as an executable.
+`ENTRYPOINT` fixe une commande par défaut (par exemple, le lancement d’une application) 
+et est utile pour garantir que le conteneur exécute toujours une tâche précise dès son lancement.
+
+::: info Remarques
+- L'`ENTRYPOINT` peut être un script shell ou un programme exécutable. Si c'est le cas, 
+il faut penser à l'ajouter dans l'image avec `COPY` ou `ADD`
+- L'`ENTRYPOINT` peut être surchargé lors du lancement du conteneur avec l'option `--entrypoint`
+:::
+
+```dockerfile
+FROM debian:12
+COPY init.sh /
+ENTRYPOINT ["/init.sh"]
+```
 
 ### `LABEL`
 
@@ -139,30 +152,33 @@ LABEL maintainer="Bob"
 
 ### `CMD`
 
-- CMD : instruction sets the command to be executed when running a container from an image. You can specify CMD instructions using shell or exec forms:
-    - CMD ["executable","param1","param2"] (exec form)
-    - CMD ["param1","param2"] (exec form, as default parameters to ENTRYPOINT)
-      Deux cas possibles :
-      Si ENTRYPOINT est défini, alors CMD sera un argument du processus ENTRYPOINT
-      Dockerfile illustratif
-      ```dockerfile
-      FROM    debian:12
-      COPY    init.sh /
-      ENTRYPOINT ["/init.sh"]
-      ```
-      Fichier init.sh
-      ```bash
-      #!/bin/bash
-      date
-      exec "$@"
-      ```
-      Si ENTRYPOINT n'est pas défini, alors CMD sera réellement le processus initial.
+Définit la commande qui sera exécutée lors du lancement du conteneur.
+
+2 cas possibles : 
+
+- Si un `ENTRYPOINT` est défini, alors `CMD` sera un argument du processus `ENTRYPOINT`
+- Si `ENTRYPOINT` n'est pas défini, alors `CMD` sera réellement le processus initial
 
 ### `EXPOSE`
 
-Remarque : Navigation au sein d'une image et ses layers
-`docker run -it -v /run/docker.sock:/run/docker.sock wagoodman/dive test:0.1`
-https://github.com/wagoodman/dive
+Cette commande spécifie quel(s) port(s) le conteneur rend disponible pour les connexions réseau. 
+Elle indique aux autres conteneurs ou services quel port utiliser pour communiquer avec ce conteneur. 
+Cependant, elle ne rend pas automatiquement le port accessible de l’extérieur,
+il est nécessaire d’utiliser l’option `-p` (ou `--publish`) lors du lancement du conteneur pour cela.
+
+Ici, le conteneur expose le port 80 :
+
+```dockerfile
+EXPOSE 80
+```
+
+Pour y accéder de l'extérieur, on peut lancer le conteneur avec :
+
+```bash
+docker run -p 8080:80 <image>
+```
+
+Cela mappe le port 80 du conteneur au port 8080 de la machine hôte.
 
 ## Exemple de Dockerfile
 
@@ -188,13 +204,3 @@ RUN npm run build
 EXPOSE 8080
 CMD [ "http-server", "dist" ]
 ```
-
-Construction de l'image
-`docker build . -t test:0.1`
-
-Résumé J2 :
-- Création d'une image perso avec Dockerfile, commande : `docker image build .`
-- Si tout s'est bien passé, on peut récupérer l'id de l'image (ex : 3199372aa3fc) -> on peut aussi taguer les images pour faire plus simple que les id
-  `--tag <image repository>:<image tag>`
-- On lance on conteneur avec l'image créée `docker container run --rm --detach --name custom-nginx-packaged --publish 8080:80 3199372aa3fc`
-  ou plus simplement avec un tag : `docker image build --tag custom-nginx:packaged .`
