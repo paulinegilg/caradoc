@@ -4,31 +4,12 @@ layout: doc
 
 # Gestion des images (*Dockerfile*)
 
-Un *Dockerfile* est un fichier texte qui définit les instructions pour créer une image docker. 
+Un *Dockerfile* est un fichier texte qui définit les **instructions pour créer une image Docker**. 
 
-Il sert à automatiser la création d'environnements de conteneur de manière reproductible et standardisée, 
+Il sert à **automatiser la création** d'environnements de conteneur de manière **reproductible** et **standardisée**, 
 facilitant ainsi le développement et le déploiement d'applications.
 
 Les noms par défaut du fichier sont `Dockerfile` ou `dockerfile`.
-
-## Construire une image
-
-Pour construire une image PHP en lui installant le module pdo_mysql, on peut utiliser le Dockerfile suivant :
-
-```dockerfile
-FROM php:8.2-fpm
-RUN  docker-php-ext-install pdo_mysql
-```
-
-Puis, on lance la commande suivante pour construire l'image :
-
-```bash
-docker build -t php-mariadb:8.2-fpm .
-```
-
-::: info Info
-Si on demande à docker d'exécuter une commande qu'il a déjà faite, il va utiliser un système de cache.
-:::
 
 ## Instructions du Dockerfile
 
@@ -60,7 +41,7 @@ COPY package*.json ./
 ### `ADD`
 
 Permet également de copier des fichiers du contexte vers l'image, mais contrairement à `COPY`, cette commande
-permet de des archives tar/tar.gz et des fichiers depuis une URL.
+permet de récupérer des archives tar/tar.gz et des fichiers depuis une URL.
 
 ```dockerfile
 ADD https://example.com/files.tar.xz .
@@ -204,3 +185,7 @@ RUN npm run build
 EXPOSE 8080
 CMD [ "http-server", "dist" ]
 ```
+
+::: info Info
+Si on demande à Docker d'exécuter une commande qu'il a déjà faite, il va utiliser un **système de cache**.
+:::

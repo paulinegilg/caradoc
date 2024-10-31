@@ -23,4 +23,12 @@ docker run -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=my_database -e 
 docker run --env-file .env mariadb
 ```
 
-Au lieu de passer les variables dans la commande, on les place dans un fichier `.env`.
+Au lieu de passer les variables dans la commande, on les place dans un fichier `.env` : 
+
+```plaintext
+# .env
+MYSQL_ROOT_PASSWORD=my-secret-pw
+MYSQL_DATABASE=my_database
+MYSQL_USER=my_user
+MYSQL_PASSWORD=my_password
+```

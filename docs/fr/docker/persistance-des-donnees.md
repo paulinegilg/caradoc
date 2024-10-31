@@ -5,21 +5,21 @@ layout: doc
 # Persistance des données
 
 On rappelle qu'une fois le conteneur arrêté et supprimé, l'ensemble de ses données est perdu.
-Si l'on souhaite conserver des données, il faut les externaliser.
+Si l'on souhaite conserver des données, il faut les **externaliser**.
 Il existe plusieurs manières de faire :
 
-- Copie des données à l'aide de `docker cp`
-- Recours aux volumes docker (objets docker)
-- Utilisation des montages bind (fonctionnalité du noyau Linux)
+- **Copier les données** à l'aide de `docker cp`
+- Utiliser les **volumes docker** (objets Docker)
+- Utiliser les **montages bind** (fonctionnalité du noyau Linux)
 
 ::: tip Quand utiliser un volume ? Quand utiliser un montage bind ?
 Les volumes sont souvent utilisés pour stocker les **données produites par le conteneur** (SGBD, LDAP, Redis, etc.).
 Pour ce qui est des autres données (**fichiers de configuration**, site web, etc.), on peut utiliser les montages bind.
 :::
 
-## Volumes docker
+## Volumes Docker
 
-Un volume docker est un objet associé à un répertoire lors de sa création.
+Un volume Docker est un objet associé à un répertoire lors de sa création.
 
 ```bash
 # Lister les volumes

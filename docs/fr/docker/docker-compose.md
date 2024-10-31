@@ -6,14 +6,14 @@ layout: doc
 
 Jusqu'à présent, nous avons vu des commandes CLI (en ligne de commande), unitaires, peu lisibles et peu maintenables.
 
-Docker compose permet d'améliorer la situation.
+**Docker compose** permet d'améliorer la situation.
 
 ## Docker compose, c'est quoi ?
 
 Docker compose nous permet de définir et gérer des applications multi-conteneurs en utilisant un fichier de configuration, 
 généralement nommé `docker-compose.yml`, au format YAML.
 
-Ainsi, on peut facilement orchestrer le lancement, l’arrêt et la gestion de plusieurs conteneurs, 
+Ainsi, on peut facilement **orchestrer** le lancement, l’arrêt et la gestion de plusieurs conteneurs, 
 souvent utilisés dans des architectures de microservices. 
 C'est particulièrement utile pour les environnements de développement et les configurations complexes.
 
@@ -22,7 +22,7 @@ C'est particulièrement utile pour les environnements de développement et les c
 YAML (*YAML Ain't Markup Language*) est un langage de sérialisation de données simple et lisible, utilisé pour les fichiers de configuration. 
 Il repose sur des indentations pour structurer les données, utilise des paires clé/valeur pour les objets et des tirets pour les listes. 
 
-YAML est largement adopté dans des outils comme Docker et Kubernetes grâce à sa lisibilité et sa facilité d’utilisation.
+YAML est largement adopté dans des outils comme Docker et [Kubernetes](https://fr.wikipedia.org/wiki/Kubernetes) grâce à sa lisibilité et sa facilité d’utilisation.
 
 Pour plus de détails, voici la [documentation YAML](https://yaml.org/).
 
@@ -36,7 +36,7 @@ La cohérence de la syntaxe peut être vérifiée par l'outil [yamllint](https:/
 (par exemple, une base de données, une API et une interface web), leurs ports, réseaux et volumes, simplifiant ainsi le déploiement.
 On appelle cela une **stack**.
 
-2. **Simplifier les commandes** : Au lieu de lancer chaque conteneur avec `docker run`, une simple commande `docker-compose up` 
+2. **Simplifier les commandes** : Au lieu de lancer chaque conteneur avec `docker run`, une simple commande `docker compose up` 
 permet de démarrer tous les services avec les configurations spécifiées.
 
 3. **Gestion centralisée des paramètres** : Les variables d'environnement, les volumes partagés, les dépendances de réseau, 
@@ -84,7 +84,7 @@ networks:
 
 ```bash
 # Démarrer tous les services définis
-docker-compose up
+docker compose up
 # Forcer l'utilisation d'un fichier ayant un autre nom 
 # ou n'étant pas présent dans le répertoire courant
 docker compose -f fichier_compose.yml up
@@ -92,13 +92,13 @@ docker compose -f fichier_compose.yml up
 docker compose up -d
 
 # Arrêter et supprimer les conteneurs
-docker-compose down
+docker compose down
 
 # Valider la syntaxe et afficher la configuration du fichier compose
-docker-compose config
+docker compose config
 
 # Afficher les logs des différents services
-docker-compose logs
+docker compose logs
 
 # Lister les services de la stack
 docker compose ls
@@ -107,12 +107,10 @@ docker compose ls
 docker compose ps
 ```
 
-Docker compose est ainsi essentiel pour simplifier le déploiement et la gestion des applications complexes basées sur plusieurs conteneurs.
-
 ## Fichier compose avec un build intégré
 
 Un fichier compose avec un build intégré est un fichier `docker-compose.yml` qui définit non seulement les services à déployer, 
-mais aussi comment construire les images Docker directement à partir des fichiers source présents dans le projet. 
+mais aussi **comment construire les images Docker** directement à partir des fichiers source présents dans le projet. 
 Cela permet de spécifier un contexte de construction, ainsi que des instructions supplémentaires, 
 comme les arguments de construction ou les Dockerfile spécifiques.
 
@@ -155,7 +153,8 @@ La section `build` spécifie comment construire l'image pour le service :
 
 - **Flexibilité** : Facilite le changement de configuration sans modifier le fichier de composition.
 - **Réutilisabilité** : Permet de réutiliser le même fichier pour différents environnements (développement, test, production) en changeant simplement le fichier `.env`.
-- **Sécurité** : Aide à ne pas exposer directement des valeurs sensibles dans le fichier de configuration, surtout si vous utilisez un fichier `.env` qui n'est pas inclus dans le contrôle de version (via `.gitignore`).
+- **Sécurité** : Aide à ne pas exposer directement des valeurs sensibles dans le fichier de configuration, 
+surtout si on utilise un fichier `.env` qui n'est pas inclus dans le contrôle de version (via `.gitignore`).
 
 ### Procédure
 
@@ -215,7 +214,7 @@ Lorsqu'on exécute `docker compose up`, Docker compose lira le fichier `.env` et
 
 ## Health check
 
-Un **health check** dans Docker vérifie l'état de santé d'un conteneur en exécutant régulièrement une commande. 
+Un **health check** dans Docker vérifie l'**état de santé** d'un conteneur en exécutant régulièrement une commande. 
 Pour l'intégrer dans un fichier `docker-compose.yml`, on utilise la section `healthcheck`.
 
 ```yaml

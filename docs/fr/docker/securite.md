@@ -11,9 +11,9 @@ Voici un ensemble de bonnes pratiques et de lignes de défense à suivre pour re
 
 ### Images vérifiées
 
-Choisir des images officielles ou provenant de sources reconnues, 
+Choisir des **images officielles** ou provenant de sources reconnues, 
 car elles sont régulièrement mises à jour et auditées pour les failles de sécurité. 
-Les images officielles sur Docker Hub, marquées par un badge "verified publisher", sont idéales.
+Les images officielles sur **Docker Hub**, marquées par un badge "verified publisher", sont idéales.
 
 ### Images légères
 
@@ -47,7 +47,7 @@ Utiliser plutôt des fichiers sécurisés ou le service de gestion de secrets in
 ### Réseaux dédiés
 
 Configurer des réseaux Docker dédiés pour chaque service ou groupe de services. 
-L’isolation réseau réduit la visibilité des conteneurs entre eux, augmentant ainsi la sécurité.
+L’**isolation réseau** réduit la visibilité des conteneurs entre eux, augmentant ainsi la sécurité.
 
 ```bash
 docker network create my_secure_network
@@ -56,7 +56,7 @@ docker run --network my_secure_network ...
 
 ### Accès aux volumes
 
-Limiter les volumes aux fichiers et répertoires nécessaires et utiliser des permissions restreintes pour éviter l’accès à des données sensibles. 
+Limiter les volumes aux fichiers et répertoires nécessaires et utiliser des **permissions restreintes** pour éviter l’accès à des données sensibles. 
 Cela empêche également les conteneurs compromis d’accéder à l’intégralité du système de fichiers de l’hôte.
 
 ## Scanner les images pour les vulnérabilités
@@ -64,18 +64,18 @@ Cela empêche également les conteneurs compromis d’accéder à l’intégrali
 ### Scan de vulnérabilités
 
 Utiliser des outils comme **Trivy** ou **Clair** pour scanner les images Docker, 
-afin de détecter des logiciels obsolètes ou présentant des failles de sécurité.
+afin de détecter des **logiciels obsolètes** ou présentant des **failles de sécurité**.
 
 ### Automatisation des scans
 
-Intégrer les scans dans le pipeline CI/CD pour tester automatiquement les images au moment de leur création, 
+Intégrer les scans dans les **pipelines CI/CD** pour tester automatiquement les images au moment de leur création, 
 maintenant ainsi un haut niveau de sécurité et prévenant les risques avant le déploiement en production.
 
 ## Limiter les ressources des conteneurs
 
 ### Prévention des attaques DoS
 
-Configurer des limites de CPU et de mémoire sur chaque conteneur pour éviter qu’une application ou un service ne consomme toutes les ressources disponibles.
+Configurer des **limites de CPU** et de **mémoire** sur chaque conteneur pour éviter qu’une application ou un service ne consomme toutes les ressources disponibles.
 
 ```bash
 docker run --memory="256m" --cpus="1.0" ...
@@ -85,15 +85,11 @@ Les paramètres `--memory` et `--cpus` définissent les limites de mémoire et d
 
 ## Surveillance et journalisation
 
-### Surveillance active
+Utiliser des outils de **monitoring** comme **Prometheus** et **Grafana** pour suivre l’état des conteneurs et détecter toute activité anormale.
 
-Utiliser des outils de monitoring comme **Prometheus** et **Grafana** pour suivre l’état des conteneurs et détecter toute activité anormale.
-
-### Journalisation pour audit
-
-Activer la journalisation des événements pour garder un historique des opérations. 
+Activer la **journalisation** des événements pour garder un **historique des opérations**. 
 En cas d'incident, les journaux permettent de comprendre ce qui s'est passé, d’identifier des failles potentielles et d’ajuster la sécurité.
 
 ### Alertes en temps réel
 
-Configurer des alertes sur des événements spécifiques, comme des pics de consommation de ressources, pour une réponse rapide aux incidents.
+Configurer des alertes sur des événements spécifiques, comme des **pics** de consommation de ressources, pour une réponse rapide aux incidents.

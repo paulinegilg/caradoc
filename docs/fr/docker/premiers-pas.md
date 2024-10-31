@@ -6,12 +6,12 @@ layout: doc
 
 ## L'environnement Docker
 
-Un conteneur docker est constitué de 4 objets de base :
+Un conteneur Docker est constitué de 4 objets de base :
 
 - **une image** : arborescence de départ et des informations
 - **un conteneur** : instanciation de l'image
 - **un ou plusieurs réseaux** : pour connecter les conteneurs entre eux
-- **un ou plusieurs volumes** : pour persister les données
+- **un ou plusieurs volumes** : pour faire persister les données
 
 ## Commandes de base
 

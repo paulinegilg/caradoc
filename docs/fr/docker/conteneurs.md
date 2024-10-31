@@ -50,7 +50,7 @@ docker run --user <user> <image>
 `<user>` peut être un nom d'utilisateur ou un UID. Pour connaître l'UID d'un utilisateur, on peut utiliser la commande `id -u <user>`.
 :::
 
-## Lancement d'un conteneur en mode interactif : `docker run -it`
+## Lancement d'un conteneur en mode interactif
 
 De nombreuses images initient des conteneurs avec un **processus shell** (Debian, Ubuntu, Busybox, Alpine, etc.).
 Pour obtenir un conteneur interactif, il faut fournir l'option `-it` :
