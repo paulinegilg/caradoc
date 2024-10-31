@@ -97,7 +97,9 @@ export default defineConfig({
                             { text: "Persistance des données", link: '/fr/docker/persistance-des-donnees'}, // OK
                             { text: "Variables d'environnement", link: '/fr/docker/variables-d-environnement'}, // OK
                             { text: "Gestion des images", link: '/fr/docker/gestion-des-images'}, // OK
-                            { text: "Docker compose", link: '/fr/docker/docker-compose'},
+                            { text: "Docker compose", link: '/fr/docker/docker-compose'}, // OK
+                            { text: "Sécurité dans un environnement Docker", link: '/fr/docker/securite'}, // TODO
+                            { text: "Conclusion", link: '/fr/docker/conclusion'} // TODO
                         ]
                     },
                     { text: "Ressources", link: '/fr/ressources' },
