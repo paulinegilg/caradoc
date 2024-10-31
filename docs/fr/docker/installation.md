@@ -1,7 +1,0 @@
----
-layout: doc
----
-
-# Installation
-
-// TODO

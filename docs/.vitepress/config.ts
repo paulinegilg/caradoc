@@ -88,7 +88,6 @@ export default defineConfig({
                     },
                     { text: "Les bases de Docker", items: [
                             { text: "Introduction", link: '/fr/docker/'}, // TODO
-                            { text: "Installation", link: '/fr/docker/installation'}, // TODO
                             { text: "Docker, c'est quoi ?", link: '/fr/docker/docker-c-est-quoi'}, // OK
                             { text: "Premiers pas", link: '/fr/docker/premiers-pas'}, // OK
                             { text: "Images", link: '/fr/docker/images'}, // OK
