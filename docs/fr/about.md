@@ -6,11 +6,12 @@ next: false
 
 # À propos
 
-Je m'appelle Pauline Gilg et je suis développeuse à Strasbourg.
+Enchantée :relaxed: !
 
-Je travaille au sein de la Direction du numérique de l'Université de Strasbourg. Je développe actuellement des applications avec Vue.
-J'enseigne également en Master CAWEB (Communication Web Multilingue), toujours à l'Université de Strasbourg.
+**Je suis Pauline Gilg, développeuse, enseignante et couteau-suisse du web depuis 2018.**
 
-Éternelle curieuse, j'aime explorer et m'auto-former à de nouveaux langages et technologies.
+Engagée pour construire un web de qualité, j'applique mes compétences pour concevoir des expériences utilisateur accessibles et inclusives. 
 
-Je m'intéresse à la protection des données personnelles, à l'accessibilité, aux logiciels libres et au monde de Linux.
+J’enseigne et partage mon approche de la qualité et de l’éthique numérique pour accompagner d'autres professionnels du web dans leur apprentissage.
+
+Découvrez mon parcours sur [mon site](https://paulinegilg.fr/about) :seedling:.

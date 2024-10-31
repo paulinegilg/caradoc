@@ -3,16 +3,13 @@ layout: home
 
 hero:
   name: CaraDoc
-  text: Formations et ressources sur le web et l'informatique
-  tagline: Pour comprendre, s'approprier et (re)prendre le contrôle de sa vie numérique
+  text: À la conquête <br>du web 🗡️
+  tagline: Guides et documentations <br>héroïques pour un web meilleur
   image:
     src: /logo.png
     alt:   
   actions:
     - theme: brand
-      text: Ressources
-      link: /fr/ressources
-    - theme: alt
       text: Contact
       link: /fr/contact
 features:

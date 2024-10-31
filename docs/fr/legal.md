@@ -8,7 +8,7 @@ next: false
 
 ## Hébergement
 
-Ce site est hébergé chez [OVH](https://ovh.com/), 2 rue Kellermann, 59100 Roubaix, France.
+Ce site est hébergé chez Netlify Inc., 512 2nd Street, Suite 200 San Francisco, CA 94107.
 
 ## Création et édition
 

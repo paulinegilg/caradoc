@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: CaraDoc
-  text: Online courses about computer science and the web
-  tagline: To understand, make your own and (re)take control of your digital life
+  text: Conquering <br>the web 🗡️
+  tagline: Heroic guides & documentation <br>for a better web
   image:
     src: /logo.png
     alt:
