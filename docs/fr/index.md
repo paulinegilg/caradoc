@@ -17,7 +17,7 @@ hero:
       link: /fr/contact
 features:
   - title: Devenir développeur-euse web en autodidacte
-    details: Perdu-es dans la jungle du développement web ? Cette documentation vous aidera à tracer votre propre chemin en tant que développeur-euse.
+    details: Perdu-es dans la jungle du développement web ? Ce guide vous aidera à tracer votre propre chemin en tant que développeur-euse.
     icon: 🦄
     link: /fr/devenir-developpeur-web/
   - title: Protéger les données personnelles en conformité avec le RGPD
