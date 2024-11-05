@@ -25,5 +25,9 @@ features:
     details: Apprenez à intégrer des critères de qualité dans vos projets web.
     icon: ✅
     link: /fr/qualite-web/
+  - title: Les bases de Docker
+    details: Plongez à la découverte des concepts de base de la conteneurisation avec Docker.
+    icon: 🐋
+    link: /fr/docker/
 ---
 

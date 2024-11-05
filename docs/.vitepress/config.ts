@@ -22,7 +22,7 @@ export default defineConfig({
                     { text: "Protéger les données personnelles en conformité avec le RGPD", items: [
                             { text: "Introduction", link: '/fr/rgpd/'},
                             { text: "Qu'est-ce qu'une donnée personnelle ?", link: '/fr/rgpd/definition-donnee-personnelle'},
-                            { text: "Pourquoi protéger les données&nbsp;?", link: '/fr/rgpd/pourquoi-proteger-les-donnees'},
+                            { text: "Pourquoi protéger les données ?", link: '/fr/rgpd/pourquoi-proteger-les-donnees'},
                             { text: "Historique de la protection des données personnelles", link: '/fr/rgpd/historique-protection-donnees-personnelles'},
                             { text: "Traitement, responsable de traitement et finalité", link: '/fr/rgpd/definition-traitement-responsable-finalite'},
                             { text: "Champ d'application du RGPD", link: '/fr/rgpd/champ-d-application'},
@@ -84,6 +84,21 @@ export default defineConfig({
                             { text: "Indicateurs de qualité", link: '/fr/qualite-web/indicateurs-de-qualite'},
                             { text: "Conclusion", link: '/fr/qualite-web/conclusion'},
                             { text: "Webographie et ressources à explorer", link: '/fr/qualite-web/webographie-et-ressources-a-explorer'}
+                        ]
+                    },
+                    { text: "Les bases de Docker", items: [
+                            { text: "Introduction", link: '/fr/docker/'}, // TODO
+                            { text: "Docker, c'est quoi ?", link: '/fr/docker/docker-c-est-quoi'}, // OK
+                            { text: "Premiers pas", link: '/fr/docker/premiers-pas'}, // OK
+                            { text: "Images", link: '/fr/docker/images'}, // OK
+                            { text: "Conteneurs", link: '/fr/docker/conteneurs'}, // OK
+                            { text: "Réseaux", link: '/fr/docker/reseaux'}, // OK
+                            { text: "Persistance des données", link: '/fr/docker/persistance-des-donnees'}, // OK
+                            { text: "Variables d'environnement", link: '/fr/docker/variables-d-environnement'}, // OK
+                            { text: "Gestion des images", link: '/fr/docker/gestion-des-images'}, // OK
+                            { text: "Docker compose", link: '/fr/docker/docker-compose'}, // OK
+                            { text: "Sécurité dans un environnement Docker", link: '/fr/docker/securite'}, // TODO
+                            { text: "Conclusion", link: '/fr/docker/conclusion'} // TODO
                         ]
                     },
                     { text: "Ressources", link: '/fr/ressources' },
