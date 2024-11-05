@@ -11,7 +11,7 @@ hero:
       link: /fr/ressources
     - theme: alt
       text: Fiches pratiques
-      link: /fr/fiches/
+      link: /fr/docker/
     - theme: alt
       text: Contact
       link: /fr/contact
@@ -29,7 +29,7 @@ features:
     icon: ✅
     link: /fr/qualite-web/
   - title: Les bases de Docker
-    details: Partez à la conquête des concepts de base de la conteneurisation avec Docker.
+    details: Plongez à la découverte des concepts de base de la conteneurisation avec Docker.
     icon: 🐋
     link: /fr/docker/
 ---

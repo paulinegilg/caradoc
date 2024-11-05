@@ -10,7 +10,7 @@ Jusqu'à présent, nous avons vu des commandes CLI (en ligne de commande), unita
 
 ## Docker compose, c'est quoi ?
 
-Docker compose nous permet de définir et gérer des applications multi-conteneurs en utilisant un fichier de configuration, 
+Docker compose nous permet de définir et gérer des applications **multi-conteneurs** en utilisant un fichier de configuration, 
 généralement nommé `docker-compose.yml`, au format YAML.
 
 Ainsi, on peut facilement **orchestrer** le lancement, l’arrêt et la gestion de plusieurs conteneurs, 
@@ -57,7 +57,7 @@ services:
     ports:
       - "8000:80"  # Expose le port 80 du conteneur sur le port 8000 de l'hôte
     volumes:
-      - web_data:/usr/src/app/data  # Montre le volume "web_data" dans le conteneur
+      - web_data:/usr/src/app/data  # Monte le volume "web_data" dans le conteneur
     networks:
       - app-network  # Connecte le service au réseau "app-network"
 
@@ -168,7 +168,7 @@ Voici comment cela s'articule en pratique :
 
 #### Création d'un fichier `.env`
 
-Dans le même répertoire que le fichier `docker-compose.yml`, on crée un fichier nommé `.env` pour y définir vos variables d'environnement :
+Dans le même répertoire que le fichier `docker-compose.yml`, on crée un fichier nommé `.env` pour y définir nos variables d'environnement :
 
 ```plaintext
 # .env

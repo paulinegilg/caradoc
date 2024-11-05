@@ -78,12 +78,6 @@ docker exec -it busy sh
 docker exec busy date
 ```
 
-Exemple d'interrogation d'un conteneur nginx depuis un conteneur busybox :
-
-```bash
-docker exec busy wget -O - -q 172.17.0.2
-```
-
 ## Autres commandes
 
 ```bash

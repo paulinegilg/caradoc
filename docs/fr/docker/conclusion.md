@@ -5,7 +5,7 @@ next: false
 
 # Conclusion
 
-Félicitations pour avoir exploré les bases de Docker ! 
+Félicitations pour avoir exploré les bases de Docker 🥳 ! 
 Vous avez maintenant les compétences essentielles pour utiliser Docker.
 
 ## Aller plus loin
@@ -14,7 +14,7 @@ Pour approfondir et élargir vos connaissances, voici quelques pistes à explore
 
 - **Docker Swarm** : Une solution de **clustering** native de Docker pour **orchestrer plusieurs conteneurs**, 
 permettant de gérer facilement des environnements complexes.
-- **Traefik** : Un **reverse proxy** moderne et dynamique, idéal pour la **gestion de trafic** dans les environnements conteneurisés, 
+- **Traefik** : Un **reverse proxy** dynamique, idéal pour la **gestion de trafic** dans les environnements conteneurisés, 
 et particulièrement adapté à Docker.
 - **Kubernetes** : Un outil de **conteneurisation** avancé pour gérer des déploiements complexes à grande échelle, 
 avec des fonctionnalités robustes pour l'orchestration, la mise à l’échelle et l'automatisation des déploiements.
@@ -22,3 +22,7 @@ avec des fonctionnalités robustes pour l'orchestration, la mise à l’échelle
 
 Ces sujets vous permettront de développer davantage vos compétences et d’approfondir votre maîtrise de la conteneurisation dans des environnements avancés. 
 Docker n'est qu'une première étape vers un écosystème riche et passionnant. Bonne exploration !
+
+## Contribuer
+
+Rendez-vous sur [GitHub](https://github.com/paulinegilg/caradoc/tree/main/docs/fr/docker) pour signaler une erreur ou contribuer au projet. Merci !

@@ -6,7 +6,7 @@ layout: doc
 
 Pour créer un conteneur, Docker a besoin d'une image.
 
-Une image est un modèle contenant des instructions pour créer un conteneur Docker.
+Une image est un modèle contenant des **instructions pour créer un conteneur** Docker.
 
 ## Récupérer une image
 
@@ -20,7 +20,7 @@ docker image pull nginx:1.24
 docker image pull busybox
 ```
 
-Ici, on récupère l'image de Nginx (logiciel de serveur web) avec le tag `1.24` qui correspond à une version spécifique,
+Ici, on récupère l'image de [Nginx](https://nginx.org/en/) (logiciel de serveur web) avec le tag `1.24` qui correspond à une version spécifique,
 puis l'image de Busybox (boîte à outil pour la ligne de commande Shell) en version "latest", c'est-à-dire la dernière version stable.
 
 ## Inspecter une image
@@ -56,16 +56,18 @@ docker image rm <image>
 Si l'image est utilisée par un conteneur, il faut d'abord supprimer le conteneur.
 :::
 
-## Supprimer toutes les images anonymes non utilisées
+## Supprimer des images
+
+```bash
+# Suppression des images anonymes 
+# non utilisées par au moins un conteneur
+docker image prune
+
+# Suppression de toutes les images 
+# non utilisées par au moins un conteneur
+docker image prune -a
+```
 
 ::: tip Info
 Une image anonyme est une image **sans tag** (un tag est créé par un conteneur avec l'option `-t`).
 :::
-
-```bash
-# Suppression des images anonymes non utilisées
-docker image prune
-
-# Suppression de toutes les images non utilisées
-docker image prune -a
-```

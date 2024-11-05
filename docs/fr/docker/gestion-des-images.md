@@ -59,7 +59,7 @@ Chaque instruction `RUN` va générer [une nouvelle couche ou *layer*](/fr/docke
 Il est donc recommandé de regrouper les commandes `RUN` pour éviter de créer des couches inutiles.
 
 ```dockerfile
-# Eviter
+# Éviter
 RUN apt-get update
 RUN apt-get install git
 RUN apt-get install curl

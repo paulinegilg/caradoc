@@ -19,6 +19,6 @@ La conteneurisation s'appuie sur un ensemble de fonctionnalités avancées du **
 
 *Source : [Docker (Wikipédia)](https://fr.wikipedia.org/wiki/Docker_(logiciel))*
 
-![](/fiches/containers-vs-virtualization.png)
+![](/docker/containers-vs-virtualization.jpg)
 
 *Source : [Containers vs. virtual machines (Atlassian)](https://www.atlassian.com/microservices/cloud-computing/containers-vs-vms)*
