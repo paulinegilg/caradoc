@@ -13,7 +13,6 @@ export default defineConfig({
             themeConfig: {
                 // https://vitepress.dev/reference/default-theme-config
                 nav: [
-                    { text: "Ressources", link: '/fr/ressources' },
                     { text: 'À propos', link: '/fr/about'},
                     { text: 'Contact', link: '/fr/contact' }
                 ],
