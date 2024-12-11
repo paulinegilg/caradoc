@@ -134,6 +134,15 @@ En complément de cette astuce, vous pouvez également explorer **K9s**, un outi
 
 En combinant un alias comme `k` pour les commandes ponctuelles et K9s pour une gestion plus visuelle et interactive, vous disposerez d'un environnement de travail optimisé, pratique pour les débutants comme pour les utilisateurs avancés.
 
+## Le CNI
+
+Le CNI (Container Network Interface) est un standard permettant de gérer le réseau des conteneurs 
+dans des environnements comme Kubernetes. Il permet d'assigner des adresses IP aux pods, de configurer 
+leur réseau et de gérer le routage du trafic entre eux et avec le monde extérieur. 
+Le CNI est modulaire et flexible, permettant l'intégration de différents plugins réseau 
+(comme Calico, Flannel, Weave) en fonction des besoins spécifiques de l'application. 
+Il joue un rôle clé dans l'isolation et la sécurité des réseaux de conteneurs.
+
 ## Gestion des pods
 
 Un pod est une unité d'exécution qui contient un ou plusieurs conteneurs, et qui fonctionne dans un nœud.
@@ -483,16 +492,26 @@ Kubernetes propose plusieurs types de services en fonction de la manière dont v
   - Utilisation de ports non standard
   - Plage limitée de 2769 ports -> 2769 services possibles
 
-- **LoadBalancer :**
-  - Crée automatiquement un load balancer externe (généralement dans le cloud) pour distribuer le trafic vers le service.
-  - Cela permet d'exposer un service à l'extérieur du cluster avec un équilibrage de charge géré par le cloud provider (ex: AWS, GCP).
-  - Nécessite un environnement cloud qui prend en charge cette fonctionnalité.
+  Pour ces raisons, on va préférer l'utilisation d'un LoadBalancer.
 
-- **ExternalName :**
-  - Fournit une abstraction pour un service externe, en utilisant un nom DNS externe.
-  - Il redirige les demandes vers un service externe au lieu de gérer des pods internes.
+- **LoadBalancer :**
+  - Expose un service à l'extérieur du cluster avec une adresse IP publique ou un DNS.
+  - Il répartit automatiquement le trafic entrant entre plusieurs pods à l'aide d'un **équilibreur de charge**, 
+  garantissant une meilleure **disponibilité** et **performance**.
+  - Ce service est particulièrement utile pour des applications en **production**, comme des sites web ou des API, 
+  accessibles depuis l'extérieur.
+  - Il dépend souvent des **fournisseurs de cloud** (comme AWS, GCP, Azure) pour gérer l'équilibreur de charge,
+    soit un plugin tel Metallb ou bien celle intégrée au CNI tel Cilium
+
+  Avantages/inconvénients :
+  - A: On n'utilise plus qu'une IP, sans port non standard
+  - I: Nécessite un mécanisme d'attribut des IP -> externe/plugin
+  - I: 1 IP/Service car repose sur un NodePort -> 2769 services possibles
+
+  Solution : Utilisation d'une ressource de type Ingress ou GatewayAPI
 
 #### 3. **Comment un Service fonctionne-t-il ?**
+// A RELIRE
 Un service fonctionne en associant un ou plusieurs **Pods** via des **labels**. Il crée un point d'accès stable et peut diriger le trafic vers les pods correspondants en fonction des critères définis par un **selector**.
 
 **Exemple** :
@@ -505,10 +524,6 @@ Les services utilisent un mécanisme de répartition de charge pour distribuer l
 Cela fonctionne en suivant une approche **round-robin** ou en fonction de la santé des pods. Kubernetes utilise une 
 table d'ip et une liste de endpoints pour savoir à quels pods diriger le trafic. 
 Chaque service a un **endpoint** qui représente l'adresse IP de chaque pod associé.
-
-#### 5. **Résolution DNS :**
-- Lorsque vous créez un Service, Kubernetes configure automatiquement un nom DNS interne pour ce service, généralement sous la forme de `<nom-du-service>.<namespace>.svc.cluster.local`.
-- Par exemple, un service nommé `hello` dans le namespace `default` sera accessible via `hello.default.svc.cluster.local`.
 
 #### Exemple d’un manifeste YAML pour un Service **ClusterIP** :
 
@@ -533,6 +548,399 @@ spec:
 - **type** : Définit le type du service (ici, `ClusterIP`, donc accessible uniquement à l'intérieur du cluster).
 
 ### Conclusion :
+
 Les **Services** dans Kubernetes offrent une abstraction puissante et flexible pour gérer la communication entre les pods, 
 à la fois à l'intérieur et à l'extérieur du cluster. Ils assurent un accès fiable, même en cas de changement des pods sous-jacents, 
 et peuvent être configurés pour offrir différents types d'accès réseau, selon les besoins de votre application.
+
+### Micro TP n°3
+
+Exposer le déploiement hello à l'aide d'un service de type ClusterIP et vérifier :
+
+```bash
+# Commandes d'exposition
+kubectl expose deployment hello --port=8080 --target-port=8080 --type=ClusterIP
+# Commande de vérification
+kubectl describe svc hello
+```
+
+Compléter le service ClusterIP par un NodePort et vérifier :
+
+Pour compléter un service **ClusterIP** avec un service de type **NodePort**, vous devez créer un deuxième service qui exposera le même déploiement à l'extérieur du cluster via un port spécifique sur chaque nœud du cluster. Voici les étapes à suivre :
+
+### 1. Exposer le déploiement avec un service **ClusterIP** (si ce n'est pas déjà fait) :
+Si le service **ClusterIP** n'est pas encore créé, vous pouvez le faire en utilisant la commande suivante :
+
+```bash
+kubectl expose deployment hello --port=8080 --target-port=8080 --type=ClusterIP
+```
+
+### 2. Créer un service **NodePort** pour exposer le même déploiement à l'extérieur :
+Ensuite, vous pouvez créer un service de type **NodePort** pour exposer le même déploiement à l'extérieur du cluster. Voici la commande pour créer un service **NodePort** :
+
+```bash
+kubectl expose deployment hello --port=8080 --target-port=8080 --type=NodePort
+```
+
+Cette commande expose le service `hello` sur le port `8080` et le redirige également vers le même port sur les pods. Kubernetes attribuera automatiquement un port externe (NodePort) dans une plage de ports (généralement entre 30000 et 32767).
+
+### 3. Vérifier la création des services et obtenir les informations nécessaires :
+
+- Vérifiez que les deux services (ClusterIP et NodePort) ont bien été créés :
+
+```bash
+kubectl get svc
+```
+
+Cela devrait afficher quelque chose comme ceci :
+
+```
+NAME     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+hello    ClusterIP   10.96.168.1     <none>        8080/TCP       10m
+hello    NodePort    10.96.168.2     <none>        8080:30500/TCP 10m
+```
+
+Dans cet exemple :
+
+- Le service `hello` de type **ClusterIP** utilise l'IP interne `10.96.168.1`.
+- Le service `hello` de type **NodePort** expose le port `8080` sur un port externe (`30500` dans cet exemple).
+
+- Pour vérifier les détails d'un service spécifique, vous pouvez utiliser :
+
+```bash
+kubectl describe svc hello
+```
+
+Cela vous donnera des informations détaillées sur les ports exposés et les adresses IP.
+
+### 4. Tester l'accès externe via le NodePort :
+Une fois le service **NodePort** créé, vous pouvez accéder à votre application depuis l'extérieur du cluster en utilisant l'IP de l'un des nœuds du cluster et le port attribué par **NodePort** (par exemple, `30500` dans l'exemple ci-dessus).
+
+Accédez à l'application en utilisant `wget` ou `curl` avec l'IP d'un nœud et le port `NodePort` :
+
+```bash
+wget -O - http://<Node_IP>:30500
+```
+
+ou avec `curl` :
+
+```bash
+curl http://<Node_IP>:30500
+```
+
+Cela devrait vous renvoyer la réponse du service **hello** exposé via **NodePort**.
+
+Ajouter le niveau LoadBalancer :
+
+Pour ajouter un service de type **LoadBalancer** à votre déploiement **hello**, vous devrez créer un troisième service qui exposera votre application à l'extérieur du cluster via un équilibreur de charge (LoadBalancer). Ce type de service est généralement utilisé dans des environnements cloud (comme AWS, GCP, ou Azure) où Kubernetes peut provisionner un équilibreur de charge pour gérer le trafic entrant.
+
+Voici les étapes pour ajouter un service de type **LoadBalancer** à votre déploiement **hello** :
+
+### 1. Créer un service **LoadBalancer** :
+Utilisez la commande suivante pour créer un service **LoadBalancer** qui expose le même port (8080) et redirige le trafic entrant vers les pods :
+
+```bash
+kubectl expose deployment hello --port=8080 --target-port=8080 --type=LoadBalancer
+```
+
+- **`--port=8080`** : définit le port sur lequel le service est exposé.
+- **`--target-port=8080`** : spécifie le port interne des pods.
+- **`--type=LoadBalancer`** : expose le service via un équilibreur de charge externe (en fonction de votre fournisseur de cloud).
+
+### 2. Vérifier la création des services :
+Vérifiez que les services **ClusterIP**, **NodePort**, et **LoadBalancer** ont bien été créés en utilisant la commande suivante :
+
+```bash
+kubectl get svc
+```
+
+La sortie pourrait ressembler à ceci :
+
+```
+NAME     TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)        AGE
+hello    ClusterIP      10.96.168.1    <none>           8080/TCP       15m
+hello    NodePort       10.96.168.2    <none>           8080:30500/TCP 15m
+hello    LoadBalancer   10.96.168.3    <pending>         8080:30080/TCP 15m
+```
+
+- Le service **ClusterIP** reste uniquement accessible à l'intérieur du cluster.
+- Le service **NodePort** expose l'application sur le port externe `30500`.
+- Le service **LoadBalancer** expose l'application à l'extérieur du cluster via une adresse IP externe. L'EXTERNAL-IP peut prendre un certain temps avant d'être attribuée (en fonction du fournisseur de cloud).
+
+### 3. Vérifier le statut du service **LoadBalancer** :
+Le champ **EXTERNAL-IP** pour le service **LoadBalancer** peut mettre un certain temps à se remplir, en particulier si vous êtes sur un fournisseur de cloud (AWS, GCP, Azure). Vous pouvez vérifier son statut avec :
+
+```bash
+kubectl describe svc hello
+```
+
+Cela vous montrera si un équilibreur de charge a été provisionné et l'adresse IP ou le DNS public qui a été attribué au service.
+
+### 4. Tester l'accès via le LoadBalancer :
+Une fois que l'adresse IP externe (ou DNS) du service **LoadBalancer** est attribuée, vous pouvez tester l'accès à votre application depuis l'extérieur du cluster en utilisant l'adresse IP ou le nom de domaine de l'équilibreur de charge et le port exposé (`8080` dans cet exemple) :
+
+```bash
+wget -O - http://<LoadBalancer_IP>:8080
+```
+
+ou avec `curl` :
+
+```bash
+curl http://<LoadBalancer_IP>:8080
+```
+
+Cela vous permettra de tester l'accès direct à l'application depuis l'extérieur du cluster.
+
+### 3 services les uns sur les autres
+
+Dans Kubernetes, chaque type de service **(ClusterIP, NodePort, LoadBalancer)** offre une manière différente d'exposer et de gérer l'accès réseau à vos pods.
+
+Si vous souhaitez exposer votre application à différents niveaux, vous devrez effectivement créer plusieurs services en fonction de vos besoins. Voici un résumé :
+
+1. **ClusterIP** (service par défaut) :
+    - Expose le service uniquement à l'intérieur du cluster.
+    - Il est idéal pour des services qui doivent être accessibles par d'autres pods dans le même cluster, mais pas à l'extérieur (comme les bases de données ou les services backend).
+
+2. **NodePort** :
+    - Expose le service à l'extérieur du cluster via un port statique sur chaque nœud (machine) du cluster.
+    - Vous pouvez accéder à votre service à partir de l'extérieur du cluster en utilisant l'adresse IP de n'importe quel nœud et le port que Kubernetes attribue au service (par exemple, 30000-32767).
+
+3. **LoadBalancer** :
+    - Expose le service à l'extérieur du cluster en utilisant un équilibreur de charge.
+    - Il crée une adresse IP publique ou un DNS, souvent fourni par le cloud, pour diriger le trafic entrant vers le service.
+    - Ce type de service est utile dans un environnement cloud où Kubernetes peut provisionner un équilibreur de charge externe automatiquement.
+
+### Exemple de cas d'usage pour chaque service :
+- **ClusterIP** : Utilisé pour exposer des services internes uniquement, tels que des bases de données ou des API qui ne doivent pas être accessibles publiquement.
+- **NodePort** : Expose une application de test ou un service de développement à l'extérieur sans dépendre d'un fournisseur de cloud. Cela permet d'accéder à l'application via un port spécifique sur un nœud.
+- **LoadBalancer** : Expose des applications de production (par exemple, des sites web ou des API) à l'extérieur du cluster avec un équilibrage de charge automatique, souvent avec une IP ou un DNS public.
+
+### Trois services ensemble :
+Si vous souhaitez avoir ces trois niveaux d'accès simultanément, vous pouvez effectivement créer trois services qui se superposent, chacun offrant une méthode différente d'accès au même ensemble de pods :
+
+1. **ClusterIP** : pour l'accès interne aux pods.
+2. **NodePort** : pour un accès direct via l'IP d'un nœud.
+3. **LoadBalancer** : pour un accès externe avec un DNS ou une IP publique.
+
+Cependant, il n'est pas nécessaire d'avoir ces trois services dans tous les cas. Cela dépend de votre cas d'usage et de la manière dont vous souhaitez exposer vos applications. Vous pouvez en créer un ou deux, en fonction de vos besoins de réseau et de sécurité.
+
+## Gestion de l'environnement des conteneurs de pods
+
+À l'instar de Docker, il est possible d'enrichir l'environnement des conteneurs de chaque pod au moment de leur création.
+Cela se fait à l'aide de l'une ou l'autre ou les deux clés suivantes :
+
+```yaml
+env:
+envFrom:
+```
+
+### ConfigMaps
+
+Une **ConfigMap** dans Kubernetes est une ressource utilisée pour **stocker des données de configuration sous forme de paires clé-valeur**, séparées du code applicatif. Cela permet de rendre vos applications **plus flexibles, modulaires et faciles à gérer**, en externalisant les configurations du conteneur.
+
+---
+
+### **Caractéristiques principales :**
+- **Flexibilité :** Les données de configuration sont séparées du conteneur, ce qui permet de modifier les configurations sans recréer les images ou redéployer les pods.
+- **Stockage de données simples :** Les ConfigMaps peuvent contenir des chaînes de texte, des variables d'environnement, des fichiers de configuration, ou des informations en format JSON/YAML.
+- **Portabilité :** Elles permettent de réutiliser la même image dans différents environnements (développement, staging, production) avec des configurations spécifiques.
+
+---
+
+### **Exemples d'usage :**
+1. **Variables d’environnement :** Ajouter des configurations comme des URL, des chemins ou des identifiants dans les pods via des variables.
+2. **Fichiers de configuration :** Monter un fichier de configuration externe dans le conteneur (ex. fichier `.properties` ou `.yaml`).
+3. **Personnalisation des applications :** Injecter des paramètres spécifiques à l'environnement (par exemple, `DEBUG=true` en développement et `DEBUG=false` en production).
+
+---
+
+### **Création d'une ConfigMap**
+
+#### Via un fichier YAML :
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configmap
+data:
+  APP_ENV: production
+  APP_PORT: "8080"
+```
+
+**Commande pour créer la ConfigMap :**
+```bash
+kubectl apply -f my-configmap.yaml
+```
+
+#### Directement en ligne de commande :
+```bash
+kubectl create configmap my-configmap \
+  --from-literal=APP_ENV=production \
+  --from-literal=APP_PORT=8080
+```
+
+---
+
+### **Utilisation d'une ConfigMap**
+
+#### Injection comme variable d’environnement :
+Dans un Pod ou Deployment, vous pouvez utiliser une ConfigMap pour définir des variables d'environnement :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    env:
+    - name: APP_ENV
+      valueFrom:
+        configMapKeyRef:
+          name: my-configmap
+          key: APP_ENV
+```
+
+#### Montage en volume :
+Pour injecter des fichiers ou des configurations directement dans un conteneur :
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    volumeMounts:
+    - name: config-volume
+      mountPath: /etc/config
+  volumes:
+  - name: config-volume
+    configMap:
+      name: my-configmap
+```
+
+---
+
+### **Limitations des ConfigMaps :**
+1. **Taille limitée :** Chaque ConfigMap est limitée à 1 Mo de données.
+2. **Pas conçues pour les données sensibles :** Les ConfigMaps ne sont pas chiffrées et ne doivent pas contenir de mots de passe ou de secrets (utilisez des Secrets pour cela).
+3. **Dépendance aux Pods :** Si la ConfigMap est supprimée ou modifiée, les pods qui en dépendent peuvent rencontrer des problèmes s'ils ne sont pas redémarrés correctement.
+
+---
+
+### **Conclusion**
+Les ConfigMaps sont un outil essentiel pour gérer la configuration des applications Kubernetes. 
+En dissociant les configurations du code, elles permettent une meilleure modularité, maintenabilité et portabilité des applications dans des environnements différents.
+
+### Micro-TP n°4
+
+Voici les étapes pour ajouter ces variables d'environnement à l'aide d'une **ConfigMap** et les injecter dans le déploiement `hello`.
+
+---
+
+### **1. Création de la ConfigMap**
+
+Créez un fichier YAML nommé `hello-configmap.yaml` :
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-configmap
+data:
+  PORT: "80"
+  MSG: "Dev"
+  VERSION: "0.1"
+```
+
+Appliquez ce fichier pour créer la ConfigMap :
+
+```bash
+kubectl apply -f hello-configmap.yaml
+```
+
+---
+
+### **2. Modification du Déploiement**
+
+Ajoutez les variables d'environnement dans le déploiement `hello` en utilisant la ConfigMap. Voici le manifest complet mis à jour :
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: hello-container
+        image: bob2606/hello-http:0.8.26
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: hello-configmap
+              key: PORT
+        - name: MSG
+          valueFrom:
+            configMapKeyRef:
+              name: hello-configmap
+              key: MSG
+        - name: VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: hello-configmap
+              key: VERSION
+```
+
+Appliquez ce fichier mis à jour :
+
+```bash
+kubectl apply -f hello-deployment.yaml
+```
+
+---
+
+### **3. Vérification**
+
+1. **Vérifiez que la ConfigMap est correctement créée :**
+
+   ```bash
+   kubectl get configmap hello-configmap -o yaml
+   ```
+
+2. **Vérifiez que les pods sont recréés avec les bonnes variables :**
+
+   ```bash
+   kubectl describe pod <pod-name>
+   ```
+
+   Cherchez dans la section `Environment Variables` pour vous assurer que les variables `PORT`, `MSG`, et `VERSION` sont bien définies.
+
+3. **Tester depuis un Pod BusyBox (ou autre outil) :**
+
+   ```bash
+   kubectl exec -it <pod-name> -- env | grep -E "PORT|MSG|VERSION"
+   ```
+
+---
+
+### **Explication**
+
+- Les variables `PORT`, `MSG`, et `VERSION` sont injectées directement depuis la ConfigMap.
+- En cas de modification de la ConfigMap, les pods devront être redémarrés pour prendre en compte les nouvelles valeurs, sauf si le déploiement utilise un mécanisme de rechargement dynamique.
+
