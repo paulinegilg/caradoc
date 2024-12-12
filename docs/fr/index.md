@@ -29,5 +29,9 @@ features:
     details: Plongez à la découverte des concepts de base de la conteneurisation avec Docker.
     icon: 🐋
     link: /fr/docker/
+  - title: Les bases de Kubernetes
+    details: 
+    icon: ☸️
+    link: /fr/kubernetes/
 ---
 

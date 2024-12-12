@@ -1154,3 +1154,592 @@ Pour quitter, appuyez sur `Ctrl+c`.
 
 K9s est un outil précieux pour tout administrateur ou développeur Kubernetes cherchant à gagner en efficacité !
 
+## Persistance des données - Les volumes dans Kubernetes
+
+Les volumes dans Kubernetes permettent d'externaliser et de persister les données générées ou utilisées par les applications, même au-delà de la durée de vie d’un pod. Cela est essentiel car les conteneurs eux-mêmes sont éphémères, et leurs données sont perdues une fois qu'ils sont arrêtés ou redéployés.
+
+Kubernetes offre différents **types de volumes**, adaptés à divers besoins, grâce à un mécanisme appelé **pilotes de volumes**. Voici un aperçu des plus courants :
+
+---
+
+### **Principaux types de volumes :**
+
+#### **`emptyDir`**
+- **Description :** Un répertoire temporaire vide créé à chaque démarrage d’un pod.
+- **Caractéristiques :**
+    - Utilisé pour partager des données entre les conteneurs d’un même pod.
+    - Disparaît lorsque le pod est supprimé.
+- **Cas d’utilisation :** Stockage temporaire ou données intermédiaires, comme des caches ou des fichiers temporaires.
+
+---
+
+#### **`hostPath`**
+- **Description :** Monte un répertoire du système de fichiers local d'un nœud dans un pod.
+- **Caractéristiques :**
+    - Le répertoire est associé au nœud spécifique sur lequel le pod est programmé.
+    - Non recommandé pour les environnements multi-nœuds, car il dépend de l'emplacement physique.
+- **Cas d’utilisation :** Accès à des fichiers système spécifiques du nœud ou journaux.
+
+---
+
+#### **`nfs` (Network File System)**
+- **Description :** Monte un système de fichiers distant via un serveur NFS.
+- **Caractéristiques :**
+    - Les données sont accessibles depuis plusieurs pods et nœuds.
+    - Permet un partage de fichiers à travers le cluster.
+- **Cas d’utilisation :** Stockage partagé pour des applications distribuées.
+
+---
+
+#### **`fc` (Fibre Channel)**
+- **Description :** Connecte un volume basé sur Fibre Channel à un pod.
+- **Caractéristiques :**
+    - Utilisé dans des environnements de stockage haute performance.
+    - Nécessite un réseau de stockage SAN configuré.
+- **Cas d’utilisation :** Stockage haute performance pour des bases de données ou applications exigeantes.
+
+---
+
+#### **`iscsi` (Internet Small Computer Systems Interface)**
+- **Description :** Permet de connecter un pod à un volume iSCSI distant.
+- **Caractéristiques :**
+    - Nécessite une configuration préalable des cibles iSCSI.
+    - Assure des performances élevées pour les systèmes critiques.
+- **Cas d’utilisation :** Applications nécessitant un stockage rapide et fiable.
+
+---
+
+#### **`configMap`**
+- **Description :** Fournit un moyen d'injecter des données de configuration non sensibles dans des pods.
+- **Caractéristiques :**
+    - Contient des données sous forme de paires clé-valeur.
+    - Les données peuvent être montées sous forme de fichiers ou injectées comme variables d’environnement.
+- **Cas d’utilisation :** Fichiers de configuration ou scripts non sensibles.
+
+---
+
+#### **`secret`**
+- **Description :** Permet de gérer des données sensibles, comme des mots de passe, des clés SSH ou des certificats.
+- **Caractéristiques :**
+    - Les secrets sont encodés en Base64 (mais pas chiffrés par défaut).
+    - Peuvent être montés comme fichiers ou injectés comme variables d’environnement.
+- **Cas d’utilisation :** Stockage sécurisé pour des informations sensibles.
+
+---
+
+#### **Autres types courants :**
+- **`persistentVolumeClaim` (PVC):** Requête d’un volume persistant géré par un administrateur (lié à un PersistentVolume).
+- **`csi` (Container Storage Interface):** Permet d'utiliser des pilotes de stockage standard pour divers systèmes.
+- **`azureDisk`, `awsElasticBlockStore`, `gcePersistentDisk`:** Pilotes spécifiques pour les volumes persistants dans les environnements cloud.
+
+---
+
+### **Avantages des volumes Kubernetes :**
+1. **Isolation des données :** Les volumes permettent de séparer le cycle de vie des données de celui des conteneurs.
+2. **Flexibilité :** Large choix de pilotes pour répondre à des besoins variés (temporaire, partagé, persistant, haute performance).
+3. **Facilité d'intégration :** Intégration native avec les principaux systèmes de stockage cloud et on-premise.
+
+---
+
+### Exemple d’un volume dans un manifeste de pod :
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: html-volume
+  volumes:
+  - name: html-volume
+    nfs:
+      server: <NFS_SERVER_IP>
+      path: /data
+```
+
+Ce manifeste monte un volume **NFS** sur le répertoire `/usr/share/nginx/html` du conteneur.
+
+---
+
+## Gestion des labels
+
+### **Qu'est-ce qu'un label ?**
+Un **label** est une étiquette sous forme de clé/valeur qui peut être associée à différentes ressources Kubernetes, comme les pods, les services, les déploiements, etc. Les labels sont utilisés pour organiser, sélectionner ou regrouper des ressources. Par exemple :
+```yaml
+labels:
+  app: hello
+  env: production
+```
+
+Ils permettent notamment :
+- De lier des **pods** à des **services** ou à des **déploiements**.
+- De sélectionner ou filtrer des ressources pour les gérer plus facilement.
+
+---
+
+### **Affichage des labels d'une ressource**
+Pour visualiser les labels associés à une ressource spécifique, vous pouvez utiliser plusieurs commandes :
+
+1. **Afficher en YAML** :
+   ```bash
+   k get ressource nom -o yaml
+   ```
+   Exemple :
+   ```bash
+   kubectl get pod my-pod -o yaml
+   ```
+
+2. **Afficher les détails** :
+   ```bash
+   k describe ressource nom
+   ```
+   Exemple :
+   ```bash
+   kubectl describe pod my-pod
+   ```
+
+3. **Afficher directement les labels** :
+   ```bash
+   k get ressource --show-labels
+   ```
+   Exemple :
+   ```bash
+   kubectl get pod --show-labels
+   ```
+
+---
+
+### **Création d'une colonne pour afficher un label**
+Vous pouvez ajouter une colonne personnalisée pour afficher certains labels :
+```bash
+k get pod -L app -L env
+```
+Cette commande affichera les pods avec deux colonnes supplémentaires : `app` et `env`.
+
+---
+
+### **Filtrage selon un label**
+
+1. **Basé sur la présence d'un label (indépendamment de sa valeur)** :
+   ```bash
+   k get pod -l app
+   ```
+
+2. **Basé sur la valeur d'un label** :
+   ```bash
+   k get pod -l app=hello
+   ```
+
+3. **Suppression de pods selon leur label** :
+   ```bash
+   k delete pod -l app=hello
+   ```
+
+---
+
+### **Affectation de labels à une ressource**
+
+1. **Au moment de la création (dans le manifest)** :
+   Ajoutez des labels dans la section `metadata` de votre manifest :
+   ```yaml
+   metadata:
+     labels:
+       app: hello
+       env: dev
+   ```
+
+2. **Dynamique avec kubectl** :
+    - **Ajout d'un label** :
+      ```bash
+      k label pod busy level=dev
+      ```
+    - **Modification d'un label existant** (en écrasant la valeur précédente) :
+      ```bash
+      k label pod busy level=preprod --overwrite
+      ```
+    - **Suppression d'un label** :
+      ```bash
+      k label pod busy level-
+      ```
+
+---
+
+### **Sélecteurs de labels**
+
+Les sélecteurs sont utilisés pour cibler des ressources spécifiques en fonction de leurs labels. Les principaux mécanismes de sélection incluent :
+
+1. **`selector` (utilisé par les Services)** :
+   Définit un dictionnaire de labels pour sélectionner les pods. Exemple :
+   ```yaml
+   selector:
+     app: hello
+   ```
+
+2. **`matchLabels` (utilisé par les Deployments)** :
+   Similaire à `selector`, mais permet de définir un dictionnaire dans un Deployment ou ReplicaSet :
+   ```yaml
+   matchLabels:
+     app: hello
+   ```
+
+3. **`matchExpressions`** :
+   Permet d'utiliser des expressions plus complexes. Exemple :
+   ```yaml
+   matchExpressions:
+     - key: app
+       operator: In
+       values:
+         - hello
+         - http
+   ```
+   Les opérateurs disponibles :
+    - `In` : la clé doit correspondre à l'une des valeurs spécifiées.
+    - `NotIn` : la clé ne doit correspondre à aucune des valeurs spécifiées.
+    - `Exists` : la clé doit exister.
+    - `DoesNotExist` : la clé ne doit pas exister.
+
+---
+
+### **En résumé :**
+Les labels sont une manière flexible et puissante d'organiser et de gérer vos ressources Kubernetes. Avec les sélecteurs de labels, vous pouvez cibler précisément les ressources nécessaires pour les Services, les Deployments, ou tout autre composant du cluster. Ces outils sont essentiels pour gérer des applications complexes dans Kubernetes.
+
+---
+
+## **Les mises à jour dans Kubernetes**
+
+---
+
+#### **Qu'est-ce qu'une mise à jour ?**
+Une mise à jour dans Kubernetes correspond à une **modification de la configuration d'une ressource**, comme un Deployment, avec la possibilité de conserver l’historique des changements pour un **retour arrière (rollback)** si nécessaire.
+
+- **Mise à jour versionnée** : Toute modification de la section `template` (conteneurs, labels des pods, variables d’environnement, etc.) déclenche une nouvelle version.
+- **Mise à jour non versionnée** : Les changements en dehors de la section `template` (comme des labels ou annotations au niveau du Deployment lui-même) ne créent pas de nouvelle version.
+
+Chaque version est représentée par un **ReplicaSet**. L’ensemble des ReplicaSets d’un Deployment correspond à son historique des versions.
+
+---
+
+#### **Gestion des révisions**
+1. **Nombre de versions conservées** :  
+   Kubernetes conserve par défaut les **10 dernières versions** d’un Deployment. Vous pouvez modifier ce comportement avec le paramètre `revisionHistoryLimit` dans le manifeste :
+   ```yaml
+   spec:
+     revisionHistoryLimit: 5
+   ```
+
+2. **Liste des versions** :  
+   Vous pouvez afficher toutes les versions enregistrées via la commande suivante :
+   ```bash
+   k rollout history deployment http
+   ```
+
+3. **Rollbacks (retours en arrière)** :  
+   Kubernetes permet de revenir à une version précédente :
+    - Revenir à la version précédente :
+      ```bash
+      k rollout undo deployment http
+      ```
+    - Revenir à une version spécifique :
+      ```bash
+      k rollout undo deployment http --to-revision=3
+      ```
+
+---
+
+#### **Annotation `change-cause`**
+L’annotation **`kubernetes.io/change-cause`** est un outil essentiel pour **documenter la raison des modifications** apportées à un Deployment. Cette annotation apparaît dans la commande `k rollout history` et facilite le suivi des changements, particulièrement en environnement collaboratif.
+
+- **Sans annotation** : Par défaut, la colonne `Change-Cause` dans l’historique des versions reste vide.
+- **Avec annotation** : Elle contient une description claire de la raison du changement, comme une mise à jour d’image ou une reconfiguration.
+
+##### **Ajout de l’annotation après une mise à jour**
+Vous pouvez ajouter manuellement une annotation pour expliquer un changement a posteriori :
+```bash
+k annotate deployment http kubernetes.io/change-cause="Mise à jour image nginx:1.27"
+```
+
+##### **Ajout de l’annotation dans le manifeste**
+Pour inclure automatiquement une raison à chaque mise à jour, ajoutez l’annotation dans la section `metadata` de votre Deployment :
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http
+  annotations:
+    kubernetes.io/change-cause: "Mise à jour image nginx:1.27"
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: http
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.27
+```
+
+---
+
+#### **Étapes d'une mise à jour**
+1. **Modifier le Deployment** :  
+   Par exemple, changer l’image utilisée dans le conteneur :
+   ```bash
+   k set image deployment http nginx=nginx:1.27
+   ```
+
+2. **Déploiement progressif** :  
+   Kubernetes remplace les anciens pods par les nouveaux de manière incrémentale tout en maintenant la disponibilité.
+
+3. **Suivre le statut de la mise à jour** :
+   ```bash
+   k rollout status deployment http
+   ```
+
+4. **Documenter la mise à jour** :  
+   Si l'annotation `change-cause` n'a pas été configurée dans le manifeste, vous pouvez l’ajouter manuellement après la mise à jour.
+
+---
+
+#### **Bonnes pratiques avec `change-cause`**
+- **Toujours documenter les changements** : Cela permet de comprendre rapidement les modifications apportées en cas de problème.
+- **Utiliser `change-cause` systématiquement dans les manifestes** pour automatiser la documentation des mises à jour.
+
+---
+// ATTENTION : vérifier les commandes
+### **Résumé des commandes principales**
+| **Action**                      | **Commande**                                           |
+|----------------------------------|-------------------------------------------------------|
+| Lister les versions d'un déploiement | `k rollout history deployment http`                  |
+| Annoter une raison de changement | `k annotate deployment http kubernetes.io/change-cause="description"` |
+| Modifier l’image d’un conteneur  | `k set image deployment http nginx=nginx:1.27`        |
+| Suivre l’état d’une mise à jour  | `k rollout status deployment http`                    |
+| Revenir à la version précédente  | `k rollout undo deployment http`                      |
+| Revenir à une version spécifique | `k rollout undo deployment http --to-revision=3`      |
+
+---
+
+L’annotation `change-cause` est particulièrement utile pour tracer l’historique des modifications. En combinant ce mécanisme avec l’historique des versions et les commandes de rollback, Kubernetes fournit une gestion puissante et flexible des mises à jour.
+
+### Stratégies de mise à jour dans Kubernetes
+
+Kubernetes propose deux principales stratégies de mise à jour des Pods associés à des Deployments : **Recreate** et **RollingUpdate**. Ces stratégies définissent comment les Pods existants sont remplacés par de nouvelles versions.
+
+---
+
+### **1. Stratégie `Recreate`**
+
+#### Fonctionnement :
+- Tous les Pods existants sont supprimés avant de créer les nouveaux Pods avec la nouvelle configuration ou image.
+- Utilisée pour des applications où des Pods de différentes versions ne peuvent pas coexister.
+
+#### Spécification dans un manifeste :
+```yaml
+strategy:
+  type: Recreate
+```
+
+#### **Avantages** :
+- Aucune coexistence de Pods ayant des configurations ou des versions différentes, ce qui simplifie le déploiement.
+
+#### **Inconvénients** :
+- Risque d'interruption de service, car il n'y a pas de Pods disponibles pendant la transition.
+- Si la mise à jour échoue, le service peut rester indisponible.
+
+---
+
+### **2. Stratégie `RollingUpdate`**
+
+#### Fonctionnement :
+- Les Pods existants sont remplacés progressivement par de nouveaux Pods.
+- Les paramètres `maxSurge` et `maxUnavailable` contrôlent la cadence de la mise à jour.
+
+#### Spécification dans un manifeste :
+**Exemple 1 :**
+```yaml
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 100%
+    maxUnavailable: 0
+```
+**Effet :** Double la capacité pendant la mise à jour (10 Pods deviennent temporairement 20).
+
+**Exemple 2 :**
+```yaml
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+```
+**Effet :** Permet un remplacement Pod par Pod (9 Pods actifs pendant la mise à jour, maximum 11 Pods).
+
+#### **Paramètres importants** :
+1. **`maxSurge`** :
+    - Nombre ou pourcentage de Pods supplémentaires autorisés pendant la mise à jour.
+    - Exprime la capacité temporaire du cluster pendant le déploiement.
+
+2. **`maxUnavailable`** :
+    - Nombre ou pourcentage de Pods pouvant être indisponibles pendant la mise à jour.
+    - Garantit une certaine continuité de service.
+
+#### **Avantages** :
+- Aucun temps d'arrêt complet : des Pods restent disponibles tout au long du déploiement.
+- Convient aux applications nécessitant une haute disponibilité.
+
+#### **Inconvénients** :
+- Pendant la mise à jour, les ressources nécessaires augmentent temporairement.
+- Peut être plus complexe à gérer si des bugs apparaissent dans les nouvelles versions.
+
+---
+
+### **Choix entre Recreate et RollingUpdate**
+- **Recreate** est adapté pour des applications sans contraintes de haute disponibilité ou des incompatibilités entre versions.
+- **RollingUpdate** est recommandé pour des applications nécessitant une disponibilité continue.
+
+---
+
+### **Personnalisation et compromis**
+Le choix des valeurs pour `maxSurge` et `maxUnavailable` dépend de :
+1. **Ressources disponibles dans le cluster** :
+    - Si les ressources sont limitées, utilisez des valeurs basses pour `maxSurge`.
+2. **Tolérance à l'indisponibilité** :
+    - Si votre application est critique, optez pour `maxUnavailable: 0`.
+
+---
+
+### **Mise en pause et reprise d’un déploiement**
+
+#### Mise en pause :
+Permet de stopper temporairement la mise à jour pour inspection ou correction :
+```bash
+kubectl rollout pause deployment hello
+```
+
+#### Reprise :
+Relance la mise à jour après une pause :
+```bash
+kubectl rollout resume deployment hello
+```
+
+---
+
+### **Stratégies avancées**
+Pour des stratégies plus complexes, des outils ou plugins tiers comme **Flagger** permettent d’implémenter :
+1. **Canary Releases** : Test progressif d'une nouvelle version auprès d'un sous-ensemble des utilisateurs.
+2. **Blue/Green Deployments** : Maintien des deux versions (ancienne et nouvelle) simultanément, avec basculement.
+
+Ces stratégies offrent un contrôle granulaire sur le déploiement, réduisant davantage les risques.
+
+### **InitContainers dans Kubernetes**
+
+Les **InitContainers** sont des conteneurs spéciaux exécutés **avant** les conteneurs principaux d’un Pod. Ils permettent de réaliser des opérations préalables au démarrage des conteneurs applicatifs.
+
+---
+
+### **Caractéristiques principales des InitContainers**
+
+1. **Exécution séquentielle :**
+    - Les InitContainers s'exécutent **un par un**, dans l’ordre défini dans le manifeste.
+    - Chaque InitContainer doit se terminer avec succès avant de passer au suivant.
+
+2. **Indépendants des conteneurs principaux :**
+    - Les InitContainers ont leur propre environnement et configuration (image, commandes, variables d’environnement).
+    - Ils n’ont pas accès au cycle de vie des conteneurs principaux.
+
+3. **Redémarrage en cas d'échec :**
+    - Si un InitContainer échoue, Kubernetes redémarre le Pod et relance tous les InitContainers depuis le début.
+
+4. **Utilisation temporaire :**
+    - Les InitContainers ne tournent plus une fois terminés avec succès. Ils ne consomment pas de ressources après leur exécution.
+
+---
+
+### **Cas d’utilisation des InitContainers**
+
+1. **Préparation de l’environnement :**
+    - Télécharger des fichiers nécessaires pour les conteneurs principaux.
+    - Effectuer des configurations spécifiques (par exemple, monter des fichiers de configuration).
+
+2. **Validation :**
+    - Vérifier les dépendances ou la disponibilité des services externes (bases de données, API, etc.).
+
+3. **Initialisation de volumes :**
+    - Copier des fichiers ou appliquer des permissions sur des volumes partagés.
+
+4. **Ajout de délais :**
+    - Introduire un délai ou attendre la disponibilité de ressources externes (par exemple, attendre qu’une base de données soit prête).
+
+---
+
+### **Déclaration d’un InitContainer**
+
+Voici un exemple de Pod avec un InitContainer :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+spec:
+  initContainers:
+  - name: init-myservice
+    image: busybox
+    command: ["sh", "-c", "echo Initialisation... && sleep 10"]
+  containers:
+  - name: my-app
+    image: my-app-image
+    ports:
+    - containerPort: 80
+```
+
+#### Décryptage de l'exemple :
+1. **`init-myservice`** :
+    - Cet InitContainer exécute une commande simple, simule une initialisation avec un délai de 10 secondes.
+2. **Conteneur principal `my-app`** :
+    - Il ne sera démarré qu’après l’exécution réussie de `init-myservice`.
+
+---
+
+### **Avantages des InitContainers**
+
+1. **Séparation des responsabilités :**
+    - Les tâches d’initialisation sont isolées des conteneurs principaux, rendant les applications plus modulaires.
+
+2. **Robustesse :**
+    - Si une étape critique de préparation échoue, les conteneurs principaux ne démarrent pas.
+
+3. **Flexibilité :**
+    - Les InitContainers peuvent utiliser des images et outils différents de ceux des conteneurs principaux.
+
+---
+
+### **Limitations des InitContainers**
+
+1. **Temps supplémentaire au démarrage :**
+    - Les InitContainers ajoutent un délai avant que le Pod soit pleinement opérationnel.
+
+2. **Pas d’accès direct aux conteneurs principaux :**
+    - Les InitContainers ne peuvent pas interagir directement avec les conteneurs principaux.
+
+---
+
+### **Bonnes pratiques avec InitContainers**
+
+1. **Limiter les tâches complexes :**
+    - Les InitContainers doivent se concentrer sur des actions rapides et essentielles.
+
+2. **Utiliser des images légères :**
+    - Optez pour des images minimalistes, comme `busybox` ou `alpine`, pour des tâches simples.
+
+3. **Rendre les étapes idempotentes :**
+    - Assurez-vous que les InitContainers peuvent être relancés sans créer de problèmes ou de conflits.
+
+---
+
+Les InitContainers permettent de renforcer la flexibilité et la fiabilité des déploiements Kubernetes, en garantissant un environnement de démarrage propre et bien préparé pour les conteneurs principaux.
