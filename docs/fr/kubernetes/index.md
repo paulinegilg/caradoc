@@ -944,3 +944,213 @@ kubectl apply -f hello-deployment.yaml
 - Les variables `PORT`, `MSG`, et `VERSION` sont injectées directement depuis la ConfigMap.
 - En cas de modification de la ConfigMap, les pods devront être redémarrés pour prendre en compte les nouvelles valeurs, sauf si le déploiement utilise un mécanisme de rechargement dynamique.
 
+## Les sondes d'état dans Kubernetes
+
+Les sondes (**Probes**) permettent à Kubernetes de surveiller et de gérer la santé des conteneurs. Elles vérifient si un conteneur est prêt à recevoir du trafic, en vie ou correctement initialisé. Kubernetes utilise ces sondes pour prendre des décisions comme redémarrer un conteneur ou le retirer du service.
+
+---
+
+### 1. **StartupProbe**
+- **Objectif** : Vérifier si le conteneur a fini de démarrer. Elle est utile pour les applications avec des phases d'initialisation longues.
+- **Comportement** :
+    - Pendant que la **StartupProbe** est en cours, les sondes **LivenessProbe** et **ReadinessProbe** sont désactivées.
+    - Si la **StartupProbe** échoue, Kubernetes redémarre le conteneur.
+- **Quand l'utiliser ?**
+    - Pour des applications lentes à démarrer (bases de données volumineuses, serveurs web complexes).
+
+---
+
+### 2. **ReadinessProbe**
+- **Objectif** : Vérifier si le conteneur est prêt à recevoir du trafic.
+- **Comportement** :
+    - Si elle échoue, Kubernetes exclut le pod du service (il ne reçoit plus de requêtes via les services comme ClusterIP ou NodePort).
+    - Elle n'entraîne pas de redémarrage.
+- **Quand l'utiliser ?**
+    - Lorsque l'application nécessite une configuration interne ou des dépendances externes avant d'accepter les requêtes (exemple : connexion à une base de données).
+
+---
+
+### 3. **LivenessProbe**
+- **Objectif** : Vérifier si le conteneur est en vie.
+- **Comportement** :
+    - Si elle échoue, Kubernetes redémarre le conteneur.
+- **Quand l'utiliser ?**
+    - Pour détecter des blocages ou des défaillances logicielles (deadlocks, erreurs critiques).
+
+---
+
+### Types de sondes
+Les trois sondes peuvent être configurées avec les mêmes types d'actions :
+1. **httpGet** : Envoie une requête HTTP à une URL spécifique (exemple : `/healthz`).
+2. **tcpSocket** : Vérifie si un port TCP est ouvert.
+3. **exec** : Exécute une commande dans le conteneur, et vérifie son code de retour.
+
+---
+
+### Exemple combiné : YAML
+
+Voici comment configurer les trois sondes dans un conteneur Kubernetes :
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: app-container
+        image: example-image:latest
+        ports:
+        - containerPort: 8080
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /alive
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          failureThreshold: 3
+```
+
+---
+
+### Résumé rapide
+| **Sonde**         | **Objectif**                           | **Action en cas d'échec**     | **Utilisation typique**                      |
+|--------------------|----------------------------------------|--------------------------------|----------------------------------------------|
+| **StartupProbe**   | Vérifier si le conteneur est démarré.  | Redémarrer le conteneur.      | Applications lentes à démarrer.             |
+| **ReadinessProbe** | Vérifier si le conteneur est prêt.     | Retirer le pod du service.    | Vérification de la préparation au trafic.   |
+| **LivenessProbe**  | Vérifier si le conteneur est en vie.   | Redémarrer le conteneur.      | Détecter des blocages ou erreurs critiques. |
+
+Ces sondes assurent la robustesse et la résilience des applications dans Kubernetes.
+
+### **K9s : Un outil CLI pour gérer vos clusters Kubernetes**
+
+K9s est un outil **open-source** basé sur une interface en ligne de commande (CLI) qui permet d'interagir efficacement avec les clusters Kubernetes. Conçu pour être rapide et intuitif, il offre une vue en temps réel des ressources Kubernetes et simplifie la gestion des pods, services, déploiements, etc.
+
+---
+
+### **Pourquoi utiliser K9s ?**
+1. **Vue temps réel** : Vous pouvez voir l'état de vos ressources Kubernetes en direct.
+2. **Navigation simplifiée** : Une interface basée sur des menus permet de parcourir les ressources sans taper de longues commandes.
+3. **Actions rapides** : Redémarrer des pods, supprimer des ressources, ou inspecter les logs est plus rapide et ergonomique.
+4. **Gain de temps** : Moins de commandes à taper, avec un accès direct aux informations critiques.
+5. **Compatible avec tous les clusters** : Fonctionne avec n'importe quelle configuration Kubernetes (cloud ou on-premises).
+
+---
+
+### **Installation de K9s**
+
+#### Pré-requis
+- **kubectl** installé et configuré pour votre cluster.
+- Kubernetes v1.16 ou supérieur.
+
+#### Étapes d'installation
+
+##### Sur Linux/macOS (via Homebrew)
+1. Installer avec Homebrew :
+   ```bash
+   brew install k9s
+   ```
+2. Vérifier l'installation :
+   ```bash
+   k9s version
+   ```
+
+##### Sur Linux (manuellement)
+1. Télécharger le binaire depuis la page des [releases GitHub de K9s](https://github.com/derailed/k9s/releases).
+   ```bash
+   curl -L -o k9s.tar.gz https://github.com/derailed/k9s/releases/download/v<version>/k9s_Linux_amd64.tar.gz
+   ```
+2. Extraire le fichier :
+   ```bash
+   tar -xvf k9s.tar.gz
+   ```
+3. Déplacer le binaire dans `/usr/local/bin` :
+   ```bash
+   sudo mv k9s /usr/local/bin
+   ```
+4. Vérifier l'installation :
+   ```bash
+   k9s version
+   ```
+
+##### Sur Windows
+1. Télécharger l'exécutable depuis la [page des releases GitHub](https://github.com/derailed/k9s/releases).
+2. Ajouter l'exécutable à votre PATH pour un accès depuis le terminal.
+
+---
+
+### **Utilisation de base**
+
+#### Lancer K9s
+Pour démarrer K9s, utilisez simplement :
+```bash
+k9s
+```
+Cela ouvre une interface interactive.
+
+#### Navigation
+- **Ressources principales** :
+    - `:pods` → Voir les pods.
+    - `:svc` → Voir les services.
+    - `:deploy` → Voir les déploiements.
+    - `:cm` → Voir les ConfigMaps.
+- **Changer de namespace** : Appuyez sur `:`, puis tapez `ns <nom_du_namespace>`.
+
+#### Commandes interactives
+- **Inspecter les logs** : Sélectionnez un pod, puis appuyez sur `l`.
+- **Supprimer une ressource** : Sélectionnez une ressource, puis appuyez sur `d`.
+- **Exécuter un shell dans un pod** : Sélectionnez un pod, puis appuyez sur `s`.
+- **Recharger la configuration** : Appuyez sur `Ctrl+r`.
+
+#### Quitter K9s
+Pour quitter, appuyez sur `Ctrl+c`.
+
+---
+
+### **Personnalisation**
+- Fichier de configuration : `~/.k9s/config.yml`.
+- Vous pouvez personnaliser les raccourcis clavier, la disposition de l'écran et les filtres.
+
+---
+
+### **Avantages par rapport à kubectl**
+| **Caractéristique**       | **kubectl**                    | **K9s**                        |
+|---------------------------|--------------------------------|---------------------------------|
+| Interface utilisateur     | Basé sur des commandes         | CLI interactive                |
+| Temps réel                | Non                            | Oui                            |
+| Facilité de navigation    | Moins intuitive                | Très intuitive                 |
+| Gestion des logs          | Commande manuelle nécessaire   | Directement accessible         |
+| Gain de productivité      | Moyen                          | Élevé                          |
+
+---
+
+### **Quand utiliser K9s ?**
+- **Monitoring quotidien** : Surveiller vos pods et services en direct.
+- **Développement local** : Tester et déboguer rapidement vos ressources.
+- **Simplification des tâches** : Pour éviter de mémoriser et taper des commandes `kubectl` complexes.
+
+K9s est un outil précieux pour tout administrateur ou développeur Kubernetes cherchant à gagner en efficacité !
+
