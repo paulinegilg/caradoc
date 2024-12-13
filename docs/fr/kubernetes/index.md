@@ -2,6 +2,7 @@
 
 https://mypads2.framapad.org/p/kubernetes-s5024-8to7o9nl
 https://github.com/bob2204/kubernetes-s5024
+https://blog.stephane-robert.info/docs/conteneurs/orchestrateurs/kubernetes/
 
 ## Qu'est-ce qu'un conteneur ?
 
@@ -1743,3 +1744,681 @@ spec:
 ---
 
 Les InitContainers permettent de renforcer la flexibilité et la fiabilité des déploiements Kubernetes, en garantissant un environnement de démarrage propre et bien préparé pour les conteneurs principaux.
+
+### **StatefulSet et Service Headless dans Kubernetes**
+
+Les **StatefulSets** et les **Services Headless** sont des concepts essentiels dans Kubernetes pour gérer des applications nécessitant une gestion d'état (comme les bases de données ou les clusters distribués). Voici une explication détaillée :
+
+---
+
+### **Qu'est-ce qu'un StatefulSet ?**
+
+Un **StatefulSet** est une ressource Kubernetes utilisée pour déployer et gérer des applications qui nécessitent une identité stable ou un stockage persistant. Contrairement à un **Deployment**, qui gère des pods identiques et interchangeables, un StatefulSet assure que chaque pod a une identité unique.
+
+#### **Caractéristiques d’un StatefulSet :**
+
+1. **Identité stable :**
+    - Chaque pod d'un StatefulSet a un nom unique basé sur le nom du StatefulSet et un suffixe ordinal (par exemple, `my-app-0`, `my-app-1`).
+    - Ces identifiants restent constants même après la suppression et le redémarrage des pods.
+
+2. **Ordre de déploiement et de suppression :**
+    - Les pods sont créés ou supprimés **séquentiellement** (dans l’ordre croissant ou décroissant des numéros).
+
+3. **Stockage persistant :**
+    - Chaque pod peut être associé à un volume persistant unique via des **PersistentVolumeClaims (PVCs)**.
+    - Ces volumes sont attachés au pod correspondant, même après un redémarrage.
+
+4. **Adapté aux applications nécessitant un état :**
+    - Idéal pour les bases de données (MySQL, Cassandra) ou les systèmes distribués comme Kafka ou Zookeeper.
+
+#### **Exemple de StatefulSet :**
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-stateful-app
+spec:
+  replicas: 3
+  serviceName: my-service
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: my-image
+        ports:
+        - containerPort: 8080
+  volumeClaimTemplates:
+  - metadata:
+      name: my-persistent-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+```
+
+---
+
+### **Qu'est-ce qu'un Service Headless ?**
+
+Un **Service Headless** est une variante de Kubernetes Service qui ne fournit pas d’adresse IP unique stable (ClusterIP). Au lieu de cela, il expose directement les pods sous-jacents et leur attribue des noms DNS individuels.
+
+#### **Caractéristiques d’un Service Headless :**
+
+1. **DNS pour chaque pod :**
+    - Chaque pod géré par un Service Headless reçoit un nom DNS unique, basé sur le format suivant :
+      ```
+      <pod-name>.<service-name>.<namespace>.svc.cluster.local
+      ```
+
+2. **Pas d'adresse IP stable :**
+    - Le Service n’a pas de ClusterIP et sert uniquement à diriger le trafic directement vers les pods.
+
+3. **Utilisé avec StatefulSets :**
+    - Permet aux applications d’atteindre des pods spécifiques d’un StatefulSet grâce à leurs identifiants DNS.
+
+#### **Exemple de Service Headless :**
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  clusterIP: None
+  selector:
+    app: my-app
+  ports:
+  - port: 8080
+    targetPort: 8080
+```
+
+---
+
+### **Combinaison StatefulSet et Service Headless**
+
+Le **StatefulSet** et le **Service Headless** sont souvent utilisés ensemble pour déployer des applications nécessitant des identités stables et un accès direct aux pods.
+
+- Le Service Headless fournit un nom DNS unique à chaque pod du StatefulSet.
+- Exemple de nom DNS pour un pod `my-stateful-app-0` dans le namespace `default` :
+  ```
+  my-stateful-app-0.my-service.default.svc.cluster.local
+  ```
+
+---
+
+### **Cas d'utilisation :**
+
+1. **Bases de données distribuées :**
+    - Les StatefulSets assurent une gestion ordonnée des pods, et le Service Headless permet aux pods de se découvrir les uns les autres.
+
+2. **Clusters avec partitions ou répliques :**
+    - Par exemple, Kafka ou Cassandra où chaque nœud doit avoir un rôle spécifique.
+
+3. **Applications nécessitant un stockage persistant :**
+    - Chaque pod peut stocker ses données dans un volume dédié, qui ne sera pas partagé avec d'autres pods.
+
+---
+
+### **Différences entre Deployment et StatefulSet :**
+
+| **Caractéristique**      | **Deployment**                   | **StatefulSet**                      |
+|---------------------------|-----------------------------------|---------------------------------------|
+| **Identité des Pods**     | Pods identiques, interchangeables | Pods uniques avec noms stables        |
+| **Ordre de déploiement**  | Aucun ordre garanti              | Création et suppression séquentielle |
+| **Stockage**              | Volumes partagés ou temporaires  | Volumes persistants dédiés            |
+
+---
+
+### **Conclusion :**
+
+- **StatefulSet** est indispensable pour les applications nécessitant un état stable et des identités uniques.
+- **Service Headless** est essentiel pour exposer directement les pods et permettre leur découverte dans un environnement distribué.
+
+Ces deux outils, combinés, permettent de gérer efficacement des applications complexes nécessitant une coordination fine entre les pods.
+
+### Explication simple sur les Namespaces dans Kubernetes
+
+Un **namespace** dans Kubernetes est un moyen de diviser un cluster en sections logiques pour organiser et isoler les ressources. Cela permet, par exemple, d’avoir deux ressources de même type et de même nom dans un même cluster, mais dans des namespaces différents.
+
+**À quoi servent les namespaces ?**
+- Organiser les ressources (par projet, environnement, équipe, etc.).
+- Simuler des sous-clusters logiques dans un cluster unique.
+- Faciliter la gestion des accès et des quotas (chaque namespace peut avoir ses propres règles et limitations).
+
+### Utilisation des namespaces :
+
+1. **Lister les namespaces disponibles** :
+   ```bash
+   kubectl get ns
+   ```
+
+2. **Créer un namespace** :
+   ```bash
+   kubectl create ns test
+   ```
+
+3. **Décrire un namespace** (détails sur ses ressources et événements) :
+   ```bash
+   kubectl describe ns test
+   ```
+
+4. **Supprimer un namespace** :
+   ```bash
+   kubectl delete ns test
+   ```
+
+5. **Affecter une ressource à un namespace** :
+    - Via une commande :
+      ```bash
+      kubectl apply -f fichier.yaml -n test
+      ```
+    - Dans le manifest de la ressource :  
+      Ajouter `metadata.namespace: test`.
+
+6. **Lister les ressources dans un namespace** :
+   ```bash
+   kubectl get secret,cm -n test
+   ```
+
+7. **Lister les ressources de tous les namespaces** :
+   ```bash
+   kubectl get pod -A
+   ```
+
+### Communication entre pods de namespaces différents
+Les pods de namespaces différents peuvent communiquer entre eux par défaut, mais il faut utiliser le **FQDN** (Fully Qualified Domain Name) du service cible.  
+Exemple :
+```plaintext
+hello.test.svc.cluster.local
+```
+- `hello` : nom du service.
+- `test` : namespace.
+- `svc.cluster.local` : suffixe du cluster (par défaut).
+
+Les namespaces sont donc un outil puissant pour structurer et gérer efficacement les ressources dans Kubernetes. 😊
+
+### Gestion des ressources simplifiée en Kubernetes
+
+La gestion des ressources dans Kubernetes permet de **contrôler la consommation CPU et mémoire (RAM)** des workloads pour :
+1. **Analyser** l’utilisation des ressources par les nodes ou les pods.
+2. **Définir des limites** pour éviter qu'un pod consomme trop ou trop peu de ressources.
+
+---
+
+### Points clés :
+
+#### 1. **Surveillance des ressources :**
+Pour surveiller la consommation des ressources, un **serveur de métriques** doit être installé. Cela se fait avec la commande :
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.7.2/components.yaml
+```
+
+Une fois installé :
+- Voir l'utilisation des nodes :
+  ```bash
+  kubectl top node
+  ```  
+- Voir l'utilisation des pods :
+  ```bash
+  kubectl top pod -n <namespace> --show-capacity=true
+  ```
+
+#### 2. **Simulation de charge :**
+Pour tester la gestion des ressources, on peut créer un **deployment de charge** :
+1. Créer un manifest avec un conteneur qui consomme beaucoup de CPU :
+   ```yaml
+   command:
+     - sh
+     - -c
+     - while :; do :; done
+   ```
+2. Déployer et vérifier la consommation via :
+   ```bash
+   kubectl top pod
+   ```
+
+---
+
+#### 3. **Limiter les ressources d'un pod :**
+On peut limiter les ressources utilisées par un pod :
+- **Dynamique** :
+  ```bash
+  kubectl set resources deploy load --limits cpu=200m
+  ```
+- **Dans le manifest** :  
+  Ajouter une section `resources` :
+  ```yaml
+  resources:
+    limits:
+      cpu: 300m
+  ```
+
+#### 4. **Définir des quotas sur un namespace :**
+Pour contrôler les ressources dans un namespace :
+1. Créer un quota via :
+   ```bash
+   kubectl create quota load-1 -n test --hard limits.cpu=500m --dry-run=client -o yaml > test-ns-quota.yml
+   ```
+2. Appliquer le manifest, puis vérifier :
+   ```bash
+   kubectl describe ns test
+   ```
+
+---
+
+#### 5. **Imposer des limites par défaut (LimitRange) :**
+Pour éviter que des pods soient déployés sans limitations :
+1. Créer un manifest de type `LimitRange` :
+   ```yaml
+   apiVersion: v1
+   kind: LimitRange
+   metadata:
+     name: limit-range
+     namespace: test
+   spec:
+     limits:
+       - type: Container
+         default:
+           cpu: 100m
+   ```
+2. Appliquer et vérifier :
+   ```bash
+   kubectl describe ns test
+   ```
+
+---
+
+### Résumé :
+- Kubernetes permet de **contrôler et optimiser l'utilisation des ressources**.
+- Les quotas et limites garantissent une utilisation équilibrée dans un cluster.
+- Les outils comme `kubectl top` et les configurations de `ResourceQuota` ou `LimitRange` sont essentiels pour la gestion proactive des ressources.
+
+### Ingress dans Kubernetes : Explication simplifiée
+
+Dans Kubernetes, une **ressource Ingress** est un moyen d'exposer vos services (applications) au monde extérieur, souvent comparée à un **Reverse Proxy** dans d'autres systèmes.
+
+---
+
+### 1. **Qu'est-ce qu'un Ingress ?**
+
+Un **Ingress** permet de gérer les requêtes externes et de les router vers les bons services dans un cluster Kubernetes. Contrairement à un **Service** de type `LoadBalancer` ou `NodePort`, qui expose une application sur une IP ou un port, un Ingress offre :
+
+- Une gestion avancée des noms de domaines (**FQDN**).
+- La prise en charge de chemins d’URL spécifiques.
+- Une option d’intégration avec HTTPS via des certificats TLS.
+
+---
+
+### 2. **Conditions pour utiliser un Ingress**
+
+Pour qu'une ressource Ingress soit fonctionnelle, elle doit s'appuyer sur une **IngressClass**, qui est elle-même prise en charge par un **Ingress Controller**.
+
+- Kubernetes ne fournit pas de contrôleur par défaut. Vous devez en installer un, comme **Ingress-NGINX**, **Traefik**, ou **HAProxy**.
+- Une fois installé, le contrôleur gère les requêtes entrantes selon les règles définies dans vos ressources Ingress.
+
+---
+
+### 3. **Exemple avec Ingress-NGINX**
+
+#### Installation via Helm :
+1. **Ajout du dépôt Helm :**
+   ```bash
+   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+   ```
+2. **Installation du chart :**
+   ```bash
+   helm install ingress-nginx ingress-nginx/ingress-nginx --namespace nginx --create-namespace
+   ```
+
+Une fois installé :
+- Une **IngressClass** nommée `nginx` est disponible.
+- Un **Service** de type `LoadBalancer` est créé, avec une IP externe que vous utiliserez pour tester vos règles Ingress.
+
+---
+
+### 4. **Critères de différenciation dans un Ingress**
+
+Un Ingress peut router les requêtes vers des services spécifiques en fonction de trois principaux critères :
+
+#### **FQDN (Fully Qualified Domain Name) :**
+- Le domaine ou sous-domaine utilisé dans la requête HTTP.
+- Exemple : `hello.stage.local`.
+
+#### **URL (Path) :**
+- Le chemin de l’URL dans la requête.
+- Exemple : `/api`, `/web`.
+
+#### **FQDN/URL :**
+- Une combinaison du domaine et du chemin.
+- Exemple : `api.example.com/v1`.
+
+---
+
+### 5. **Exemple de manifeste Ingress**
+
+Voici un manifeste Ingress qui route les requêtes vers deux services selon le FQDN :
+
+#### Création du manifeste :
+Commande :
+```bash
+k create ingress ingress-1 --rule=hello.stage.local/*=hello:80 --rule=http.stage.local/=http:80 --dry-run=client -o yaml > ingress-1.yml
+```
+
+#### Contenu du fichier `ingress-1.yml` :
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-1
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: hello.stage.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: hello
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  - host: http.stage.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: http
+            port:
+              number: 80
+        path: /
+        pathType: Exact
+```
+
+#### Explications :
+1. **`hello.stage.local` :**
+    - Toutes les requêtes vers ce domaine (`*`) seront routées vers le service `hello` sur le port 80.
+
+2. **`http.stage.local` :**
+    - Les requêtes vers ce domaine, avec un chemin exact `/`, seront routées vers le service `http` sur le port 80.
+
+---
+
+### 6. **Résumé**
+
+| Concept              | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| **Ingress**          | Expose et route les requêtes externes vers les services internes.           |
+| **Ingress Controller** | Implémente les règles définies par Ingress (ex. : NGINX, Traefik).         |
+| **Critères de routage** | `FQDN`, `URL`, ou une combinaison des deux (`FQDN/URL`).                   |
+| **TLS**              | Support d'HTTPS avec des certificats (ex. : `Let's Encrypt`).               |
+
+Un Ingress est essentiel pour centraliser et simplifier le routage dans Kubernetes, avec des fonctionnalités avancées comme les certificats TLS ou le Load Balancing intégré.
+
+Voici une version simplifiée des concepts et des étapes pour mieux comprendre :
+
+---
+
+### **Authentification et RBAC (Role-Based Access Control)**
+
+1. **Authentification** : Tout accès à l'API Kubernetes nécessite une **authentification** (prouver son identité) et une **autorisation** (vérifier les droits).
+
+2. **Types de comptes :**
+    - **Comptes utilisateurs** : Pour les accès externes (personnes).
+    - **Comptes de service** : Pour les accès internes (automatisation entre ressources Kubernetes).
+
+3. **Méthodes d'authentification :**
+    - **Certificat x509** : Utilise des certificats SSL pour identifier un utilisateur.
+    - **Jeton JWT** : Token sécurisé utilisé pour identifier les utilisateurs.
+    - **OIDC (OpenID Connect)** : Authentification via un fournisseur externe (ex. Google).
+
+---
+
+### **Création d’un compte utilisateur avec certificat x509**
+
+**Objectif** : Créer un utilisateur nommé "bob" dans le groupe "stage" avec un accès au namespace `test`.
+
+#### Étapes principales :
+1. **Obtenir un certificat approuvé par le cluster** :
+    - Génération de la clé privée :
+      ```bash
+      openssl genrsa -out bob.key 2048
+      ```
+    - Génération d’une requête de certification (CSR) :
+      ```bash
+      openssl req -new -key bob.key -out bob.csr -subj "/CN=bob/O=stage"
+      ```
+    - Préparer la requête pour Kubernetes :
+      Convertir en base64 :
+      ```bash
+      base64 bob.csr | tr -d "\n" > bob-csr.b64
+      ```
+    - Créer une demande de certificat dans Kubernetes :
+      Rédiger un fichier YAML contenant les informations de la CSR (avec `bob-csr.b64`).
+    - Appliquer le fichier YAML :
+      ```bash
+      kubectl apply -f bob-csr.yml
+      ```
+    - Approuver la demande :
+      ```bash
+      kubectl certificate approve bob
+      ```
+    - Récupérer le certificat approuvé :
+      ```bash
+      kubectl get csr bob -o jsonpath="{.status.certificate}" | base64 -d > bob.crt
+      ```
+
+2. **Créer un contexte utilisateur** :
+    - Récupérer le certificat de l’autorité du cluster (CA) :
+      ```bash
+      kubectl get cm -n kube-public cluster-info -o jsonpath="{.data.kubeconfig}" | awk -F": " '$1 ~ /certificate/ { print $2}' | base64 -d > cluster-ca.crt
+      ```
+    - Configurer les informations utilisateur :
+      ```bash
+      kubectl config set-credentials bob --client-certificate bob.crt --client-key bob.key
+      ```
+    - Configurer les informations du cluster :
+      ```bash
+      kubectl config set-cluster stage --certificate-authority cluster-ca.crt --server https://172.18.0.4:6443
+      ```
+    - Créer et activer un contexte pour "bob" :
+      ```bash
+      kubectl config set-context stage-bob --cluster stage --user bob --namespace test
+      kubectl config use-context stage-bob
+      ```
+
+3. **Définir les accès (RBAC)** :
+   Sans autorisation explicite, "bob" obtiendra une erreur `Forbidden`. Les accès doivent être définis via RBAC.
+
+---
+
+### **RBAC (Role-Based Access Control)**
+
+RBAC gère les droits d’accès aux ressources Kubernetes selon deux niveaux :
+- **Namespace (Role)** : Accès limité à un namespace.
+- **Cluster (ClusterRole)** : Accès global au cluster.
+
+#### Étapes pour créer un accès :
+1. **Créer un rôle (ClusterRole) avec des droits spécifiques :**
+    - Exemple : Autoriser "bob" à lire les `nodes` :
+      ```bash
+      kubectl create clusterrole getnode --resource node --verb="get,list" --dry-run=client -o yaml > getnode-clusterrole.yml
+      ```
+    - Modifier et appliquer le fichier YAML généré.
+
+2. **Associer ce rôle à "bob" (ClusterRoleBinding) :**
+    - Exemple : Associer le rôle au groupe `stage` :
+      ```bash
+      kubectl create clusterrolebinding getnode-stage --clusterrole getnode --group stage --dry-run=client -o yaml > getnode-clusterrolebinding.yml
+      ```
+    - Modifier et appliquer le fichier YAML généré.
+
+3. **Validation** :
+    - Tester les droits :
+      ```bash
+      KUBECONFIG=config-bob kubectl get node
+      ```
+    - Si tout est bien configuré, "bob" pourra lister les nœuds.
+
+---
+
+### **Résumé des notions importantes** :
+- **Certificat x509** : Identifie un utilisateur avec une clé privée et un certificat approuvé.
+- **Contexte utilisateur** : Définit comment "bob" interagit avec le cluster (via `kubectl`).
+- **RBAC** : Contrôle les accès grâce à des rôles et des bindings.
+- **Namespace et Cluster** : Les droits peuvent être spécifiques à un namespace ou globaux.
+
+Cette approche garantit une sécurité stricte tout en offrant des accès adaptés aux besoins.
+
+Pour permettre au groupe `stage` d’avoir **tous les accès** (lecture, écriture, suppression, etc.) sur les **pods** dans le namespace `test`, vous devez créer un **Role** (spécifique au namespace) et un **RoleBinding** (pour lier ce rôle au groupe).
+
+---
+
+### Étapes détaillées
+
+#### 1. **Créer un rôle (Role) avec des permissions complètes sur les pods**
+Rédigez un fichier YAML pour le rôle. Exemple : `role-pods-access.yml`
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: test
+  name: manage-pods
+rules:
+  - apiGroups: [""] # "" signifie les ressources de base (comme pods)
+    resources: ["pods"]
+    verbs: ["*"] # "*" signifie tous les verbes (get, list, create, delete, etc.)
+```
+
+Appliquez le rôle dans Kubernetes :
+
+```bash
+kubectl apply -f role-pods-access.yml
+```
+
+---
+
+#### 2. **Créer un RoleBinding pour associer le rôle au groupe `stage`**
+Rédigez un fichier YAML pour le RoleBinding. Exemple : `rolebinding-pods-access.yml`
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: test
+  name: allow-stage-manage-pods
+subjects:
+  - kind: Group
+    name: stage # Le nom du groupe
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: manage-pods # Le rôle défini précédemment
+  apiGroup: rbac.authorization.k8s.io
+```
+
+Appliquez le RoleBinding dans Kubernetes :
+
+```bash
+kubectl apply -f rolebinding-pods-access.yml
+```
+
+---
+
+### 3. **Validation**
+
+Connectez-vous avec un utilisateur membre du groupe `stage` (ex. `bob`) et testez les commandes sur les pods dans le namespace `test`.
+
+- Exemple de test :
+    - Créer un pod :
+      ```bash
+      kubectl run nginx --image=nginx --namespace=test
+      ```
+    - Lister les pods :
+      ```bash
+      kubectl get pods --namespace=test
+      ```
+    - Supprimer un pod :
+      ```bash
+      kubectl delete pod nginx --namespace=test
+      ```
+
+Si tout est configuré correctement, les opérations seront autorisées.
+
+---
+
+### Résumé
+- **Role** : Définit les permissions sur les pods dans le namespace `test`.
+- **RoleBinding** : Associe ce rôle au groupe `stage`.
+- **Namespace** : Les accès sont limités au namespace `test`.
+
+Avec cette configuration, le groupe `stage` peut effectuer toutes les actions sur les pods dans le namespace `test`.
+
+Un **CNI (Container Network Interface)** est une norme et un ensemble de plugins permettant de gérer le réseau des conteneurs dans des orchestrateurs comme Kubernetes.
+
+### Rôle principal :
+- Configurer le réseau des conteneurs : attribution d'adresses IP, création de routes, etc.
+- Nettoyer la configuration réseau à la suppression des conteneurs.
+- Assurer la connectivité entre les pods, les nœuds et les services dans un cluster.
+
+### Exemples de plugins populaires :
+- **Calico** : Connectivité réseau et politiques de sécurité.
+- **Flannel** : Réseau simple pour connecter des pods.
+- **Cilium** : Sécurité avancée et performances optimisées avec eBPF.
+
+### Importance :
+Le CNI garantit que les conteneurs peuvent communiquer de manière fiable et évolutive dans un environnement distribué, indispensable pour les clusters Kubernetes.
+
+### Les **NetworkPolicies** en résumé :
+
+1. **Par défaut** :  
+   Tous les pods d'un namespace peuvent communiquer entre eux, et aussi avec les pods des autres namespaces.
+
+2. **But des NetworkPolicies** :
+    - Contrôler les flux réseau entre les pods, les namespaces, et même les accès externes.
+    - Fonctionnent comme des règles de pare-feu spécifiques aux pods.
+
+3. **Conditions d'utilisation** :
+    - Le CNI doit supporter les NetworkPolicies (par exemple : **Calico** les supporte, mais pas **Flannel** en configuration standard).
+
+---
+
+### Exemple : **Limiter les accès aux pods du namespace `default`**
+Seules les communications entre pods **du même namespace** seront autorisées.
+
+Voici une NetworkPolicy typique :
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: limit-to-default
+  namespace: default
+spec:
+  podSelector: {}  # Sélectionne tous les pods du namespace
+  policyTypes:
+    - Ingress  # Contrôle les entrées
+  ingress:
+    - from:
+        - podSelector: {}  # Autorise seulement les pods du namespace `default`
+```
+
+### Explication :
+- **`podSelector: {}`** : S'applique à tous les pods du namespace.
+- **`policyTypes: Ingress`** : Règle pour les connexions entrantes.
+- **`from:`** : Autorise uniquement les pods du même namespace à communiquer.
+
+---
+
+**Résultat** :
+- Les pods dans `default` peuvent communiquer entre eux.
+- Les pods des autres namespaces (ou des connexions externes) ne peuvent pas les joindre.
